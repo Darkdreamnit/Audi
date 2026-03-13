@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive Audi OBD-II diagnostic trouble codes database. Search DTCs by code, symptom, or model. Find causes, fixes, and repair costs for all Audi models.">
+    <meta name="keywords" content="Audi DTC, OBD-II codes, check engine light, Audi diagnostic, fault codes, P0171, P0420, Audi repair">
+    <title>Audi DTC Diagnostic Pro | Complete OBD-II Code Database</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+        .audi-red { color: #ff0000; }
+        .bg-audi-red { background-color: #ff0000; }
+        .hover-audi-red:hover { background-color: #dc2626; }
+        .code-card { transition: all 0.3s ease; }
+        .code-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .search-input:focus { box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2); }
+        .symptom-tag { transition: all 0.2s; }
+        .symptom-tag:hover { transform: scale(1.05); }
+        .model-card { transition: all 0.3s; }
+        .model-card:hover { border-color: #ff0000; transform: translateY(-2px); }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .difficulty-easy { background-color: #dcfce7; color: #166534; }
+        .difficulty-medium { background-color: #fef3c7; color: #92400e; }
+        .difficulty-hard { background-color: #fee2e2; color: #991b1b; }
+        .category-powertrain { border-left: 4px solid #ef4444; }
+        .category-body { border-left: 4px solid #3b82f6; }
+        .category-chassis { border-left: 4px solid #10b981; }
+        .category-network { border-left: 4px solid #f59e0b; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="showHome()">
+                    <i data-lucide="activity" class="w-8 h-8 text-red-500"></i>
+                    <div>
+                        <h1 class="font-bold text-xl tracking-tight">Audi DTC Pro</h1>
+                        <p class="text-xs text-slate-400">Diagnostic Database</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#search-section" class="hover:text-red-400 transition">Search Codes</a>
+                    <a href="#models-section" class="hover:text-red-400 transition">Models</a>
+                    <a href="#symptoms-section" class="hover:text-red-400 transition">Symptom Checker</a>
+                    <a href="#common-codes" class="hover:text-red-400 transition">Common DTCs</a>
+                </div>
+                <button class="md:hidden" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#search-section" class="block px-3 py-2 hover:bg-slate-700 rounded">Search Codes</a>
+                <a href="#models-section" class="block px-3 py-2 hover:bg-slate-700 rounded">Models</a>
+                <a href="#symptoms-section" class="block px-3 py-2 hover:bg-slate-700 rounded">Symptom Checker</a>
+                <a href="#common-codes" class="block px-3 py-2 hover:bg-slate-700 rounded">Common DTCs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                Diagnose Your <span class="text-red-500">Audi</span> Like a Pro
+            </h1>
+            <p class="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+                Comprehensive database of OBD-II diagnostic trouble codes. Search by code, symptom, or model to find detailed fixes, costs, and DIY guides.
+            </p>
+            
+            <!-- Main Search -->
+            <div id="search-section" class="relative max-w-2xl mx-auto">
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-6 h-6"></i>
+                    <input 
+                        type="text" 
+                        id="main-search" 
+                        placeholder="Search codes (P0171), symptoms (rough idle), or models (A4)..." 
+                        class="w-full pl-12 pr-4 py-4 rounded-xl text-slate-900 bg-white search-input focus:outline-none text-lg shadow-2xl"
+                        oninput="handleSearch(this.value)"
+                    >
+                    <button id="clear-search" class="hidden absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600" onclick="clearSearch()">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <div class="mt-3 flex flex-wrap justify-center gap-2 text-sm text-slate-400">
+                    <span>Try:</span>
+                    <button onclick="quickSearch('P0420')" class="hover:text-white underline">P0420</button>
+                    <button onclick="quickSearch('P0171')" class="hover:text-white underline">P0171</button>
+                    <button onclick="quickSearch('misfire')" class="hover:text-white underline">misfire</button>
+                    <button onclick="quickSearch('turbo')" class="hover:text-white underline">turbo</button>
+                    <button onclick="quickSearch('A4')" class="hover:text-white underline">A4 common issues</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="bg-white border-b border-slate-200 py-4">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-8 text-center">
+            <div>
+                <div class="text-2xl font-bold text-slate-900">500+</div>
+                <div class="text-sm text-slate-500">DTC Codes</div>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-slate-900">15</div>
+                <div class="text-sm text-slate-500">Audi Models</div>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-slate-900">50+</div>
+                <div class="text-sm text-slate-500">Symptoms</div>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-slate-900">24/7</div>
+                <div class="text-sm text-slate-500">Instant Access</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        
+        <!-- Search Results Section (Hidden by default) -->
+        <div id="search-results-container" class="hidden mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">Search Results <span id="result-count" class="text-slate-500 text-lg font-normal"></span></h2>
+                <button onclick="clearSearch()" class="text-red-600 hover:text-red-700 font-medium flex items-center gap-2">
+                    <i data-lucide="x" class="w-4 h-4"></i> Clear Search
+                </button>
+            </div>
+            <div id="search-results" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+        </div>
+
+        <!-- Code Detail View (Hidden by default) -->
+        <div id="code-detail-view" class="hidden fade-in mb-12">
+            <button onclick="backToSearch()" class="mb-4 text-slate-600 hover:text-slate-900 flex items-center gap-2 font-medium">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Results
+            </button>
+            <div id="code-detail-content" class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden"></div>
+        </div>
+
+        <!-- Home Content -->
+        <div id="home-content">
+            
+            <!-- Symptom Checker -->
+            <section id="symptoms-section" class="mb-16">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Symptom Checker</h2>
+                    <p class="text-slate-600">Select symptoms to find likely diagnostic codes</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="symptom-grid">
+                        <!-- Symptoms injected by JS -->
+                    </div>
+                    
+                    <div id="selected-symptoms" class="hidden mb-4">
+                        <p class="text-sm font-medium text-slate-700 mb-2">Selected Symptoms:</p>
+                        <div id="symptom-tags" class="flex flex-wrap gap-2"></div>
+                    </div>
+                    
+                    <button onclick="findCodesBySymptoms()" class="w-full md:w-auto bg-audi-red hover-audi-red text-white px-8 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2 mx-auto">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                        Find Matching Codes
+                    </button>
+                </div>
+            </section>
+
+            <!-- Model Explorer -->
+            <section id="models-section" class="mb-16">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Audi Model Explorer</h2>
+                    <p class="text-slate-600">Select your model to see common issues and codes</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="model-grid">
+                    <!-- Models injected by JS -->
+                </div>
+                
+                <div id="model-specific-codes" class="hidden mt-8 fade-in">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-900" id="model-title"></h3>
+                        <button onclick="clearModelFilter()" class="text-sm text-slate-500 hover:text-slate-700">Show All Models</button>
+                    </div>
+                    <div id="model-codes-list" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+                </div>
+            </section>
+
+            <!-- Common Codes -->
+            <section id="common-codes" class="mb-16">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Most Common Audi DTCs</h2>
+                    <p class="text-slate-600">Frequently encountered diagnostic codes across Audi models</p>
+                </div>
+                
+                <div id="common-codes-grid" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Common codes injected by JS -->
+                </div>
+            </section>
+
+            <!-- Categories Info -->
+            <section class="mb-16 bg-slate-100 rounded-2xl p-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Understanding DTC Categories</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-red-100 p-2 rounded-lg">
+                                <i data-lucide="engine" class="w-6 h-6 text-red-600"></i>
+                            </div>
+                            <h3 class="font-bold text-lg">Powertrain (P)</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Engine, transmission, and fuel system issues. Most common category.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-blue-100 p-2 rounded-lg">
+                                <i data-lucide="car" class="w-6 h-6 text-blue-600"></i>
+                            </div>
+                            <h3 class="font-bold text-lg">Body (B)</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Comfort systems, airbags, climate control, and body electronics.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-green-100 p-2 rounded-lg">
+                                <i data-lucide="circle-dot" class="w-6 h-6 text-green-600"></i>
+                            </div>
+                            <h3 class="font-bold text-lg">Chassis (C)</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">ABS, traction control, suspension, and steering systems.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-amber-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-amber-100 p-2 rounded-lg">
+                                <i data-lucide="network" class="w-6 h-6 text-amber-600"></i>
+                            </div>
+                            <h3 class="font-bold text-lg">Network (U)</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Communication errors between control modules and CAN bus.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIY Difficulty Guide -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Repair Difficulty Levels</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-4">
+                            <i data-lucide="wrench" class="w-6 h-6 text-green-600"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-green-900 mb-2">DIY Friendly</h3>
+                        <p class="text-sm text-green-700 mb-4">Basic tools, 1-2 hours, minimal risk</p>
+                        <ul class="text-left text-sm text-green-800 space-y-1">
+                            <li>• Sensor replacements</li>
+                            <li>• Simple hose repairs</li>
+                            <li>• Filter changes</li>
+                            <li>• Coil packs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-amber-100 rounded-full mb-4">
+                            <i data-lucide="settings" class="w-6 h-6 text-amber-600"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-amber-900 mb-2">Intermediate</h3>
+                        <p class="text-sm text-amber-700 mb-4">Specialized tools, 3-5 hours, moderate complexity</p>
+                        <ul class="text-left text-sm text-amber-800 space-y-1">
+                            <li>• Brake component replacement</li>
+                            <li>• Suspension work</li>
+                            <li>• Cooling system repairs</li>
+                            <li>• Intake manifold</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mb-4">
+                            <i data-lucide="alert-triangle" class="w-6 h-6 text-red-600"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-red-900 mb-2">Mechanic Recommended</h3>
+                        <p class="text-sm text-red-700 mb-4">Professional tools, complex procedures, high risk</p>
+                        <ul class="text-left text-sm text-red-800 space-y-1">
+                            <li>• Internal engine repairs</li>
+                            <li>• Transmission work</li>
+                            <li>• Turbo replacement</li>
+                            <li>• Timing chains</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4 text-white">
+                        <i data-lucide="activity" class="w-6 h-6 text-red-500"></i>
+                        <span class="font-bold text-lg">Audi DTC Pro</span>
+                    </div>
+                    <p class="text-sm text-slate-400">The most comprehensive Audi diagnostic database. Helping owners diagnose and fix issues since 2024.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">All DTC Codes</a></li>
+                        <li><a href="#" class="hover:text-white transition">Common Symptoms</a></li>
+                        <li><a href="#" class="hover:text-white transition">Repair Costs</a></li>
+                        <li><a href="#" class="hover:text-white transition">DIY Guides</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Popular Models</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="filterByModel('A4')" class="hover:text-white transition">Audi A4</a></li>
+                        <li><a href="#" onclick="filterByModel('A6')" class="hover:text-white transition">Audi A6</a></li>
+                        <li><a href="#" onclick="filterByModel('Q5')" class="hover:text-white transition">Audi Q5</a></li>
+                        <li><a href="#" onclick="filterByModel('TT')" class="hover:text-white transition">Audi TT</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Disclaimer</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Information provided for educational purposes only. Always consult a professional mechanic for accurate diagnosis and repair. Safety first when working on vehicles.
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+                <p>&copy; 2024 Audi DTC Diagnostic Pro. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Not affiliated with Audi AG.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+<script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+</body>
+</html>
