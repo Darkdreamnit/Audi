@@ -7,16 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSymptomsGrid();
     initializeModelGrid();
     displayCommonCodes();
-    
-    // Check for URL parameters for direct code access
-    const urlParams = new URLSearchParams(window.location.search);
-    const codeParam = urlParams.get('code');
-    if (codeParam) {
-        const code = dtcDatabase.find(c => c.code.toLowerCase() === codeParam.toLowerCase());
-        if (code) {
-            showCodeDetail(code);
-        }
-    }
+    handleUrlParams();
 });
 
 // Mobile menu toggle
@@ -329,4 +320,178 @@ function showCodeDetail(code) {
         <div class="p-8 md:p-12 space-y-8">
             <!-- Description -->
             <section>
-                <h2 class="
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-6 h-6 text-red-500"></i>
+                    Detailed Explanation
+                </h2>
+                <p class="text-slate-700 leading-relaxed text-lg">${code.detailedExplanation}</p>
+            </section>
+
+            <!-- Symptoms -->
+            <section class="bg-red-50 rounded-xl p-6 border border-red-100">
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="activity" class="w-5 h-5 text-red-600"></i>
+                    Common Symptoms
+                </h2>
+                <div class="grid md:grid-cols-2 gap-3">
+                    ${code.symptoms.map(s => `
+                        <div class="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm">
+                            <i data-lucide="alert-circle" class="w-4 h-4 text-red-500"></i>
+                            <span class="text-slate-700 capitalize">${s}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+
+            <!-- Causes -->
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="search" class="w-5 h-5 text-amber-500"></i>
+                    Most Common Causes
+                </h2>
+                <div class="space-y-3">
+                    ${code.causes.map((cause, index) => `
+                        <div class="flex gap-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                            <div class="flex-shrink-0 w-8 h-8 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center font-bold text-sm">
+                                ${index + 1}
+                            </div>
+                            <div>
+                                <p class="text-slate-700">${cause}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+
+            <!-- Fixes -->
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
+                    Recommended Fixes
+                </h2>
+                <div class="space-y-3">
+                    ${code.fixes.map((fix, index) => `
+                        <div class="flex gap-4 p-4 bg-green-50 rounded-lg border border-green-100">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-700 rounded-full flex items-center justify-center font-bold text-sm">
+                                ${index + 1}
+                            </div>
+                            <div>
+                                <p class="text-slate-700">${fix}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+
+            <!-- DIY Steps -->
+            <section class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="wrench" class="w-5 h-5 text-blue-600"></i>
+                    DIY Diagnostic Steps
+                </h2>
+                <div class="space-y-4">
+                    ${code.diySteps.map(step => `
+                        <div class="flex gap-3">
+                            <div class="flex-shrink-0 mt-1">
+                                <i data-lucide="chevron-right" class="w-5 h-5 text-blue-500"></i>
+                            </div>
+                            <p class="text-slate-700">${step}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+
+            <!-- Related Codes -->
+            ${code.relatedCodes.length > 0 ? `
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="link" class="w-5 h-5 text-purple-500"></i>
+                    Related Codes
+                </h2>
+                <div class="flex flex-wrap gap-3">
+                    ${code.relatedCodes.map(rc => `
+                        <button onclick="showCodeDetailByCode('${rc}')" class="px-4 py-2 bg-purple-50 text-purple-700 rounded-lg border border-purple-200 hover:bg-purple-100 transition font-medium">
+                            ${rc}
+                        </button>
+                    `).join('')}
+                </div>
+            </section>
+            ` : ''}
+
+            <!-- Affected Models -->
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="car" class="w-5 h-5 text-slate-500"></i>
+                    Commonly Affected Models
+                </h2>
+                <div class="flex flex-wrap gap-2">
+                    ${code.affectedModels.map(model => `
+                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium">
+                            Audi ${model}
+                        </span>
+                    `).join('')}
+                </div>
+            </section>
+
+            <!-- Warning -->
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 flex gap-4">
+                <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-500 flex-shrink-0 mt-1"></i>
+                <div>
+                    <h3 class="font-bold text-amber-900 mb-1">Important Safety Notice</h3>
+                    <p class="text-sm text-amber-800 leading-relaxed">
+                        This information is for educational purposes only. Always use proper safety equipment and procedures when working on your vehicle. If you're unsure about any repair, consult a certified Audi technician. Some repairs may affect your warranty or emissions compliance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    lucide.createIcons();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Show home content
+function showHome() {
+    document.getElementById('search-results-container').classList.add('hidden');
+    document.getElementById('code-detail-view').classList.add('hidden');
+    document.getElementById('home-content').classList.remove('hidden');
+    document.getElementById('main-search').value = '';
+    document.getElementById('clear-search').classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Back to search results
+function backToSearch() {
+    document.getElementById('code-detail-view').classList.add('hidden');
+    document.getElementById('search-results-container').classList.remove('hidden');
+    window.scrollTo({ top: document.getElementById('search-section').offsetTop - 100, behavior: 'smooth' });
+}
+
+// Copy code link to clipboard
+function copyCodeLink(code) {
+    const url = `${window.location.origin}${window.location.pathname}?code=${code}`;
+    navigator.clipboard.writeText(url).then(() => {
+        alert(`Link copied to clipboard: ${url}`);
+    }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert(`Link copied to clipboard: ${url}`);
+    });
+}
+
+// Handle URL parameters on load
+function handleUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const codeParam = urlParams.get('code');
+    if (codeParam) {
+        const code = dtcDatabase.find(c => c.code.toLowerCase() === codeParam.toLowerCase());
+        if (code) {
+            showCodeDetail(code);
+        }
+    }
+}
