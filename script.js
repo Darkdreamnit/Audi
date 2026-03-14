@@ -7,8 +7,33 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSymptomsGrid();
     initializeModelGrid();
     displayCommonCodes();
+    initializeSubmissionForm();
     handleUrlParams();
 });
+
+// Populate submission form dropdowns
+function initializeSubmissionForm() {
+    const codeSelect = document.getElementById('submit-code');
+    const modelSelect = document.getElementById('submit-model');
+    
+    if (codeSelect) {
+        dtcDatabase.forEach(d => {
+            const option = document.createElement('option');
+            option.value = d.code;
+            option.textContent = `${d.code} - ${d.description}`;
+            codeSelect.appendChild(option);
+        });
+    }
+    
+    if (modelSelect) {
+        audiModels.forEach(m => {
+            const option = document.createElement('option');
+            option.value = m.id;
+            option.textContent = m.name;
+            modelSelect.appendChild(option);
+        });
+    }
+}
 
 // Mobile menu toggle
 function toggleMobileMenu() {
@@ -495,3 +520,226 @@ function handleUrlParams() {
         }
     }
 }
+
+// Configuration
+const API_URL = window.location.origin.includes('localhost') 
+    ? 'http://localhost:3000/api' 
+    : '/api'; // Adjust this to your deployed backend URL
+
+// Community Solutions Functions
+let communityPosts = [];
+let currentCommunityFilter = 'all';
+
+function initializeCommunitySection() {
+    loadCommunityPosts();
+}
+
+async function loadCommunityPosts() {
+    try {
+        const response = await fetch(`${API_URL}/submissions?code=${currentCommunityFilter}`);
+        if (!response.ok) throw new Error('Failed to load posts');
+        communityPosts = await response.json();
+        renderCommunityPosts();
+    } catch (error) {
+        console.error('Error loading community posts:', error);
+        // Show empty state or error message
+        const grid = document.getElementById('community-grid');
+        const empty = document.getElementById('community-empty');
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        empty.innerHTML = `
+            <i data-lucide="wifi-off" class="w-16 h-16 text-slate-300 mx-auto mb-4"></i>
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">Connection Error</h3>
+            <p class="text-slate-600">Unable to load community posts. Please check your connection.</p>
+        `;
+        lucide.createIcons();
+    }
+}
+
+function openSubmissionModal() {
+    document.getElementById('submission-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    lucide.createIcons();
+}
+
+function closeSubmissionModal() {
+    document.getElementById('submission-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+    document.getElementById('submission-form').reset();
+    document.getElementById('photo-preview').classList.add('hidden');
+    document.getElementById('photo-preview-container').classList.remove('hidden');
+}
+
+function previewPhoto(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('photo-preview').src = e.target.result;
+            document.getElementById('photo-preview').classList.remove('hidden');
+            document.getElementById('photo-preview-container').classList.add('hidden');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+async function submitCommunityFix(event) {
+    event.preventDefault();
+    
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Uploading...';
+    submitBtn.disabled = true;
+    lucide.createIcons();
+
+    try {
+        const formData = new FormData();
+        formData.append('code', document.getElementById('submit-code').value);
+        formData.append('model', document.getElementById('submit-model').value);
+        formData.append('year', document.getElementById('submit-year').value);
+        formData.append('solution', document.getElementById('submit-solution').value);
+        formData.append('cost', document.getElementById('submit-cost').value || '');
+        formData.append('name', document.getElementById('submit-name').value || 'Anonymous Audi Enthusiast');
+        
+        const photoFile = document.getElementById('submit-photo').files[0];
+        if (photoFile) {
+            formData.append('photo', photoFile);
+        }
+
+        const response = await fetch(`${API_URL}/submissions`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to submit');
+        }
+
+        const newPost = await response.json();
+        
+        closeSubmissionModal();
+        await loadCommunityPosts(); // Reload to show new post
+        
+        // Show success message
+        alert('Thank you for sharing your fix! It has been added to the community.');
+    } catch (error) {
+        console.error('Error submitting fix:', error);
+        alert('Error submitting your fix: ' + error.message + '\n\nPlease try again or check your connection.');
+    } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        lucide.createIcons();
+    }
+}
+
+function renderCommunityPosts() {
+    const grid = document.getElementById('community-grid');
+    const empty = document.getElementById('community-empty');
+    
+    if (communityPosts.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        empty.innerHTML = `
+            <i data-lucide="users" class="w-16 h-16 text-slate-300 mx-auto mb-4"></i>
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">No fixes shared yet</h3>
+            <p class="text-slate-600">Be the first to share your DTC repair experience!</p>
+        `;
+        lucide.createIcons();
+        return;
+    }
+    
+    empty.classList.add('hidden');
+    grid.innerHTML = communityPosts.map(post => createCommunityCard(post)).join('');
+    lucide.createIcons();
+}
+
+function createCommunityCard(post) {
+    const codeInfo = dtcDatabase.find(d => d.code === post.code);
+    return `
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+            <div class="relative h-48 bg-slate-100 overflow-hidden">
+                <img src="${post.image}" alt="Fix for ${post.code}" class="w-full h-full object-cover" loading="lazy">
+                <div class="absolute top-3 left-3">
+                    <span class="px-3 py-1 bg-red-600 text-white text-sm font-bold rounded-full shadow-lg">
+                        ${post.code}
+                    </span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <p class="text-white font-semibold">Audi ${post.model}${post.year ? ' ' + post.year : ''}</p>
+                </div>
+            </div>
+            <div class="p-5">
+                <h4 class="font-bold text-slate-900 mb-2">${codeInfo ? codeInfo.description : post.code}</h4>
+                <p class="text-slate-600 text-sm mb-4 line-clamp-3">${post.solution}</p>
+                
+                <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                    <div class="flex items-center gap-2 text-sm text-slate-500">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                        <span>${post.name}</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        ${post.cost ? `<span class="text-sm font-medium text-green-600 bg-green-50 px-2 py-1 rounded">${post.cost}</span>` : ''}
+                        <button onclick="likePost(${post.id})" class="flex items-center gap-1 text-sm text-slate-500 hover:text-red-600 transition">
+                            <i data-lucide="thumbs-up" class="w-4 h-4"></i>
+                            <span id="likes-${post.id}">${post.likes || 0}</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-3 text-xs text-slate-400">
+                    Posted ${post.date}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+async function filterCommunity(code) {
+    currentCommunityFilter = code;
+    
+    // Update button styles
+    document.querySelectorAll('.community-filter').forEach(btn => {
+        if (btn.dataset.filter === code) {
+            btn.classList.remove('bg-slate-200', 'text-slate-700');
+            btn.classList.add('bg-slate-900', 'text-white');
+        } else {
+            btn.classList.remove('bg-slate-900', 'text-white');
+            btn.classList.add('bg-slate-200', 'text-slate-700');
+        }
+    });
+    
+    await loadCommunityPosts();
+}
+
+async function likePost(id) {
+    try {
+        const response = await fetch(`${API_URL}/submissions/${id}/like`, {
+            method: 'POST'
+        });
+        
+        if (!response.ok) throw new Error('Failed to like post');
+        
+        const data = await response.json();
+        const likesElement = document.getElementById(`likes-${id}`);
+        if (likesElement) {
+            likesElement.textContent = data.likes;
+        }
+        
+        // Update local data
+        const post = communityPosts.find(p => p.id === id);
+        if (post) post.likes = data.likes;
+    } catch (error) {
+        console.error('Error liking post:', error);
+    }
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeSubmissionModal();
+    }
+});
+
+// Initialize community section on load
+document.addEventListener('DOMContentLoaded', () => {
+    initializeCommunitySection();
+});
