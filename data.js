@@ -327,7 +327,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+
 
 // Initialize Firebase when script loads
 let firebaseApp;
