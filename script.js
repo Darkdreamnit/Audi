@@ -76,13 +76,7 @@ function initSubmissionForm() {
 
   const form = document.getElementById("submission-form");
 
-  if (!form) {
-
-    console.warn("Form not found");
-
-    return;
-
-  }
+  if (!form) return;
 
   form.addEventListener("submit", submitCommunityFix);
 
