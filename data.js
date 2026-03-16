@@ -310,15 +310,24 @@ const symptomsList = [
 // ============================================
 // Replace with your Firebase project credentials
 // Get these from: Firebase Console > Project Settings > General > Your Apps > SDK setup and configuration
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY_HERE",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA1byZuKmj7ZyjTLZvLDtUl4qfLuyiFDbo",
+  authDomain: "audi-dtc-pro.firebaseapp.com",
+  databaseURL: "https://audi-dtc-pro-default-rtdb.firebaseio.com",
+  projectId: "audi-dtc-pro",
+  storageBucket: "audi-dtc-pro.firebasestorage.app",
+  messagingSenderId: "1098221329925",
+  appId: "1:1098221329925:web:0a12d9e67b1a313a02466c"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase when script loads
 let firebaseApp;
