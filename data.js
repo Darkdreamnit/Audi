@@ -65,253 +65,298 @@ function getCommunityPostsRef() {
    DTC DATABASE
 ========================================== */
 
+/* ==========================================
+   LARGE DTC DATABASE
+========================================== */
+
 const dtcDatabase = [
 
+/* ===== AIR / FUEL SYSTEM ===== */
+
 {
-code: "P0100",
-description: "Mass Air Flow Circuit Malfunction",
-severity: "Medium",
-symptoms: [
-"check engine light",
-"rough idle",
-"poor acceleration",
-"stalling"
-],
-causes: [
-"faulty mass air flow sensor",
-"vacuum leak",
-"dirty air filter",
-"damaged wiring"
-],
-fixes: [
-"clean or replace mass air flow sensor",
-"inspect intake hoses for leaks",
-"replace air filter",
-"repair wiring harness"
-],
-estimatedCost: "$80 - $350",
-difficulty: "Easy",
-models: ["Audi A4","Audi A6","Audi Q5"]
+code:"P0100",
+description:"Mass Air Flow Circuit Malfunction",
+severity:"Medium",
+symptoms:["check engine light","rough idle","poor acceleration"],
+causes:["faulty MAF sensor","dirty air filter","vacuum leak"],
+fixes:["clean or replace MAF sensor","replace air filter","inspect intake hoses"],
+estimatedCost:"$80 - $350"
 },
 
 {
-code: "P0171",
-description: "System Too Lean (Bank 1)",
-severity: "Medium",
-symptoms: [
-"check engine light",
-"rough idle",
-"engine hesitation",
-"poor fuel economy"
-],
-causes: [
-"vacuum leak",
-"dirty MAF sensor",
-"fuel pump weak",
-"clogged fuel injector"
-],
-fixes: [
-"clean mass air flow sensor",
-"repair vacuum leaks",
-"replace fuel pump",
-"clean injectors"
-],
-estimatedCost: "$120 - $900",
-difficulty: "Medium",
-models: ["Audi A3","Audi A4","Audi A6","Audi Q7"]
+code:"P0101",
+description:"Mass Air Flow Sensor Range / Performance",
+severity:"Medium",
+symptoms:["engine hesitation","poor fuel economy","stalling"],
+causes:["dirty MAF sensor","intake leak","faulty sensor"],
+fixes:["clean MAF sensor","inspect air intake","replace sensor"],
+estimatedCost:"$100 - $300"
 },
 
 {
-code: "P0300",
-description: "Random/Multiple Cylinder Misfire Detected",
-severity: "High",
-symptoms: [
-"engine shaking",
-"check engine flashing",
-"loss of power",
-"rough idle"
-],
-causes: [
-"bad spark plugs",
-"faulty ignition coils",
-"fuel injector failure",
-"low compression"
-],
-fixes: [
-"replace spark plugs",
-"replace ignition coils",
-"clean or replace injectors",
-"check compression"
-],
-estimatedCost: "$100 - $1200",
-difficulty: "Medium",
-models: ["Audi A4","Audi A6","Audi S4"]
+code:"P0102",
+description:"Mass Air Flow Circuit Low Input",
+severity:"Medium",
+symptoms:["weak acceleration","rough idle"],
+causes:["MAF unplugged","damaged wiring"],
+fixes:["repair wiring","replace MAF"],
+estimatedCost:"$80 - $250"
 },
 
 {
-code: "P0420",
-description: "Catalyst System Efficiency Below Threshold",
-severity: "Medium",
-symptoms: [
-"check engine light",
-"reduced fuel economy",
-"exhaust smell"
-],
-causes: [
-"bad catalytic converter",
-"faulty O2 sensor",
-"exhaust leak"
-],
-fixes: [
-"replace catalytic converter",
-"replace oxygen sensors",
-"repair exhaust leak"
-],
-estimatedCost: "$250 - $2000",
-difficulty: "Medium",
-models: ["Audi A4","Audi A5","Audi Q5"]
+code:"P0103",
+description:"Mass Air Flow Circuit High Input",
+severity:"Medium",
+symptoms:["check engine light","high fuel consumption"],
+causes:["shorted wiring","bad MAF"],
+fixes:["repair wiring","replace sensor"],
+estimatedCost:"$90 - $300"
 },
 
 {
-code: "P0455",
-description: "Evaporative Emission System Leak (Large Leak)",
-severity: "Low",
-symptoms: [
-"check engine light",
-"fuel smell",
-"failed emissions test"
-],
-causes: [
-"loose gas cap",
-"damaged EVAP hose",
-"faulty purge valve"
-],
-fixes: [
-"tighten or replace gas cap",
-"repair EVAP hoses",
-"replace purge valve"
-],
-estimatedCost: "$20 - $250",
-difficulty: "Easy",
-models: ["Audi A3","Audi A4","Audi A6"]
+code:"P0113",
+description:"Intake Air Temperature Sensor High Input",
+severity:"Low",
+symptoms:["hard start","poor fuel economy"],
+causes:["bad IAT sensor","wiring issue"],
+fixes:["replace IAT sensor","repair wiring"],
+estimatedCost:"$40 - $150"
+},
+
+/* ===== FUEL SYSTEM ===== */
+
+{
+code:"P0171",
+description:"System Too Lean Bank 1",
+severity:"Medium",
+symptoms:["rough idle","engine hesitation","poor fuel economy"],
+causes:["vacuum leak","dirty MAF","weak fuel pump"],
+fixes:["repair vacuum leak","clean MAF","replace fuel pump"],
+estimatedCost:"$120 - $900"
 },
 
 {
-code: "P0113",
-description: "Intake Air Temperature Sensor High Input",
-severity: "Low",
-symptoms: [
-"check engine light",
-"hard starting",
-"rough idle"
-],
-causes: [
-"bad IAT sensor",
-"wiring issue",
-"sensor unplugged"
-],
-fixes: [
-"replace intake air temperature sensor",
-"repair wiring",
-"reconnect sensor"
-],
-estimatedCost: "$40 - $150",
-difficulty: "Easy",
-models: ["Audi A4","Audi Q3","Audi Q5"]
+code:"P0172",
+description:"System Too Rich Bank 1",
+severity:"Medium",
+symptoms:["black smoke","strong fuel smell","poor MPG"],
+causes:["bad fuel injector","faulty MAF","fuel pressure regulator"],
+fixes:["clean injectors","replace MAF","replace regulator"],
+estimatedCost:"$150 - $800"
 },
 
 {
-code: "P0128",
-description: "Coolant Thermostat Below Regulating Temperature",
-severity: "Low",
-symptoms: [
-"engine takes long to warm up",
-"heater weak",
-"check engine light"
-],
-causes: [
-"stuck open thermostat",
-"coolant sensor failure"
-],
-fixes: [
-"replace thermostat",
-"replace coolant temperature sensor"
-],
-estimatedCost: "$120 - $400",
-difficulty: "Medium",
-models: ["Audi A4","Audi A6","Audi Q5"]
+code:"P0190",
+description:"Fuel Rail Pressure Sensor Circuit Malfunction",
+severity:"Medium",
+symptoms:["hard starting","stalling"],
+causes:["bad fuel pressure sensor","wiring issue"],
+fixes:["replace fuel pressure sensor","repair wiring"],
+estimatedCost:"$120 - $400"
+},
+
+/* ===== IGNITION / MISFIRE ===== */
+
+{
+code:"P0300",
+description:"Random/Multiple Cylinder Misfire Detected",
+severity:"High",
+symptoms:["engine shaking","flashing check engine light"],
+causes:["bad spark plugs","ignition coils","fuel injector failure"],
+fixes:["replace spark plugs","replace ignition coils","clean injectors"],
+estimatedCost:"$100 - $1200"
 },
 
 {
-code: "P0299",
-description: "Turbocharger Underboost Condition",
-severity: "High",
-symptoms: [
-"loss of power",
-"turbo not spooling",
-"check engine light"
-],
-causes: [
-"boost leak",
-"faulty turbo",
-"wastegate issue"
-],
-fixes: [
-"repair boost leak",
-"replace turbocharger",
-"repair wastegate actuator"
-],
-estimatedCost: "$150 - $2500",
-difficulty: "Hard",
-models: ["Audi A4","Audi S3","Audi S4"]
+code:"P0301",
+description:"Cylinder 1 Misfire Detected",
+severity:"High",
+symptoms:["rough idle","loss of power"],
+causes:["bad spark plug","coil failure"],
+fixes:["replace spark plug","replace coil pack"],
+estimatedCost:"$80 - $350"
 },
 
 {
-code: "P0507",
-description: "Idle Control System RPM Higher Than Expected",
-severity: "Medium",
-symptoms: [
-"high idle",
-"engine revving at stop",
-"check engine light"
-],
-causes: [
-"vacuum leak",
-"dirty throttle body",
-"bad idle control valve"
-],
-fixes: [
-"clean throttle body",
-"repair vacuum leaks",
-"replace idle control valve"
-],
-estimatedCost: "$80 - $350",
-difficulty: "Easy",
-models: ["Audi A4","Audi A6"]
+code:"P0302",
+description:"Cylinder 2 Misfire Detected",
+severity:"High",
+symptoms:["engine vibration","poor performance"],
+causes:["ignition coil failure","plug wear"],
+fixes:["replace spark plug","replace coil"],
+estimatedCost:"$80 - $350"
 },
 
 {
-code: "P0700",
-description: "Transmission Control System Malfunction",
-severity: "High",
-symptoms: [
-"transmission slipping",
-"harsh shifting",
-"check engine light"
-],
-causes: [
-"transmission sensor failure",
-"low transmission fluid",
-"internal transmission damage"
-],
-fixes: [
-"check transmission fluid",
-"replace transmission sensor",
-"repair transmission"
-],
-estimatedCost: "$150 - $3000",
-difficulty: "Hard",
-models: ["Audi A4","Audi A6","Audi Q7"]
+code:"P0303",
+description:"Cylinder 3 Misfire Detected",
+severity:"High",
+symptoms:["engine shaking","poor acceleration"],
+causes:["bad spark plug","fuel injector"],
+fixes:["replace spark plug","clean injector"],
+estimatedCost:"$90 - $400"
+},
+
+{
+code:"P0304",
+description:"Cylinder 4 Misfire Detected",
+severity:"High",
+symptoms:["rough idle","loss of power"],
+causes:["coil pack failure","plug wear"],
+fixes:["replace spark plug","replace coil"],
+estimatedCost:"$90 - $350"
+},
+
+/* ===== CATALYTIC / EMISSIONS ===== */
+
+{
+code:"P0420",
+description:"Catalyst System Efficiency Below Threshold Bank 1",
+severity:"Medium",
+symptoms:["check engine light","reduced fuel economy"],
+causes:["bad catalytic converter","faulty oxygen sensor"],
+fixes:["replace catalytic converter","replace O2 sensors"],
+estimatedCost:"$250 - $2000"
+},
+
+{
+code:"P0430",
+description:"Catalyst Efficiency Below Threshold Bank 2",
+severity:"Medium",
+symptoms:["check engine light","poor MPG"],
+causes:["bad catalytic converter","faulty oxygen sensor"],
+fixes:["replace catalytic converter","replace O2 sensors"],
+estimatedCost:"$250 - $2000"
+},
+
+/* ===== OXYGEN SENSOR ===== */
+
+{
+code:"P0130",
+description:"Oxygen Sensor Circuit Malfunction Bank 1 Sensor 1",
+severity:"Medium",
+symptoms:["poor fuel economy","check engine light"],
+causes:["bad O2 sensor","wiring issue"],
+fixes:["replace oxygen sensor","repair wiring"],
+estimatedCost:"$120 - $300"
+},
+
+{
+code:"P0133",
+description:"O2 Sensor Slow Response",
+severity:"Medium",
+symptoms:["poor fuel economy","emissions failure"],
+causes:["aging O2 sensor"],
+fixes:["replace O2 sensor"],
+estimatedCost:"$120 - $250"
+},
+
+/* ===== EVAP SYSTEM ===== */
+
+{
+code:"P0440",
+description:"Evaporative Emission System Malfunction",
+severity:"Low",
+symptoms:["check engine light"],
+causes:["loose gas cap","EVAP leak"],
+fixes:["tighten gas cap","repair EVAP hoses"],
+estimatedCost:"$20 - $250"
+},
+
+{
+code:"P0455",
+description:"EVAP Large Leak Detected",
+severity:"Low",
+symptoms:["fuel smell","check engine light"],
+causes:["loose gas cap","broken EVAP hose"],
+fixes:["replace gas cap","repair hoses"],
+estimatedCost:"$20 - $200"
+},
+
+{
+code:"P0456",
+description:"EVAP Small Leak Detected",
+severity:"Low",
+symptoms:["check engine light"],
+causes:["small vacuum leak","bad purge valve"],
+fixes:["replace purge valve","repair hose"],
+estimatedCost:"$50 - $250"
+},
+
+/* ===== COOLING SYSTEM ===== */
+
+{
+code:"P0128",
+description:"Coolant Thermostat Below Regulating Temperature",
+severity:"Low",
+symptoms:["engine slow to warm","poor heater output"],
+causes:["stuck thermostat"],
+fixes:["replace thermostat"],
+estimatedCost:"$120 - $400"
+},
+
+{
+code:"P0217",
+description:"Engine Overtemperature Condition",
+severity:"High",
+symptoms:["engine overheating","steam from hood"],
+causes:["low coolant","bad radiator fan"],
+fixes:["replace radiator fan","repair cooling system"],
+estimatedCost:"$150 - $700"
+},
+
+/* ===== TURBO / BOOST ===== */
+
+{
+code:"P0299",
+description:"Turbocharger Underboost Condition",
+severity:"High",
+symptoms:["loss of power","slow acceleration"],
+causes:["boost leak","wastegate failure","bad turbo"],
+fixes:["repair boost leak","replace turbocharger"],
+estimatedCost:"$200 - $2500"
+},
+
+{
+code:"P0234",
+description:"Turbocharger Overboost Condition",
+severity:"High",
+symptoms:["engine surging","check engine light"],
+causes:["stuck wastegate","boost control failure"],
+fixes:["replace boost control valve","repair wastegate"],
+estimatedCost:"$150 - $900"
+},
+
+/* ===== TRANSMISSION ===== */
+
+{
+code:"P0700",
+description:"Transmission Control System Malfunction",
+severity:"High",
+symptoms:["harsh shifting","transmission slipping"],
+causes:["low transmission fluid","sensor failure"],
+fixes:["check fluid level","replace transmission sensor"],
+estimatedCost:"$150 - $3000"
+},
+
+{
+code:"P0730",
+description:"Incorrect Gear Ratio",
+severity:"High",
+symptoms:["transmission slipping","delayed shifting"],
+causes:["internal transmission wear"],
+fixes:["transmission repair or rebuild"],
+estimatedCost:"$1200 - $4500"
+},
+
+{
+code:"P0740",
+description:"Torque Converter Clutch Circuit Malfunction",
+severity:"High",
+symptoms:["poor acceleration","high RPM"],
+causes:["bad torque converter clutch"],
+fixes:["replace torque converter"],
+estimatedCost:"$800 - $2500"
 }
 
-]
+];
