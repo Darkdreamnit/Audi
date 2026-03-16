@@ -700,7 +700,6 @@ DISPLAY RESULTS
 function displayResults(results){
 
 const container = document.getElementById("search-results")
-
 const section = document.getElementById("results-section")
 
 section.classList.remove("hidden")
@@ -708,8 +707,8 @@ section.classList.remove("hidden")
 if(results.length === 0){
 
 container.innerHTML = `
-<div class="col-span-full text-center text-slate-500">
-No results found
+<div class="col-span-full text-center text-slate-400 text-lg py-12">
+No diagnostic codes found
 </div>
 `
 
@@ -718,37 +717,73 @@ return
 
 container.innerHTML = results.map(dtc => `
 
-<div class="code-card bg-white p-6 rounded-xl shadow">
+<div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-red-500 transition duration-300 shadow-lg">
 
-<h3 class="text-xl font-bold text-red-600 mb-2">${dtc.code}</h3>
+<!-- HEADER -->
+<div class="flex justify-between items-center mb-4">
 
-<p class="font-semibold mb-3">${dtc.description}</p>
+<span class="bg-red-600 text-white px-3 py-1 rounded-lg font-bold text-sm">
+${dtc.code}
+</span>
 
-<div class="text-sm mb-2">
-<b>Symptoms:</b>
-<ul class="list-disc list-inside">
-${dtc.symptoms.map(s=>`<li>${s}</li>`).join("")}
-</ul>
+<span class="text-xs text-slate-400 uppercase">
+${dtc.severity || "Medium"} Severity
+</span>
+
 </div>
 
-<div class="text-sm mb-2">
-<b>Causes:</b>
-<ul class="list-disc list-inside">
-${dtc.causes.map(c=>`<li>${c}</li>`).join("")}
+<!-- DESCRIPTION -->
+<h3 class="text-white text-lg font-semibold mb-4">
+${dtc.description}
+</h3>
+
+<!-- SYMPTOMS -->
+<div class="mb-4">
+
+<p class="text-sm text-slate-400 mb-1">Symptoms</p>
+
+<ul class="text-slate-300 text-sm space-y-1">
+${dtc.symptoms.map(s=>`<li>• ${s}</li>`).join("")}
 </ul>
+
 </div>
 
-<div class="text-sm">
-<b>Fixes:</b>
-<ul class="list-disc list-inside">
-${dtc.fixes.map(f=>`<li>${f}</li>`).join("")}
+<!-- CAUSES -->
+<div class="mb-4">
+
+<p class="text-sm text-slate-400 mb-1">Possible Causes</p>
+
+<ul class="text-slate-300 text-sm space-y-1">
+${dtc.causes.map(c=>`<li>• ${c}</li>`).join("")}
 </ul>
+
+</div>
+
+<!-- FIXES -->
+<div class="mb-4">
+
+<p class="text-sm text-slate-400 mb-1">Recommended Fix</p>
+
+<ul class="text-slate-300 text-sm space-y-1">
+${dtc.fixes.map(f=>`<li>🔧 ${f}</li>`).join("")}
+</ul>
+
+</div>
+
+<!-- COST -->
+<div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
+
+<span class="text-xs text-slate-400">Estimated Repair Cost</span>
+
+<span class="bg-slate-800 text-green-400 text-xs px-3 py-1 rounded">
+${dtc.estimatedCost}
+</span>
+
 </div>
 
 </div>
 
 `).join("")
-
 }
 
 
