@@ -68,6 +68,69 @@ function closeSubmissionModal() {
 
 
 /* =========================================================
+   Handles the form submit and prevents the default page reload
+   ========================================================= */
+async function submitCommunityFix(event) {
+    event.preventDefault();
+
+    // Get form values
+    const code = document.getElementById('submit-code').value;
+    const model = document.getElementById('submit-model').value;
+    const year = document.getElementById('submit-year').value;
+    const solution = document.getElementById('submit-solution').value;
+    const cost = document.getElementById('submit-cost').value || '';
+    const author = document.getElementById('submit-name').value || 'Anonymous';
+    const photoInput = document.getElementById('submit-photo');
+    const file = photoInput.files[0] || null;
+
+    if (!code || !model || !solution || !file) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    try {
+        // Upload image to Firebase Storage
+        const postId = Date.now().toString(); // Temporary ID if needed
+        let imageURL = null;
+        if (file && firebaseInitialized) {
+            imageURL = await uploadImageToFirebase(file, postId);
+        }
+
+        // Prepare post data
+        const postData = {
+            code,
+            model,
+            year,
+            solution,
+            cost,
+            author,
+            image: imageURL || null,
+            date: new Date().toISOString(),
+            likes: 0
+        };
+
+        // Submit to Firebase
+        if (firebaseInitialized) {
+            await submitPostToFirebase(postData);
+            alert('✅ Your fix has been shared!');
+        } else {
+            // Fallback: push to local array
+            communityPosts.push(postData);
+            initCommunityPosts();
+            alert('✅ Your fix has been added locally.');
+        }
+
+        // Reset form
+        closeSubmissionModal();
+
+    } catch (err) {
+        console.error(err);
+        alert('❌ Error submitting your fix. Try again.');
+    }
+}
+
+
+/* =========================================================
    FIREBASE DATABASE FUNCTIONS
    ========================================================= */
 
