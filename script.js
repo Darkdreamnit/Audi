@@ -526,6 +526,8 @@ const API_URL = window.location.origin.includes('localhost')
     ? 'http://localhost:3000/api' 
     : '/api'; // Adjust this to your deployed backend URL
 
+    const CLOUDINARY_CLOUD_NAME = 'Audi';
+
 // Community Solutions Functions
 let communityPosts = [];
 let currentCommunityFilter = 'all';
