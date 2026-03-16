@@ -55,25 +55,15 @@ document.addEventListener('DOMContentLoaded', function () {
    ========================================================= */
 
 function openSubmissionModal() {
-
-    const modal = document.getElementById('submission-modal');
-
-    if (!modal) return;
-
-    modal.classList.remove('hidden');
-
-    if (window.lucide) {
-        lucide.createIcons();
-    }
+    document.getElementById('submission-modal').classList.remove('hidden');
 }
 
 function closeSubmissionModal() {
-
-    const modal = document.getElementById('submission-modal');
-
-    if (!modal) return;
-
-    modal.classList.add('hidden');
+    document.getElementById('submission-modal').classList.add('hidden');
+    document.getElementById('submission-form').reset();
+    // Reset preview
+    document.getElementById('photo-preview').classList.add('hidden');
+    document.getElementById('photo-preview-container').classList.remove('hidden');
 }
 
 
@@ -509,6 +499,8 @@ const model = document.getElementById("submit-model").value === "other"
 const year = document.getElementById("submit-year").value === "other"
 ? document.getElementById("custom-year").value
 : document.getElementById("submit-year").value;
+
+
 
 /* =========================================================
    MOBILE MENU
