@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
@@ -9,34 +10,39 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configure Cloudinary
+// ------------------------
+// Cloudinary Configuration
+// ------------------------
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+    cloud_name: 'Audi', // your Cloudinary cloud name
+    api_key: '823697266895623', // your API key
+    api_secret: 'PTd344wPWxCL0-rQR9hwa37iTSQ' // your API secret
 });
 
+// ------------------------
 // Middleware
+// ------------------------
 app.use(cors());
 app.use(express.json());
 app.use(express.static('.'));
 
-// Configure multer for memory storage (we'll upload to Cloudinary)
+// ------------------------
+// Multer configuration for memory storage
+// ------------------------
 const upload = multer({ 
     storage: multer.memoryStorage(),
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB max
     fileFilter: (req, file, cb) => {
-        if (file.mimetype.startsWith('image/')) {
-            cb(null, true);
-        } else {
-            cb(new Error('Only image files are allowed'), false);
-        }
+        if (file.mimetype.startsWith('image/')) cb(null, true);
+        else cb(new Error('Only image files are allowed'), false);
     }
 });
 
+// ------------------------
+// JSON storage for testing (ephemeral on Render)
+// ------------------------
 const DATA_FILE = path.join(__dirname, 'submissions.json');
 
-// Initialize data file if it doesn't exist
 async function initializeDataFile() {
     try {
         await fs.access(DATA_FILE);
@@ -45,20 +51,27 @@ async function initializeDataFile() {
     }
 }
 
+// ------------------------
+// Root API route (for testing)
+// ------------------------
+app.get('/api', (req, res) => {
+    res.json({ message: 'API is working! Use /api/submissions for submissions.' });
+});
+
+// ------------------------
 // Get all submissions
+// ------------------------
 app.get('/api/submissions', async (req, res) => {
     try {
         const data = await fs.readFile(DATA_FILE, 'utf8');
         let submissions = JSON.parse(data);
         
-        // Filter by code if provided
+        // Optional filter by code
         if (req.query.code && req.query.code !== 'all') {
             submissions = submissions.filter(s => s.code === req.query.code);
         }
-        
-        // Sort by date (newest first)
+
         submissions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        
         res.json(submissions);
     } catch (error) {
         console.error('Error reading submissions:', error);
@@ -66,7 +79,9 @@ app.get('/api/submissions', async (req, res) => {
     }
 });
 
-// Create new submission
+// ------------------------
+// Create a new submission
+// ------------------------
 app.post('/api/submissions', upload.single('photo'), async (req, res) => {
     try {
         const { code, model, year, solution, cost, name } = req.body;
@@ -77,24 +92,15 @@ app.post('/api/submissions', upload.single('photo'), async (req, res) => {
 
         let imageUrl = null;
 
-        // Upload image to Cloudinary if provided
+        // Upload to Cloudinary if file is provided
         if (req.file) {
-            const uploadPromise = new Promise((resolve, reject) => {
+            const result = await new Promise((resolve, reject) => {
                 const stream = cloudinary.uploader.upload_stream(
-                    { 
-                        folder: 'audi-dtc-fixes',
-                        public_id: `fix_${Date.now()}`,
-                        resource_type: 'image'
-                    },
-                    (error, result) => {
-                        if (error) reject(error);
-                        else resolve(result);
-                    }
+                    { folder: 'audi-dtc-fixes', public_id: `fix_${Date.now()}`, resource_type: 'image' },
+                    (error, result) => error ? reject(error) : resolve(result)
                 );
                 stream.end(req.file.buffer);
             });
-
-            const result = await uploadPromise;
             imageUrl = result.secure_url;
         }
 
@@ -106,21 +112,23 @@ app.post('/api/submissions', upload.single('photo'), async (req, res) => {
             solution,
             cost: cost || '',
             name: name || 'Anonymous Audi Enthusiast',
-            image: imageUrl || 'https://static.photos/technology/640x360/1', // Placeholder if no image
+            image: imageUrl || 'https://static.photos/technology/640x360/1', // placeholder
             date: new Date().toLocaleDateString(),
             createdAt: new Date().toISOString(),
             likes: 0
         };
 
-        // Read existing data
+        // Read existing submissions
         const data = await fs.readFile(DATA_FILE, 'utf8');
         const submissions = JSON.parse(data);
-        
+
         // Add new submission
         submissions.unshift(submission);
-        
-        // Write back to file
+
+        // Save back to JSON file
         await fs.writeFile(DATA_FILE, JSON.stringify(submissions, null, 2));
+
+        console.log('New submission received:', submission);
 
         res.status(201).json(submission);
     } catch (error) {
@@ -129,21 +137,20 @@ app.post('/api/submissions', upload.single('photo'), async (req, res) => {
     }
 });
 
+// ------------------------
 // Like a submission
+// ------------------------
 app.post('/api/submissions/:id/like', async (req, res) => {
     try {
         const data = await fs.readFile(DATA_FILE, 'utf8');
         const submissions = JSON.parse(data);
-        
+
         const submission = submissions.find(s => s.id === parseInt(req.params.id));
-        if (!submission) {
-            return res.status(404).json({ error: 'Submission not found' });
-        }
+        if (!submission) return res.status(404).json({ error: 'Submission not found' });
 
         submission.likes = (submission.likes || 0) + 1;
-        
         await fs.writeFile(DATA_FILE, JSON.stringify(submissions, null, 2));
-        
+
         res.json({ likes: submission.likes });
     } catch (error) {
         console.error('Error liking submission:', error);
@@ -151,18 +158,20 @@ app.post('/api/submissions/:id/like', async (req, res) => {
     }
 });
 
-// Error handling middleware
+// ------------------------
+// Error handling
+// ------------------------
 app.use((error, req, res, next) => {
-    if (error instanceof multer.MulterError) {
-        if (error.code === 'LIMIT_FILE_SIZE') {
-            return res.status(400).json({ error: 'File too large (max 5MB)' });
-        }
+    if (error instanceof multer.MulterError && error.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ error: 'File too large (max 5MB)' });
     }
     console.error(error);
     res.status(500).json({ error: 'Something went wrong' });
 });
 
+// ------------------------
 // Start server
+// ------------------------
 initializeDataFile().then(() => {
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
