@@ -82,6 +82,38 @@ function initSubmissionForm() {
 
 }
 
+/* ==========================================
+   Limit Image Size to 3mb
+========================================== */
+
+if (file && file.size > 3 * 1024 * 1024) {
+  alert("Image must be under 3MB");
+  return;
+}
+
+/* ==========================================
+   Prevent double submitting
+========================================== */
+
+let submitting = false;
+
+async function submitCommunityFix(event) {
+  event.preventDefault();
+
+  if (submitting) return;
+  submitting = true;
+
+  const button = document.querySelector("#submission-form button[type='submit']");
+  if (button) button.disabled = true;
+
+  try {
+    // your firebase submission code here
+  } finally {
+    submitting = false;
+    if (button) button.disabled = false;
+  }
+}
+
 
 /* ==========================================
    FORM SUBMISSION
