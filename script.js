@@ -33,6 +33,18 @@ document.addEventListener('DOMContentLoaded', function () {
     firebaseInitialized = false;
 }
 
+
+/* =========================================================
+   Just stuff
+   ========================================================= */
+
+function initSubmissionForm() {
+    const form = document.getElementById("submission-form");
+    if (form) {
+        form.addEventListener("submit", submitCommunityFix);
+    }
+}
+
 /* =========================================================
    Confirm button works
    ========================================================= */
