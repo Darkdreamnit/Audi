@@ -120,8 +120,15 @@ app.post('/api/submissions', upload.single('photo'), async (req, res) => {
         };
 
         // Read existing submissions
-        const data = await fs.readFile(DATA_FILE, 'utf8');
-        const submissions = JSON.parse(data);
+        let submissions = [];
+
+try {
+    const data = await fs.readFile(DATA_FILE, 'utf8');
+    submissions = JSON.parse(data);
+} catch (err) {
+    console.log("No submissions file yet, creating one...");
+    submissions = [];
+}
 
         // Add new submission
         submissions.unshift(submission);
@@ -143,8 +150,15 @@ app.post('/api/submissions', upload.single('photo'), async (req, res) => {
 // ------------------------
 app.post('/api/submissions/:id/like', async (req, res) => {
     try {
-        const data = await fs.readFile(DATA_FILE, 'utf8');
-        const submissions = JSON.parse(data);
+        let submissions = [];
+
+try {
+    const data = await fs.readFile(DATA_FILE, 'utf8');
+    submissions = JSON.parse(data);
+} catch (err) {
+    console.log("No submissions file yet, creating one...");
+    submissions = [];
+}
 
         const submission = submissions.find(s => s.id === parseInt(req.params.id));
         if (!submission) return res.status(404).json({ error: 'Submission not found' });
