@@ -112,6 +112,16 @@
         </div>
     </section>
 
+    <!-- SEARCH RESULTS -->
+<section id="results-section" class="max-w-6xl mx-auto px-4 py-12 hidden">
+
+    <h2 class="text-2xl font-bold mb-6">Search Results</h2>
+
+    <div id="search-results" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    </div>
+
+</section>
+
     <!-- Stats Bar -->
     <div class="bg-white border-b border-slate-200 py-4">
         <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-8 text-center">
@@ -629,5 +639,135 @@ function closeSubmissionModal(){
     <script>
         lucide.createIcons();
     </script>
+    <script>
+
+/* ================================
+MAIN SEARCH HANDLER
+================================ */
+
+function handleSearch(query){
+
+if(!query){
+document.getElementById("results-section").classList.add("hidden")
+return
+}
+
+query = query.toUpperCase()
+
+const results = dtcDatabase.filter(dtc =>
+
+dtc.code.includes(query) ||
+dtc.description.toUpperCase().includes(query) ||
+dtc.symptoms.join(" ").toUpperCase().includes(query)
+
+)
+
+displayResults(results)
+
+}
+
+
+/* ================================
+QUICK SEARCH BUTTONS
+================================ */
+
+function quickSearch(term){
+
+document.getElementById("main-search").value = term
+
+handleSearch(term)
+
+}
+
+
+/* ================================
+CLEAR SEARCH
+================================ */
+
+function clearSearch(){
+
+document.getElementById("main-search").value = ""
+
+document.getElementById("results-section").classList.add("hidden")
+
+}
+
+
+/* ================================
+DISPLAY RESULTS
+================================ */
+
+function displayResults(results){
+
+const container = document.getElementById("search-results")
+
+const section = document.getElementById("results-section")
+
+section.classList.remove("hidden")
+
+if(results.length === 0){
+
+container.innerHTML = `
+<div class="col-span-full text-center text-slate-500">
+No results found
+</div>
+`
+
+return
+}
+
+container.innerHTML = results.map(dtc => `
+
+<div class="code-card bg-white p-6 rounded-xl shadow">
+
+<h3 class="text-xl font-bold text-red-600 mb-2">${dtc.code}</h3>
+
+<p class="font-semibold mb-3">${dtc.description}</p>
+
+<div class="text-sm mb-2">
+<b>Symptoms:</b>
+<ul class="list-disc list-inside">
+${dtc.symptoms.map(s=>`<li>${s}</li>`).join("")}
+</ul>
+</div>
+
+<div class="text-sm mb-2">
+<b>Causes:</b>
+<ul class="list-disc list-inside">
+${dtc.causes.map(c=>`<li>${c}</li>`).join("")}
+</ul>
+</div>
+
+<div class="text-sm">
+<b>Fixes:</b>
+<ul class="list-disc list-inside">
+${dtc.fixes.map(f=>`<li>${f}</li>`).join("")}
+</ul>
+</div>
+
+</div>
+
+`).join("")
+
+}
+
+
+/* ================================
+NAVIGATION FUNCTIONS
+================================ */
+
+function showHome(){
+
+window.scrollTo({top:0,behavior:"smooth"})
+
+}
+
+function toggleMobileMenu(){
+
+document.getElementById("mobile-menu").classList.toggle("hidden")
+
+}
+
+</script>
 </body>
 </html>
