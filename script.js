@@ -524,7 +524,7 @@ function handleUrlParams() {
 // Configuration
 const API_URL = window.location.origin.includes('localhost')
   ? 'http://localhost:3000/api'
-  : 'https://https://audi-vses.onrender.com/api';
+  : 'https://audi-vses.onrender.com/api';
 
 // Community Solutions Functions
 let communityPosts = [];
