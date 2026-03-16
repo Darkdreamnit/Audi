@@ -428,6 +428,40 @@ async function likeCommunityPost(postId) {
 
 
 /* =========================================================
+   This is for Chat GPT Dropdown
+   ========================================================= */
+function toggleCustomField(selectElement, fieldId) {
+
+const field = document.getElementById(fieldId);
+
+if(selectElement.value === "other"){
+
+field.classList.remove("hidden");
+
+}else{
+
+field.classList.add("hidden");
+
+}
+}
+
+
+/* =========================================================
+   Submit function
+   ========================================================= */
+const code = document.getElementById("submit-code").value === "other"
+? document.getElementById("custom-code").value
+: document.getElementById("submit-code").value;
+
+const model = document.getElementById("submit-model").value === "other"
+? document.getElementById("custom-model").value
+: document.getElementById("submit-model").value;
+
+const year = document.getElementById("submit-year").value === "other"
+? document.getElementById("custom-year").value
+: document.getElementById("submit-year").value;
+
+/* =========================================================
    MOBILE MENU
    ========================================================= */
 
