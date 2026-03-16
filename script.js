@@ -610,6 +610,10 @@ async function submitCommunityFix(event) {
             body: formData
         });
 
+        app.get('/api', (req, res) => {
+  res.json({ message: 'API is working! Use /api/submissions for data.' });
+});
+
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.error || 'Failed to submit');
