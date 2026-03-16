@@ -340,6 +340,55 @@ function displayCommunityPosts(posts) {
 
     }
 
+    function toggleCustomField(select, fieldId) {
+
+  const field = document.getElementById(fieldId);
+
+  if (select.value === "other") {
+    field.classList.remove("hidden");
+  } else {
+    field.classList.add("hidden");
+  }
+
+}
+
+
+
+/* Preview Photo */
+function previewPhoto(input){
+
+  const file = input.files[0];
+  const preview = document.getElementById("photo-preview");
+  const container = document.getElementById("photo-preview-container");
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    preview.src = e.target.result;
+    preview.classList.remove("hidden");
+    container.classList.add("hidden");
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function handleDragOver(event){
+  event.preventDefault();
+}
+
+function handleDrop(event){
+  event.preventDefault();
+
+  const file = event.dataTransfer.files[0];
+  const input = document.getElementById("submit-photo");
+
+  input.files = event.dataTransfer.files;
+
+  previewPhoto(input);
+}
+
 
     container.innerHTML = posts.map(post => `
 
