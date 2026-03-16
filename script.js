@@ -33,6 +33,15 @@ document.addEventListener('DOMContentLoaded', function () {
     firebaseInitialized = false;
 }
 
+/* =========================================================
+   Confirm button works
+   ========================================================= */
+
+function openSubmissionModal() {
+    console.log("Button clicked");
+    document.getElementById('submission-modal').classList.remove('hidden');
+}
+
     /* Initialize all UI components */
     initSymptomGrid();
     initModelGrid();
