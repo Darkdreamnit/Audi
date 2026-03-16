@@ -13,10 +13,11 @@ const PORT = process.env.PORT || 3000;
 // ------------------------
 // Cloudinary Configuration
 // ------------------------
+
 cloudinary.config({
-    cloud_name: 'Audi', // your Cloudinary cloud name
-    api_key: '823697266895623', // your API key
-    api_secret: 'PTd344wPWxCL0-rQR9hwa37iTSQ' // your API secret
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
 });
 
 // ------------------------
