@@ -445,6 +445,55 @@ field.classList.add("hidden");
 }
 }
 
+// Preview the selected image
+function previewPhoto(input) {
+    const preview = document.getElementById('photo-preview');
+    const container = document.getElementById('photo-preview-container');
+
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+
+        // Validate size (<5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            alert('File too large. Max 5MB allowed.');
+            input.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
+            container.classList.add('hidden');
+        }
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = '';
+        preview.classList.add('hidden');
+        container.classList.remove('hidden');
+    }
+}
+
+// Drag & Drop Support
+function handleDragOver(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = "copy";
+    event.currentTarget.classList.add('border-red-500');
+}
+
+function handleDrop(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+        const input = document.getElementById('submit-photo');
+        input.files = files;
+        previewPhoto(input);
+    }
+    event.currentTarget.classList.remove('border-red-500');
+}
+
 
 /* =========================================================
    Submit function
