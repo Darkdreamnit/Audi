@@ -26,7 +26,12 @@ let firebaseInitialized = false;
 document.addEventListener('DOMContentLoaded', function () {
 
     /* Initialize Firebase FIRST */
+    firebaseInitialized = initFirebase();try {
     firebaseInitialized = initFirebase();
+} catch (e) {
+    console.error("Firebase failed to initialize:", e);
+    firebaseInitialized = false;
+}
 
     /* Initialize all UI components */
     initSymptomGrid();
