@@ -247,3 +247,119 @@ estimatedCost:"$100 - $800"
 })
 
 }
+
+
+/* ==========================================
+DTC SEARCH SYSTEM
+========================================== */
+
+function searchDTC() {
+
+const input = document.getElementById("search-input")
+
+if(!input) return
+
+const query = input.value.trim().toUpperCase()
+
+if(query === "") return
+
+const results = dtcDatabase.filter(dtc =>
+dtc.code.includes(query) ||
+dtc.description.toUpperCase().includes(query)
+)
+
+displayDTCResults(results)
+
+}
+
+
+/* ==========================================
+TRY CODE BUTTONS
+========================================== */
+
+function tryCode(code){
+
+const input = document.getElementById("search-input")
+
+if(input){
+
+input.value = code
+
+searchDTC()
+
+}
+
+}
+
+
+/* ==========================================
+DISPLAY SEARCH RESULTS
+========================================== */
+
+function displayDTCResults(results){
+
+const container = document.getElementById("search-results")
+
+if(!container) return
+
+if(results.length === 0){
+
+container.innerHTML = `
+<div class="p-6 text-center">
+No results found
+</div>
+`
+return
+
+}
+
+container.innerHTML = results.map(dtc => `
+
+<div class="bg-white shadow rounded-lg p-6 mb-4">
+
+<h2 class="text-xl font-bold text-red-600">
+${dtc.code}
+</h2>
+
+<p class="font-semibold mt-2">
+${dtc.description}
+</p>
+
+<div class="mt-4">
+
+<b>Symptoms</b>
+<ul>
+${dtc.symptoms.map(s => `<li>• ${s}</li>`).join("")}
+</ul>
+
+</div>
+
+<div class="mt-3">
+
+<b>Common Causes</b>
+<ul>
+${dtc.causes.map(c => `<li>• ${c}</li>`).join("")}
+</ul>
+
+</div>
+
+<div class="mt-3">
+
+<b>Possible Fixes</b>
+<ul>
+${dtc.fixes.map(f => `<li>• ${f}</li>`).join("")}
+</ul>
+
+</div>
+
+<div class="mt-3 text-sm text-gray-600">
+
+Estimated Cost: ${dtc.estimatedCost}
+
+</div>
+
+</div>
+
+`).join("")
+
+}
