@@ -522,11 +522,9 @@ function handleUrlParams() {
 }
 
 // Configuration
-const API_URL = window.location.origin.includes('localhost') 
-    ? 'http://localhost:3000/api' 
-    : '/api'; // Adjust this to your deployed backend URL
-
-    const CLOUDINARY_CLOUD_NAME = 'Audi';
+const API_URL = window.location.origin.includes('localhost')
+  ? 'http://localhost:3000/api'
+  : 'https://https://audi-vses.onrender.com/api';
 
 // Community Solutions Functions
 let communityPosts = [];
