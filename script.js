@@ -454,6 +454,7 @@ Click to diagnose →
 
 }
 
+
 /* ==========================================
 MODEL DROPDOWN HANDLER (NEW)
 ========================================== */
@@ -465,10 +466,28 @@ clearModelFilter()
 return
 }
 
-/* Use your existing working function */
 filterByModel(value)
 
 }
+
+
+/* ==========================================
+CLEAR MODEL FILTER (IMPROVED)
+========================================== */
+
+function clearModelFilter() {
+
+currentModelFilter = null;
+
+document.getElementById('model-specific-codes')?.classList.add('hidden');
+
+/* Reset dropdown */
+const dropdown = document.getElementById("model-dropdown");
+if(dropdown) dropdown.value = "";
+
+}
+
+
 /* ==========================================
 CUSTOM FIELD
 ========================================== */
