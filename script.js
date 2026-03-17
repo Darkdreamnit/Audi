@@ -1,31 +1,43 @@
 /* ==========================================
-   GLOBAL STATE
+   GLOBAL VARIABLES
 ========================================== */
 
 let firebaseInitialized = false;
 let communityPosts = [];
-let submitting = false;
 
 
 /* ==========================================
-   PAGE LOAD
+   PAGE LOAD INITIALIZATION
 ========================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-  console.log("App Initialized");
+  console.log("Page loaded");
+
+  /* Initialize Firebase safely */
 
   try {
+
     firebaseInitialized = initFirebase();
+
   } catch (e) {
+
     console.error("Firebase failed:", e);
+
     firebaseInitialized = false;
+
   }
+
+  /* Initialize form submission */
 
   initSubmissionForm();
 
+  /* Load posts */
+
   if (firebaseInitialized) {
+
     loadCommunityPosts();
+
   }
 
 });
@@ -36,12 +48,23 @@ document.addEventListener("DOMContentLoaded", () => {
 ========================================== */
 
 function openSubmissionModal() {
-  document.getElementById("submission-modal").classList.remove("hidden");
+
+  const modal = document.getElementById("submission-modal");
+
+  modal.classList.remove("hidden");
+
 }
 
 function closeSubmissionModal() {
-  document.getElementById("submission-modal").classList.add("hidden");
-  document.getElementById("submission-form").reset();
+
+  const modal = document.getElementById("submission-modal");
+
+  const form = document.getElementById("submission-form");
+
+  modal.classList.add("hidden");
+
+  form.reset();
+
 }
 
 
@@ -50,19 +73,31 @@ function closeSubmissionModal() {
 ========================================== */
 
 function initSubmissionForm() {
+
   const form = document.getElementById("submission-form");
+
   if (!form) return;
 
   form.addEventListener("submit", submitCommunityFix);
+
 }
 
-
 /* ==========================================
-   SUBMIT FIX (IMPROVED + SAFE)
+   Limit Image Size to 3mb
 ========================================== */
 
-async function submitCommunityFix(event) {
+if (file && file.size > 3 * 1024 * 1024) {
+  alert("Image must be under 3MB");
+  return;
+}
 
+/* ==========================================
+   Prevent double submitting
+========================================== */
+
+let submitting = false;
+
+async function submitCommunityFix(event) {
   event.preventDefault();
 
   if (submitting) return;
@@ -72,37 +107,51 @@ async function submitCommunityFix(event) {
   if (button) button.disabled = true;
 
   try {
+    // your firebase submission code here
+  } finally {
+    submitting = false;
+    if (button) button.disabled = false;
+  }
+}
 
-    const code = document.getElementById("submit-code").value.toUpperCase();
-    const model = document.getElementById("submit-model").value;
-    const year = document.getElementById("submit-year").value;
-    const solution = document.getElementById("submit-solution").value;
-    const cost = document.getElementById("submit-cost").value;
-    const author = document.getElementById("submit-name").value || "Anonymous";
 
-    const file = document.getElementById("submit-photo").files[0];
+/* ==========================================
+   FORM SUBMISSION
+========================================== */
 
-    /* Image validation */
-    if (file && file.size > 3 * 1024 * 1024) {
-      alert("Image must be under 3MB");
-      submitting = false;
-      button.disabled = false;
-      return;
-    }
+async function submitCommunityFix(event) {
+
+  event.preventDefault();
+
+  const code = document.getElementById("submit-code").value;
+  const model = document.getElementById("submit-model").value;
+  const year = document.getElementById("submit-year").value;
+  const solution = document.getElementById("submit-solution").value;
+  const cost = document.getElementById("submit-cost").value;
+  const author = document.getElementById("submit-name").value || "Anonymous";
+
+  const photoInput = document.getElementById("submit-photo");
+  const file = photoInput.files[0];
+
+  try {
 
     let imageURL = null;
 
-    /* Upload image */
+    /* Upload photo */
+
     if (file && firebaseInitialized) {
 
-      const imageRef = firebaseStorage
-        .ref("community/" + Date.now() + "-" + file.name);
+      const storageRef = firebaseStorage.ref();
+      const imageRef = storageRef.child("community/" + Date.now() + "-" + file.name);
 
       await imageRef.put(file);
+
       imageURL = await imageRef.getDownloadURL();
+
     }
 
     const post = {
+
       code,
       model,
       year,
@@ -110,23 +159,31 @@ async function submitCommunityFix(event) {
       cost,
       author,
       image: imageURL,
-      date: Date.now(),
+      date: new Date().toISOString(),
       likes: 0
+
     };
 
+    /* Save to Firebase */
+
     const postsRef = getCommunityPostsRef();
-    await postsRef.push(post);
+
+    const newPost = postsRef.push();
+
+    await newPost.set(post);
 
     alert("✅ Fix shared successfully!");
+
     closeSubmissionModal();
 
   } catch (err) {
-    console.error(err);
+
+    console.error("Submission error:", err);
+
     alert("❌ Error submitting fix.");
+
   }
 
-  submitting = false;
-  if (button) button.disabled = false;
 }
 
 
@@ -138,16 +195,24 @@ function loadCommunityPosts() {
 
   const postsRef = getCommunityPostsRef();
 
-  postsRef.on("value", snapshot => {
+  postsRef.on("value", function (snapshot) {
 
     const data = snapshot.val();
 
-    communityPosts = data
-      ? Object.keys(data).map(key => ({
-          id: key,
-          ...data[key]
-        }))
-      : [];
+    if (!data) {
+
+      communityPosts = [];
+
+    } else {
+
+      communityPosts = Object.keys(data).map(key => ({
+
+        id: key,
+        ...data[key]
+
+      }));
+
+    }
 
     displayCommunityPosts();
 
@@ -157,156 +222,109 @@ function loadCommunityPosts() {
 
 
 /* ==========================================
-   DISPLAY POSTS (🔥 MODERN AUDI UI)
+   DISPLAY POSTS
 ========================================== */
 
 function displayCommunityPosts() {
 
   const container = document.getElementById("community-grid");
+
   if (!container) return;
 
   if (communityPosts.length === 0) {
-    container.innerHTML = `
-      <div class="text-center text-slate-400 py-10">
-        No fixes shared yet
-      </div>`;
+
+    container.innerHTML = "<p>No fixes shared yet.</p>";
+
     return;
+
   }
 
   container.innerHTML = communityPosts.map(post => `
 
-  <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden
-              hover:border-red-500 transition duration-300 shadow-lg">
+    <div class="bg-white rounded-xl shadow border p-4">
 
-    ${post.image ? `
-    <img src="${post.image}" class="w-full h-48 object-cover">
-    ` : ""}
+      ${post.image ? `<img src="${post.image}" class="rounded mb-3 w-full">` : ""}
 
-    <div class="p-5">
+      <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">${post.code}</span>
 
-      <!-- HEADER -->
-      <div class="flex justify-between items-center mb-3">
+      <h3 class="font-bold mt-2">${post.model} ${post.year || ""}</h3>
 
-        <span class="bg-red-600 text-white text-xs px-3 py-1 rounded font-bold">
-          ${post.code}
-        </span>
+      <p class="text-sm mt-2">${post.solution}</p>
 
-        <span class="text-xs text-slate-400">
-          ${formatDate(post.date)}
-        </span>
-
-      </div>
-
-      <!-- VEHICLE -->
-      <h3 class="text-white font-semibold text-lg">
-        ${post.model || "Audi"} ${post.year || ""}
-      </h3>
-
-      <!-- FIX -->
-      <p class="text-slate-300 text-sm mt-3 leading-relaxed">
-        ${post.solution}
-      </p>
-
-      <!-- COST -->
-      ${post.cost ? `
-      <div class="mt-3">
-        <span class="text-xs text-slate-400">Repair Cost</span>
-        <div class="text-green-400 font-semibold">
-          $${post.cost}
-        </div>
-      </div>
-      ` : ""}
-
-      <!-- FOOTER -->
-      <div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-800">
-
-        <span class="text-xs text-slate-500">
-          by ${post.author}
-        </span>
-
-        <button onclick="likePost('${post.id}')"
-          class="text-xs text-red-400 hover:text-red-500">
-
-          ❤️ ${post.likes || 0}
-        </button>
-
-      </div>
+      <div class="text-xs text-slate-500 mt-2">${post.author}</div>
 
     </div>
 
-  </div>
-
   `).join("");
-}
-
-
-/* ==========================================
-   LIKE SYSTEM
-========================================== */
-
-function likePost(postId) {
-
-  const postRef = getCommunityPostsRef().child(postId);
-
-  postRef.transaction(post => {
-    if (post) {
-      post.likes = (post.likes || 0) + 1;
-    }
-    return post;
-  });
 
 }
 
 
 /* ==========================================
-   HELPERS
-========================================== */
-
-function formatDate(timestamp) {
-  if (!timestamp) return "";
-  const date = new Date(timestamp);
-  return date.toLocaleDateString();
-}
-
-
-/* ==========================================
-   UI HELPERS
+   MODAL HELPER FUNCTIONS
 ========================================== */
 
 function toggleCustomField(select, fieldId) {
+
   const field = document.getElementById(fieldId);
-  field.classList.toggle("hidden", select.value !== "other");
+
+  if (select.value === "other") {
+
+    field.classList.remove("hidden");
+
+  } else {
+
+    field.classList.add("hidden");
+
+  }
+
 }
 
 
 function previewPhoto(input) {
 
   const file = input.files[0];
-  if (!file) return;
-
   const preview = document.getElementById("photo-preview");
   const container = document.getElementById("photo-preview-container");
 
+  if (!file) return;
+
   const reader = new FileReader();
 
-  reader.onload = e => {
+  reader.onload = function (e) {
+
     preview.src = e.target.result;
+
     preview.classList.remove("hidden");
+
     container.classList.add("hidden");
+
   };
 
   reader.readAsDataURL(file);
+
 }
 
 
-function handleDragOver(e) {
-  e.preventDefault();
+function handleDragOver(event) {
+
+  event.preventDefault();
+
 }
 
 
-function handleDrop(e) {
-  e.preventDefault();
+function handleDrop(event) {
+
+  event.preventDefault();
+
   const input = document.getElementById("submit-photo");
-  input.files = e.dataTransfer.files;
+
+  input.files = event.dataTransfer.files;
+
   previewPhoto(input);
+
 }
+
+
+
+
