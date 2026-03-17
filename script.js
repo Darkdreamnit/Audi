@@ -34,6 +34,34 @@ const dropdown = document.getElementById("dtc-dropdown");
 
 if(!dropdown) return;
 
+    /* ==========================================
+DTC DROPDOWN HANDLER
+========================================== */
+
+let selectedDTC = null;
+
+function handleDTCSelection(code){
+
+if(!code){
+clearDTCSelection()
+return
+}
+
+const dtc = audiCommonDTCs.find(d => d.code === code);
+
+if(!dtc) return;
+
+selectedDTC = dtc;
+
+/* Show preview */
+document.getElementById("dtc-preview").classList.remove("hidden");
+
+document.getElementById("dtc-code").textContent = dtc.code;
+document.getElementById("dtc-severity").textContent = dtc.severity;
+document.getElementById("dtc-desc").textContent = dtc.desc;
+
+}
+
 /* Populate dropdown */
 dropdown.innerHTML = `
 <option value="">🔧 Select a Common Code</option>
