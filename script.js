@@ -357,13 +357,25 @@ LIKE POSTS
 
 function likePost(id){
 
-const post = communityPosts.find(p=>p.id===id)
+const post = communityPosts.find(p => p.id === id)
 if(!post) return
+
+/* 🔒 Unique key per post */
+const likeKey = `liked_${id}`
+
+/* 🚫 Prevent duplicate likes */
+if(localStorage.getItem(likeKey)){
+alert("⚠️ You already liked this fix.")
+return
+}
+
+/* Save like locally */
+localStorage.setItem(likeKey, "true")
 
 const postsRef = getCommunityPostsRef()
 
 postsRef.child(id).update({
-likes:(post.likes||0)+1
+likes: (post.likes || 0) + 1
 })
 
 }
