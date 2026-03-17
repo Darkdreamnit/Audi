@@ -393,7 +393,77 @@ displayCommunityPosts()
 }
 
 
+/* ==========================================
+SEARCHABLE DTC DROPDOWN (UI UPGRADE ONLY)
+========================================== */
 
+function filterDTCs(query){
+
+const resultsBox = document.getElementById("dtc-results");
+if(!resultsBox) return;
+
+if(!query){
+resultsBox.classList.add("hidden");
+return;
+}
+
+query = query.toLowerCase();
+
+const matches = audiCommonDTCs.filter(dtc =>
+dtc.code.toLowerCase().includes(query) ||
+dtc.desc.toLowerCase().includes(query)
+).slice(0,20);
+
+if(matches.length === 0){
+resultsBox.innerHTML = `<div class="p-3 text-sm text-slate-500">No results found</div>`;
+resultsBox.classList.remove("hidden");
+return;
+}
+
+resultsBox.innerHTML = matches.map(dtc => `
+<div onclick="selectDTC('${dtc.code}')"
+class="p-3 hover:bg-slate-100 cursor-pointer border-b">
+
+<div class="font-semibold text-sm">${dtc.code}</div>
+<div class="text-xs text-slate-500">${dtc.desc}</div>
+
+</div>
+`).join("");
+
+resultsBox.classList.remove("hidden");
+
+}
+
+
+function selectDTC(code){
+
+const dtc = audiCommonDTCs.find(d => d.code === code);
+if(!dtc) return;
+
+selectedDTC = dtc;
+
+/* 🔥 THIS USES YOUR EXISTING UI — NOT CHANGED */
+handleDTCSelection(code);
+
+document.getElementById("dtc-search").value = code;
+document.getElementById("dtc-results").classList.add("hidden");
+
+}
+
+
+/* Close dropdown when clicking outside */
+document.addEventListener("click", function(e){
+
+const box = document.getElementById("dtc-results");
+const input = document.getElementById("dtc-search");
+
+if(!box || !input) return;
+
+if(!box.contains(e.target) && e.target !== input){
+box.classList.add("hidden");
+}
+
+});
 /* ==========================================
 CUSTOM FIELD
 ========================================== */
