@@ -42,7 +42,7 @@ COMMON DTC DROPDOWN (FIXED)
 function loadCommonDTCs(){
 
 const dropdown = document.getElementById("dtc-dropdown");
-if(!dropdown || !window.audiCommonDTCs) return;
+const audiCommonDTCs = [...]
 
 /* Populate dropdown */
 dropdown.innerHTML = `
