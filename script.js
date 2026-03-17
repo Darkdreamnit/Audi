@@ -530,6 +530,30 @@ if(dropdown) dropdown.value = "";
 
 }
 
+/* Common DTC clear function*/
+
+function clearDTCSelection(){
+
+selectedDTC = null;
+
+document.getElementById("dtc-preview")?.classList.add("hidden");
+
+const dropdown = document.getElementById("dtc-dropdown");
+if(dropdown) dropdown.value = "";
+
+}
+
+/* Search trigger for Common DTcs */
+
+function runSelectedDTCSearch(){
+
+if(!selectedDTC) return;
+
+/* Use your existing system */
+quickSearch(selectedDTC.code);
+
+}
+
 
 /* ==========================================
 CUSTOM FIELD
