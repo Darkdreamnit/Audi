@@ -42,9 +42,22 @@ COMMON DTC DROPDOWN (FIXED)
 function loadCommonDTCs(){
 
 const dropdown = document.getElementById("dtc-dropdown");
-const audiCommonDTCs = [...]
 
-/* Populate dropdown */
+if(!dropdown){
+console.error("❌ Dropdown element not found");
+return;
+}
+
+if(typeof audiCommonDTCs === "undefined"){
+console.error("❌ audiCommonDTCs is not loaded. Check data.js");
+return;
+}
+
+if(!Array.isArray(audiCommonDTCs) || audiCommonDTCs.length === 0){
+console.error("❌ audiCommonDTCs is empty");
+return;
+}
+
 dropdown.innerHTML = `
 <option value="">🔧 Select a Common Code</option>
 ` + audiCommonDTCs.map(dtc => `
@@ -52,6 +65,8 @@ dropdown.innerHTML = `
 ${dtc.code} - ${dtc.desc}
 </option>
 `).join("");
+
+console.log("✅ DTC dropdown loaded:", audiCommonDTCs.length);
 
 }
 
