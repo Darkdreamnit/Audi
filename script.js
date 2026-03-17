@@ -27,8 +27,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   initSubmissionForm();
 
-  /* ✅ ADD THIS LINE */
-  loadCommonDTCs();
+  /* Loading common DTCs*/
+  function loadCommonDTCs(){
+
+const dropdown = document.getElementById("dtc-dropdown");
+
+if(!dropdown) return;
+
+/* Populate dropdown */
+dropdown.innerHTML = `
+<option value="">🔧 Select a Common Code</option>
+` + audiCommonDTCs.map(dtc => `
+<option value="${dtc.code}">
+${dtc.code} - ${dtc.desc}
+</option>
+`).join("");
+
+}
 
   if (firebaseInitialized) {
 
