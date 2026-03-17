@@ -5,6 +5,8 @@ GLOBAL VARIABLES
 let firebaseInitialized = false
 let communityPosts = []
 let submitting = false
+let selectedDTC = null
+let currentModelFilter = null
 
 
 /* ==========================================
@@ -15,52 +17,32 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("Page loaded");
 
   try {
-
     firebaseInitialized = initFirebase();
-
   } catch (e) {
-
     console.error("Firebase failed:", e);
     firebaseInitialized = false;
-
   }
 
   initSubmissionForm();
 
-  /* Loading common DTCs*/
-  function loadCommonDTCs(){
+  /* ✅ FIXED: Properly load dropdown */
+  loadCommonDTCs();
 
-const dropdown = document.getElementById("dtc-dropdown");
+  if (firebaseInitialized) {
+    loadCommunityPosts();
+  }
 
-if(!dropdown) return;
+});
 
-    /* ==========================================
-DTC DROPDOWN HANDLER
+
+/* ==========================================
+COMMON DTC DROPDOWN (FIXED)
 ========================================== */
 
-let selectedDTC = null;
+function loadCommonDTCs(){
 
-function handleDTCSelection(code){
-
-if(!code){
-clearDTCSelection()
-return
-}
-
-const dtc = audiCommonDTCs.find(d => d.code === code);
-
-if(!dtc) return;
-
-selectedDTC = dtc;
-
-/* Show preview */
-document.getElementById("dtc-preview").classList.remove("hidden");
-
-document.getElementById("dtc-code").textContent = dtc.code;
-document.getElementById("dtc-severity").textContent = dtc.severity;
-document.getElementById("dtc-desc").textContent = dtc.desc;
-
-}
+const dropdown = document.getElementById("dtc-dropdown");
+if(!dropdown || !window.audiCommonDTCs) return;
 
 /* Populate dropdown */
 dropdown.innerHTML = `
@@ -73,13 +55,78 @@ ${dtc.code} - ${dtc.desc}
 
 }
 
-  if (firebaseInitialized) {
 
-    loadCommunityPosts();
+/* ==========================================
+DTC DROPDOWN HANDLER
+========================================== */
 
-  }
+function handleDTCSelection(code){
 
-});
+if(!code){
+clearDTCSelection()
+return
+}
+
+const dtc = audiCommonDTCs.find(d => d.code === code);
+if(!dtc) return;
+
+selectedDTC = dtc;
+
+document.getElementById("dtc-preview")?.classList.remove("hidden");
+document.getElementById("dtc-code").textContent = dtc.code;
+document.getElementById("dtc-severity").textContent = dtc.severity;
+document.getElementById("dtc-desc").textContent = dtc.desc;
+
+}
+
+
+function runSelectedDTCSearch(){
+
+if(!selectedDTC) return;
+
+quickSearch(selectedDTC.code);
+
+}
+
+
+function clearDTCSelection(){
+
+selectedDTC = null;
+
+document.getElementById("dtc-preview")?.classList.add("hidden");
+
+const dropdown = document.getElementById("dtc-dropdown");
+if(dropdown) dropdown.value = "";
+
+}
+
+
+/* ==========================================
+MODEL DROPDOWN
+========================================== */
+
+function handleModelDropdown(value){
+
+if(!value){
+clearModelFilter()
+return
+}
+
+filterByModel(value)
+
+}
+
+
+function clearModelFilter() {
+
+currentModelFilter = null;
+
+document.getElementById('model-specific-codes')?.classList.add('hidden');
+
+const dropdown = document.getElementById("model-dropdown");
+if(dropdown) dropdown.value = "";
+
+}
 
 
 /* ==========================================
@@ -87,20 +134,14 @@ NAVIGATION
 ========================================== */
 
 function showHome(){
-
 document.getElementById("search-results-container")?.classList.add("hidden")
 window.scrollTo({top:0,behavior:"smooth"})
-
 }
 
 function toggleMobileMenu(){
-
 const menu = document.getElementById("mobile-menu")
-
 if(!menu) return
-
 menu.classList.toggle("hidden")
-
 }
 
 
@@ -109,9 +150,7 @@ MODAL CONTROLS
 ========================================== */
 
 function openSubmissionModal(){
-
 document.getElementById("submission-modal").classList.remove("hidden")
-
 }
 
 function closeSubmissionModal(){
@@ -139,7 +178,6 @@ FORM SETUP
 function initSubmissionForm(){
 
 const form = document.getElementById("submission-form")
-
 if(!form) return
 
 form.addEventListener("submit", submitCommunityFix)
@@ -173,15 +211,11 @@ const author = document.getElementById("submit-name").value.trim() || "Anonymous
 const photoInput = document.getElementById("submit-photo")
 const file = photoInput.files[0]
 
-/* Limit image size */
-
 if(file && file.size > 3 * 1024 * 1024){
-
 alert("Image must be under 3MB")
 submitting = false
 if(button) button.disabled = false
 return
-
 }
 
 let imageURL = null
@@ -192,12 +226,9 @@ const storageRef = firebaseStorage.ref()
 const imageRef = storageRef.child("community/" + Date.now() + "-" + file.name)
 
 await imageRef.put(file)
-
 imageURL = await imageRef.getDownloadURL()
 
 }
-
-/* Prevent duplicate fixes */
 
 const duplicate = communityPosts.find(p =>
 p.code === code &&
@@ -206,44 +237,30 @@ p.solution === solution
 )
 
 if(duplicate){
-
 alert("⚠️ This fix has already been shared.")
 submitting = false
 if(button) button.disabled = false
 return
-
 }
 
 const post = {
-
-code,
-model,
-year,
-solution,
-cost,
-author,
+code, model, year, solution, cost, author,
 image:imageURL,
 date:new Date().toISOString(),
 likes:0
-
 }
 
 const postsRef = getCommunityPostsRef()
-
 const newPost = postsRef.push()
 
 await newPost.set(post)
 
 alert("✅ Fix shared successfully!")
-
 closeSubmissionModal()
 
 }catch(err){
-
 console.error("Submission error:",err)
-
 alert("❌ Error submitting fix.")
-
 }
 
 submitting = false
@@ -264,22 +281,10 @@ postsRef.on("value",function(snapshot){
 
 const data = snapshot.val()
 
-if(!data){
-
-communityPosts=[]
-
-}else{
-
-communityPosts = Object.keys(data).map(key=>({
-
+communityPosts = data ? Object.keys(data).map(key=>({
 id:key,
 ...data[key]
-
-}))
-
-}
-
-/* Sort newest first */
+})) : []
 
 communityPosts.sort((a,b)=> new Date(b.date)-new Date(a.date))
 
@@ -297,14 +302,11 @@ DISPLAY POSTS
 function displayCommunityPosts(posts = communityPosts){
 
 const container = document.getElementById("community-grid")
-
 if(!container) return
 
 if(posts.length===0){
-
 container.innerHTML="<p>No fixes shared yet.</p>"
 return
-
 }
 
 container.innerHTML = posts.map(post=>`
@@ -322,13 +324,9 @@ ${post.image ? `<img src="${post.image}" class="rounded mb-3 w-full">`:""}
 <div class="text-xs text-slate-500 mt-2">${post.author}</div>
 
 <div class="flex items-center mt-3">
-
 <button onclick="likePost('${post.id}')" class="text-sm text-blue-600">
-
 👍 ${post.likes || 0}
-
 </button>
-
 </div>
 
 </div>
@@ -345,15 +343,12 @@ LIKE POSTS
 function likePost(id){
 
 const post = communityPosts.find(p=>p.id===id)
-
 if(!post) return
 
 const postsRef = getCommunityPostsRef()
 
 postsRef.child(id).update({
-
 likes:(post.likes||0)+1
-
 })
 
 }
@@ -366,192 +361,20 @@ SEARCH SYSTEM
 function handleSearch(query){
 
 query = query.toLowerCase().trim()
-
 if(!query) return
 
 const results = communityPosts.filter(post=>
-
 post.code.toLowerCase().includes(query) ||
 post.model.toLowerCase().includes(query) ||
 post.solution.toLowerCase().includes(query)
-
 )
 
 displayCommunityPosts(results)
 
 }
 
-
 function clearSearch(){
-
 displayCommunityPosts()
-
-}
-
-
-/* ==========================================
-COMMUNITY FILTER
-========================================== */
-
-function filterCommunity(code){
-
-if(code==="all"){
-
-displayCommunityPosts()
-
-return
-
-}
-
-const filtered = communityPosts.filter(post=>post.code===code)
-
-displayCommunityPosts(filtered)
-
-}
-
-
-/* ==========================================
-PHOTO PREVIEW
-========================================== */
-
-function previewPhoto(input){
-
-const file = input.files[0]
-const preview = document.getElementById("photo-preview")
-const container = document.getElementById("photo-preview-container")
-
-if(!file) return
-
-const reader = new FileReader()
-
-reader.onload=function(e){
-
-preview.src=e.target.result
-preview.classList.remove("hidden")
-container.classList.add("hidden")
-
-}
-
-reader.readAsDataURL(file)
-
-}
-
-
-function handleDragOver(event){
-
-event.preventDefault()
-
-}
-
-function handleDrop(event){
-
-event.preventDefault()
-
-const input=document.getElementById("submit-photo")
-
-input.files=event.dataTransfer.files
-
-previewPhoto(input)
-
-}
-
-
-/* ==========================================
-COMMON AUDI CODES
-========================================== */
-function loadCommonDTCs(){
-
-const container = document.getElementById("common-dtc-grid");
-
-if(!container) return;
-
-container.innerHTML = audiCommonDTCs.map(dtc => `
-
-<div onclick="quickSearch('${dtc.code}')"
-class="bg-slate-900 border border-slate-800 rounded-xl p-5 cursor-pointer
-hover:border-red-500 transition duration-300 shadow-lg">
-
-<div class="flex justify-between items-center mb-3">
-
-<span class="bg-red-600 text-white text-xs px-3 py-1 rounded font-bold">
-${dtc.code}
-</span>
-
-<span class="text-xs text-slate-400">
-${dtc.severity}
-</span>
-
-</div>
-
-<h3 class="text-white font-semibold text-sm">
-${dtc.desc}
-</h3>
-
-<div class="mt-3 text-xs text-slate-400">
-Click to diagnose →
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-
-/* ==========================================
-MODEL DROPDOWN HANDLER (NEW)
-========================================== */
-
-function handleModelDropdown(value){
-
-if(!value){
-clearModelFilter()
-return
-}
-
-filterByModel(value)
-
-}
-
-
-/* ==========================================
-CLEAR MODEL FILTER (IMPROVED)
-========================================== */
-
-function clearModelFilter() {
-
-currentModelFilter = null;
-
-document.getElementById('model-specific-codes')?.classList.add('hidden');
-
-/* Reset dropdown */
-const dropdown = document.getElementById("model-dropdown");
-if(dropdown) dropdown.value = "";
-
-}
-
-/* Common DTC clear function*/
-
-function clearDTCSelection(){
-
-selectedDTC = null;
-
-document.getElementById("dtc-preview")?.classList.add("hidden");
-
-const dropdown = document.getElementById("dtc-dropdown");
-if(dropdown) dropdown.value = "";
-
-}
-
-/* Search trigger for Common DTcs */
-
-function runSelectedDTCSearch(){
-
-if(!selectedDTC) return;
-
-/* Use your existing system */
-quickSearch(selectedDTC.code);
-
 }
 
 
@@ -564,13 +387,9 @@ function toggleCustomField(select,fieldId){
 const field=document.getElementById(fieldId)
 
 if(select.value==="other"){
-
 field.classList.remove("hidden")
-
 }else{
-
 field.classList.add("hidden")
-
 }
 
 }
