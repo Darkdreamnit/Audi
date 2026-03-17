@@ -326,5 +326,27 @@ function handleDrop(event) {
 }
 
 
+<<<<<<< HEAD
 
 
+=======
+/* ==========================================
+CUSTOM FIELD
+========================================== */
+
+function toggleCustomField(select,fieldId){
+
+const field=document.getElementById(fieldId)
+
+if(select.value==="other"){
+
+field.classList.remove("hidden")
+
+}else{
+
+field.classList.add("hidden")
+
+}
+
+}
+>>>>>>> parent of 0d1b64f (Update script.js)
