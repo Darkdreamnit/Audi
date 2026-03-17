@@ -221,6 +221,42 @@ code.startsWith("P07") ? "$400 - $3500" :
 
 
 /* ==========================================
+   COMMON AUDI CODES
+========================================== */
+const audiCommonDTCs = [
+
+{code:"P0299", desc:"Turbo Underboost", severity:"High"},
+{code:"P0420", desc:"Catalyst Efficiency Below Threshold", severity:"Medium"},
+{code:"P0171", desc:"System Too Lean Bank 1", severity:"Medium"},
+{code:"P0300", desc:"Random Misfire Detected", severity:"High"},
+{code:"P0301", desc:"Cylinder 1 Misfire", severity:"High"},
+{code:"P0302", desc:"Cylinder 2 Misfire", severity:"High"},
+{code:"P0303", desc:"Cylinder 3 Misfire", severity:"High"},
+{code:"P0304", desc:"Cylinder 4 Misfire", severity:"High"},
+
+{code:"P2187", desc:"System Too Lean at Idle", severity:"Medium"},
+{code:"P2279", desc:"Intake Air Leak Detected", severity:"Medium"},
+{code:"P0507", desc:"Idle RPM Higher Than Expected", severity:"Low"},
+{code:"P2015", desc:"Intake Manifold Flap Position", severity:"Medium"},
+{code:"P2004", desc:"Intake Manifold Runner Stuck Open", severity:"Medium"},
+
+{code:"P0016", desc:"Crank/Cam Correlation Error", severity:"High"},
+{code:"P0011", desc:"Camshaft Timing Over-Advanced", severity:"High"},
+
+{code:"P0455", desc:"EVAP Large Leak", severity:"Low"},
+{code:"P0456", desc:"EVAP Small Leak", severity:"Low"},
+
+{code:"P0101", desc:"MAF Sensor Performance", severity:"Medium"},
+{code:"P0113", desc:"Intake Air Temp High", severity:"Low"},
+
+{code:"P0700", desc:"Transmission Control System", severity:"High"},
+{code:"P0730", desc:"Incorrect Gear Ratio", severity:"High"},
+
+{code:"P0128", desc:"Coolant Temp Below Thermostat", severity:"Low"},
+{code:"P0217", desc:"Engine Overheating", severity:"High"}
+
+];
+/* ==========================================
    GENERATE ADDITIONAL GENERIC CODES
    (P1000–P1499) TO BUILD LARGE DATABASE
 ========================================== */
