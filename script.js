@@ -411,6 +411,53 @@ previewPhoto(input)
 }
 
 
+
+/* ================================
+LIVE SEARCH SUGGESTIONS
+================================ */
+
+const searchInput = document.getElementById("main-search")
+
+if(searchInput){
+
+searchInput.addEventListener("input", function(){
+
+const query = this.value.toUpperCase()
+
+const suggestionsBox = document.getElementById("search-suggestions")
+
+if(query.length < 2){
+suggestionsBox.classList.add("hidden")
+return
+}
+
+const matches = dtcDatabase.filter(dtc =>
+dtc.code.includes(query) ||
+dtc.description.toUpperCase().includes(query)
+).slice(0,6)
+
+if(matches.length === 0){
+suggestionsBox.classList.add("hidden")
+return
+}
+
+suggestionsBox.innerHTML = matches.map(dtc => `
+
+<div onclick="quickSearch('${dtc.code}')"
+class="px-4 py-2 hover:bg-red-600 cursor-pointer border-b border-slate-700">
+
+<span class="font-bold">${dtc.code}</span>
+<span class="text-sm text-slate-400 ml-2">${dtc.description}</span>
+
+</div>
+
+`).join("")
+
+suggestionsBox.classList.remove("hidden")
+
+})
+
+}
 /* ==========================================
 CUSTOM FIELD
 ========================================== */
