@@ -283,6 +283,32 @@ if(button) button.disabled = false
 
 }
 
+/* ==========================================
+PHOTO PREVIEW (FIXED)
+========================================== */
+
+function previewPhoto(input){
+
+const file = input.files[0]
+const preview = document.getElementById("photo-preview")
+const container = document.getElementById("photo-preview-container")
+
+if(!file || !preview || !container) return
+
+const reader = new FileReader()
+
+reader.onload = function(e){
+
+preview.src = e.target.result
+preview.classList.remove("hidden")
+container.classList.add("hidden")
+
+}
+
+reader.readAsDataURL(file)
+
+}
+
 
 /* ==========================================
 LOAD COMMUNITY POSTS
