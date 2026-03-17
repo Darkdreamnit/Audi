@@ -10,31 +10,33 @@ let submitting = false
 /* ==========================================
 PAGE LOAD INITIALIZATION
 ========================================== */
-
 document.addEventListener("DOMContentLoaded", function () {
 
-console.log("Page loaded")
+  console.log("Page loaded");
 
-try {
+  try {
 
-firebaseInitialized = initFirebase()
+    firebaseInitialized = initFirebase();
 
-} catch (e) {
+  } catch (e) {
 
-console.error("Firebase failed:", e)
-firebaseInitialized = false
+    console.error("Firebase failed:", e);
+    firebaseInitialized = false;
 
-}
+  }
 
-initSubmissionForm()
+  initSubmissionForm();
 
-if (firebaseInitialized) {
+  /* ✅ ADD THIS LINE */
+  loadCommonDTCs();
 
-loadCommunityPosts()
+  if (firebaseInitialized) {
 
-}
+    loadCommunityPosts();
 
-})
+  }
+
+});
 
 
 /* ==========================================
@@ -411,6 +413,46 @@ previewPhoto(input)
 }
 
 
+/* ==========================================
+COMMON AUDI CODES
+========================================== */
+function loadCommonDTCs(){
+
+const container = document.getElementById("common-dtc-grid");
+
+if(!container) return;
+
+container.innerHTML = audiCommonDTCs.map(dtc => `
+
+<div onclick="quickSearch('${dtc.code}')"
+class="bg-slate-900 border border-slate-800 rounded-xl p-5 cursor-pointer
+hover:border-red-500 transition duration-300 shadow-lg">
+
+<div class="flex justify-between items-center mb-3">
+
+<span class="bg-red-600 text-white text-xs px-3 py-1 rounded font-bold">
+${dtc.code}
+</span>
+
+<span class="text-xs text-slate-400">
+${dtc.severity}
+</span>
+
+</div>
+
+<h3 class="text-white font-semibold text-sm">
+${dtc.desc}
+</h3>
+
+<div class="mt-3 text-xs text-slate-400">
+Click to diagnose →
+</div>
+
+</div>
+
+`).join("");
+
+}
 /* ==========================================
 CUSTOM FIELD
 ========================================== */
