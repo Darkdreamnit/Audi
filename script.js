@@ -83,7 +83,7 @@ function initSubmissionForm() {
 }
 
 /* ==========================================
-   Limit Image Size to 3m
+   Limit Image Size to 3mb
 ========================================== */
 
 if (file && file.size > 3 * 1024 * 1024) {
@@ -324,3 +324,7 @@ function handleDrop(event) {
   previewPhoto(input);
 
 }
+
+
+
+
