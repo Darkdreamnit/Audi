@@ -453,6 +453,22 @@ Click to diagnose →
 `).join("");
 
 }
+
+/* ==========================================
+MODEL DROPDOWN HANDLER (NEW)
+========================================== */
+
+function handleModelDropdown(value){
+
+if(!value){
+clearModelFilter()
+return
+}
+
+/* Use your existing working function */
+filterByModel(value)
+
+}
 /* ==========================================
 CUSTOM FIELD
 ========================================== */
