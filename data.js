@@ -180,49 +180,7 @@ const dtcBase = {
    AUTO-GENERATE LARGE DATABASE
 ========================================== */
 
-const dtcDatabase = [
-  { code: "P0420", description: "Catalyst System Efficiency Below Threshold" },
-  { code: "P0171", description: "System Too Lean" }
-];
-
-Object.keys(dtcBase).forEach(code => {
-
-let causes = commonFixes
-let fixes = commonFixes
-
-if(code.startsWith("P01")) causes = fuelCauses
-if(code.startsWith("P03")) causes = ignitionCauses
-if(code.startsWith("P04")) causes = evapCauses
-if(code.startsWith("P02")) causes = fuelCauses
-if(code.startsWith("P029")) causes = turboCauses
-
-dtcDatabase.push({
-
-code: code,
-description: dtcBase[code],
-
-severity:
-code.startsWith("P03") ? "High" :
-code.startsWith("P07") ? "High" :
-code.startsWith("P04") ? "Low" : "Medium",
-
-symptoms: commonSymptoms.slice(0,3),
-
-causes: causes.slice(0,3),
-
-fixes: fixes.slice(0,3),
-
-estimatedCost:
-code.startsWith("P03") ? "$150 - $1200" :
-code.startsWith("P04") ? "$20 - $250" :
-code.startsWith("P07") ? "$400 - $3500" :
-"$80 - $600"
-
-})
-
-
-
-})
+const dtcDatabase = []
 
 /* ==========================================
    AUDI-SPECIFIC DTC EXPANSION (FROM PDF)
@@ -507,25 +465,3 @@ const audiCommonDTCs = [
    (P1000–P1499) TO BUILD LARGE DATABASE
 ========================================== */
 
-for(let i=1000;i<=1499;i++){
-
-let code = "P"+i
-
-dtcDatabase.push({
-
-code:code,
-description:"Manufacturer Specific Powertrain Diagnostic Code",
-
-severity:"Medium",
-
-symptoms:commonSymptoms.slice(0,3),
-
-causes:commonFixes.slice(0,3),
-
-fixes:commonFixes.slice(0,3),
-
-estimatedCost:"$100 - $800"
-
-})
-
-}
