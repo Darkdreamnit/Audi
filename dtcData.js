@@ -1,4 +1,5 @@
 const rawDTCData = [
+  
   {
     "code": "DTC",
     "description": "DTC Text"
@@ -13134,6 +13135,6 @@ Turbo engines amplify this problem because unmetered air disrupts boost calculat
     dealership: "$300 – $800+"
   }
 
-  
+
 };
 
