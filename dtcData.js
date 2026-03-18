@@ -13064,7 +13064,76 @@ rawDTCData.forEach(item => {
 
 
 
+dtcDatabase["P0300"] = {
+  code: "P0300",
+  description: "Random/Multiple Cylinder Misfire Detected",
 
+  severity: "High",
+  severityExplanation:
+    "A P0300 misfire can quickly damage your catalytic converter if left unresolved. Severe misfires can also lead to engine damage, stalling, and unsafe driving conditions.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $1000+",
+
+  deepDive:
+    "The P0300 code indicates that multiple cylinders are misfiring randomly, rather than a single specific cylinder. On Audi engines, this is often related to ignition coil failure, worn spark plugs, or vacuum leaks. Turbocharged Audi engines are especially sensitive to ignition issues, meaning even minor faults can cause noticeable performance problems. If ignored, this condition can overheat and damage the catalytic converter.",
+
+  symptoms: [
+    "Flashing or steady check engine light",
+    "Rough idle or engine shaking",
+    "Hesitation or jerking during acceleration",
+    "Loss of power",
+    "Engine stalling or hard starting",
+    "Poor fuel economy"
+  ],
+
+  causes: [
+    "Worn spark plugs or ignition wires (most common)",
+    "Failing ignition coil packs",
+    "Vacuum leaks (hoses, intake manifold, PCV system)",
+    "Clogged or dirty fuel injectors",
+    "Low fuel pressure (weak pump or clogged filter)",
+    "Faulty MAF, crankshaft, or camshaft sensors",
+    "Low engine compression (mechanical issue)"
+  ],
+
+  diagnosisSteps: [
+    "Use an OBD-II scanner to confirm P0300 and check for related codes",
+    "Inspect spark plugs for wear or fouling",
+    "Test ignition coils (swap between cylinders if needed)",
+    "Check for vacuum leaks in hoses and intake system",
+    "Test fuel pressure and inspect fuel system",
+    "Scan live data for misfire counts and sensor readings",
+    "Perform compression test if issue persists"
+  ],
+
+  fixes: [
+    "Replace worn spark plugs",
+    "Replace faulty ignition coils",
+    "Repair vacuum leaks",
+    "Clean or replace fuel injectors",
+    "Replace fuel pump or filter if needed",
+    "Replace faulty sensors (MAF, crank, cam)",
+    "Address engine mechanical issues if compression is low"
+  ],
+
+  commonMistakes: [
+    "Replacing only one spark plug instead of the full set",
+    "Ignoring coil packs as a common failure point on Audi",
+    "Skipping vacuum leak inspection",
+    "Not checking fuel pressure",
+    "Clearing the code without fixing the root issue"
+  ],
+
+  costBreakdown: {
+    diy: "$100 – $300",
+    independentShop: "$200 – $600",
+    dealership: "$400 – $1000+"
+  },
+
+  relatedCodes: ["P0301", "P0302", "P0303", "P0304"]
+};
 
 
 
