@@ -117,6 +117,40 @@ if(dropdown) dropdown.value = "";
 
 
 /* ==========================================
+PREVIEW IMAGE
+========================================== */
+
+document.getElementById("submit-photo")?.addEventListener("change", function(event) {
+
+  const file = event.target.files[0];
+
+  const preview = document.getElementById("photo-preview");
+  const container = document.getElementById("photo-preview-container");
+
+  if (!file) {
+    preview.classList.add("hidden");
+    container.classList.remove("hidden");
+    return;
+  }
+
+  // Validate image type
+  if (!file.type.startsWith("image/")) {
+    alert("Please upload a valid image file");
+    event.target.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    preview.src = e.target.result;
+    preview.classList.remove("hidden");
+    container.classList.add("hidden");
+  };
+
+  reader.readAsDataURL(file);
+});
+/* ==========================================
 MODEL DROPDOWN
 ========================================== */
 
