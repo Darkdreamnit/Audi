@@ -153,7 +153,9 @@ function displayDTCResult(dtc) {
     const result = clone.querySelector('.slide-in');
     
     const detailsBtn = result.querySelector('.details-btn');
-detailsBtn.href = `dtc.html?code=${dtc.code}`;
+if (detailsBtn) {
+  detailsBtn.href = `dtc.html?code=${dtc.code}`;
+}
     
     // Fill in data
     result.querySelector('.code-display').textContent = dtc.code;
