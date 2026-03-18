@@ -105,6 +105,26 @@ body { font-family: 'Inter', sans-serif; }
   <div id="relatedCodes" class="flex flex-wrap gap-2"></div>
 </div>
 
+<div class="glass p-6 rounded">
+  <h2 class="font-bold mb-2">Detailed Overview</h2>
+  <p id="deepDive"></p>
+</div>
+
+<div class="glass p-6 rounded">
+  <h2 class="font-bold mb-2">Step-by-Step Diagnosis</h2>
+  <ul id="diagnosisSteps"></ul>
+</div>
+
+<div class="glass p-6 rounded">
+  <h2 class="font-bold mb-2">Common Mistakes</h2>
+  <ul id="commonMistakes"></ul>
+</div>
+
+<div class="glass p-6 rounded">
+  <h2 class="font-bold mb-2">Cost Breakdown</h2>
+  <div id="costBreakdown"></div>
+</div>
+
 </section>
 
 <script src="dtcData.js"></script>
@@ -155,6 +175,24 @@ dtc.fixes.forEach(item => {
   fixes.innerHTML += `<li>✔ ${item}</li>`;
 });
 
+deepDive.innerText = dtc.deepDive || "";
+
+dtc.diagnosisSteps?.forEach(step => {
+  diagnosisSteps.innerHTML += `<li>🔧 ${step}</li>`;
+});
+
+dtc.commonMistakes?.forEach(m => {
+  commonMistakes.innerHTML += `<li>⚠️ ${m}</li>`;
+});
+
+if (dtc.costBreakdown) {
+  costBreakdown.innerHTML = `
+    <div>DIY: ${dtc.costBreakdown.diy}</div>
+    <div>Independent Shop: ${dtc.costBreakdown.independentShop}</div>
+    <div>Dealership: ${dtc.costBreakdown.dealership}</div>
+  `;
+}
+
 // RELATED
 if (dtc.relatedCodes) {
   dtc.relatedCodes.forEach(rc => {
@@ -169,6 +207,8 @@ if (dtc.relatedCodes) {
 
 lucide.createIcons();
 </script>
+
+
 
 </body>
 </html>
