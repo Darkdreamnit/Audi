@@ -217,13 +217,7 @@ code.startsWith("P07") ? "$400 - $3500" :
 
 })
 
-/* ==========================================
-   MERGE AUDI-SPECIFIC DATA INTO DATABASE
-========================================== */
 
-audiSpecificDTCs.forEach(dtc => {
-dtcDatabase.push(dtc)
-})
 
 })
 
@@ -501,6 +495,16 @@ const audiCommonDTCs = [
 {code:"P0217", desc:"Engine Overheating", severity:"High"}
 
 ];
+
+/* ==========================================
+   MERGE AUDI-SPECIFIC DATA INTO DATABASE
+========================================== */
+
+audiSpecificDTCs.forEach(dtc => {
+dtcDatabase.push(dtc)
+})
+
+
 /* ==========================================
    GENERATE ADDITIONAL GENERIC CODES
    (P1000–P1499) TO BUILD LARGE DATABASE
