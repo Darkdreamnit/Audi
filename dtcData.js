@@ -13037,24 +13037,4 @@ const rawDTCData = [
   }
 ];
 
-const dtcDatabase = {};
-
-// Convert array → object
-rawDTCData.forEach(item => {
-  dtcDatabase[item.code] = {
-    code: item.code,
-    description: item.description,
-
-    // Default values (you can improve later)
-    severity: "medium",
-    severityExplanation: "This issue should be diagnosed to prevent further problems.",
-    difficulty: "Intermediate",
-    repairTime: "1–2 hours",
-    estimatedCost: "$100 – $400",
-
-    symptoms: ["Check engine light"],
-    causes: ["Requires diagnosis"],
-    fixes: ["Inspect system and diagnose"]
-  };
-});
 
