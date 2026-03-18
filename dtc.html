@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title id="pageTitle">Audi DTC</title>
+<title>Audi DTC</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -158,6 +158,12 @@ const code = params.get("code");
 
 // LOAD DATA
 const dtc = dtcDatabase[code];
+
+
+// SETS THE TITLE FOR EACH DTC PAGE
+if (dtc) {
+  document.title = `${dtc.code} - ${dtc.description} | Audi DTC`;
+}
 
 if (!dtc) {
   document.body.innerHTML = "<h1 style='padding:40px'>Code not found</h1>";
