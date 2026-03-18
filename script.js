@@ -448,8 +448,11 @@ function handlemainSearch(query) {
     return;
   }
 
-  // 🔥 SEARCH dtcDatabase
-  const results = dtcDatabase.filter(dtc =>
+
+  
+
+  // 🔥 SEARCH dtcData
+  const results = dtcData.filter(dtc =>
     dtc.code.toLowerCase().includes(query) ||
     dtc.description.toLowerCase().includes(query)
   );
