@@ -180,7 +180,10 @@ const dtcBase = {
    AUTO-GENERATE LARGE DATABASE
 ========================================== */
 
-const dtcDatabase = []
+const dtcDatabase = [
+  ...dtcBase,
+  ...audiSpecificDTCs
+]
 
 Object.keys(dtcBase).forEach(code => {
 
