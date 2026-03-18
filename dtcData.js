@@ -13135,6 +13135,264 @@ dtcDatabase["P0300"] = {
   relatedCodes: ["P0301", "P0302", "P0303", "P0304"]
 };
 
+// 🔥 CYLINDER-SPECIFIC MISFIRE CODES
+
+dtcDatabase["P0301"] = {
+  code: "P0301",
+  description: "Cylinder 1 Misfire Detected",
+
+  severity: "High",
+  severityExplanation:
+    "A misfire in cylinder 1 can cause engine imbalance, reduced performance, and catalytic converter damage if ignored. Immediate diagnosis is recommended.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $800",
+
+  deepDive:
+    "The P0301 code indicates a misfire specifically in cylinder 1. On Audi engines, this is often caused by a faulty ignition coil or worn spark plug. Since the issue is isolated to one cylinder, diagnosis is typically faster than a P0300 random misfire. However, ignoring it can lead to further engine imbalance and damage.",
+
+  symptoms: [
+    "Rough idle or engine shaking",
+    "Loss of power",
+    "Hesitation during acceleration",
+    "Check engine light (may flash)",
+    "Poor fuel economy"
+  ],
+
+  causes: [
+    "Worn or fouled spark plug in cylinder 1",
+    "Faulty ignition coil (very common on Audi)",
+    "Fuel injector issue in cylinder 1",
+    "Vacuum leak affecting cylinder 1",
+    "Low compression in cylinder 1"
+  ],
+
+  diagnosisSteps: [
+    "Confirm P0301 with an OBD-II scanner",
+    "Inspect spark plug from cylinder 1",
+    "Swap ignition coil with another cylinder to test",
+    "Check fuel injector operation",
+    "Inspect for vacuum leaks near cylinder 1",
+    "Perform compression test if needed"
+  ],
+
+  fixes: [
+    "Replace spark plug in cylinder 1",
+    "Replace faulty ignition coil",
+    "Clean or replace fuel injector",
+    "Repair vacuum leaks",
+    "Fix compression-related engine issues"
+  ],
+
+  commonMistakes: [
+    "Replacing only the spark plug without checking the coil",
+    "Ignoring coil pack failures (common Audi issue)",
+    "Not swapping components to confirm diagnosis",
+    "Skipping compression testing"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $800"
+  },
+
+  relatedCodes: ["P0300", "P0302", "P0303", "P0304"]
+};
+
+
+
+dtcDatabase["P0302"] = {
+  code: "P0302",
+  description: "Cylinder 2 Misfire Detected",
+
+  severity: "High",
+  severityExplanation:
+    "A misfire in cylinder 2 can lead to poor engine performance and potential catalytic converter damage if not resolved promptly.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $800",
+
+  deepDive:
+    "The P0302 code indicates a misfire in cylinder 2. This is commonly caused by ignition coil failure or worn spark plugs on Audi engines. Like other cylinder-specific misfires, it allows for more targeted diagnosis compared to random misfire codes.",
+
+  symptoms: [
+    "Engine shaking or rough idle",
+    "Loss of acceleration power",
+    "Check engine light on or flashing",
+    "Poor fuel economy"
+  ],
+
+  causes: [
+    "Worn spark plug in cylinder 2",
+    "Faulty ignition coil",
+    "Fuel injector malfunction",
+    "Vacuum leak near cylinder 2",
+    "Low compression"
+  ],
+
+  diagnosisSteps: [
+    "Scan and confirm P0302",
+    "Inspect spark plug condition",
+    "Swap ignition coil with another cylinder",
+    "Check injector operation",
+    "Inspect for vacuum leaks",
+    "Run compression test if needed"
+  ],
+
+  fixes: [
+    "Replace spark plug",
+    "Replace ignition coil",
+    "Clean or replace injector",
+    "Fix vacuum leaks",
+    "Repair engine mechanical issues"
+  ],
+
+  commonMistakes: [
+    "Not testing the coil before replacing parts",
+    "Ignoring injector issues",
+    "Skipping vacuum leak checks"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $800"
+  },
+
+  relatedCodes: ["P0300", "P0301", "P0303", "P0304"]
+};
+
+
+
+dtcDatabase["P0303"] = {
+  code: "P0303",
+  description: "Cylinder 3 Misfire Detected",
+
+  severity: "High",
+  severityExplanation:
+    "A cylinder 3 misfire can cause noticeable engine vibration and long-term damage if left unresolved.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $800",
+
+  deepDive:
+    "The P0303 code indicates a misfire in cylinder 3. On Audi engines, this is often linked to ignition system issues or fuel delivery problems. Diagnosing this code typically involves isolating the faulty component through part swapping and testing.",
+
+  symptoms: [
+    "Rough idle",
+    "Engine vibration",
+    "Reduced engine performance",
+    "Check engine light"
+  ],
+
+  causes: [
+    "Faulty spark plug",
+    "Bad ignition coil",
+    "Fuel injector issue",
+    "Vacuum leak",
+    "Low compression"
+  ],
+
+  diagnosisSteps: [
+    "Confirm P0303 code",
+    "Inspect spark plug",
+    "Swap ignition coil",
+    "Test injector",
+    "Check for vacuum leaks",
+    "Perform compression test"
+  ],
+
+  fixes: [
+    "Replace spark plug",
+    "Replace ignition coil",
+    "Repair injector",
+    "Fix vacuum leaks",
+    "Address internal engine issues"
+  ],
+
+  commonMistakes: [
+    "Replacing parts without testing",
+    "Ignoring coil pack issues",
+    "Skipping proper diagnosis steps"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $800"
+  },
+
+  relatedCodes: ["P0300", "P0301", "P0302", "P0304"]
+};
+
+
+
+dtcDatabase["P0304"] = {
+  code: "P0304",
+  description: "Cylinder 4 Misfire Detected",
+
+  severity: "High",
+  severityExplanation:
+    "A misfire in cylinder 4 can result in engine imbalance and potential catalytic converter damage if not addressed quickly.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $800",
+
+  deepDive:
+    "The P0304 code indicates a misfire in cylinder 4. This is typically caused by ignition system failures such as faulty coils or worn spark plugs, but can also result from fuel or compression issues.",
+
+  symptoms: [
+    "Engine shaking",
+    "Poor acceleration",
+    "Check engine light",
+    "Rough idle"
+  ],
+
+  causes: [
+    "Worn spark plug",
+    "Faulty ignition coil",
+    "Fuel injector issue",
+    "Vacuum leak",
+    "Low compression"
+  ],
+
+  diagnosisSteps: [
+    "Scan for P0304",
+    "Inspect spark plug",
+    "Swap ignition coil",
+    "Check injector",
+    "Inspect vacuum system",
+    "Perform compression test"
+  ],
+
+  fixes: [
+    "Replace spark plug",
+    "Replace ignition coil",
+    "Repair injector",
+    "Fix vacuum leaks",
+    "Repair engine internals if needed"
+  ],
+
+  commonMistakes: [
+    "Skipping coil testing",
+    "Ignoring injector issues",
+    "Not checking compression"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $800"
+  },
+
+  relatedCodes: ["P0300", "P0301", "P0302", "P0303"]
+};
+
 
 
 
