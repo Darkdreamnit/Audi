@@ -433,7 +433,7 @@ likes: (post.likes || 0) + 1
 SEARCH SYSTEM
 ========================================== */
 
-function handleSearch(query){
+function handleCommunitySearch(query){
 
 query = query.toLowerCase().trim()
 if(!query) return
