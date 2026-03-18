@@ -180,7 +180,10 @@ const dtcBase = {
    AUTO-GENERATE LARGE DATABASE
 ========================================== */
 
-const dtcDatabase = []
+const dtcDatabase = [
+  { code: "P0420", description: "Catalyst System Efficiency Below Threshold" },
+  { code: "P0171", description: "System Too Lean" }
+];
 
 /* ==========================================
    AUDI-SPECIFIC DTC EXPANSION (FROM PDF)
