@@ -496,14 +496,6 @@ const audiCommonDTCs = [
 
 ];
 
-/* ==========================================
-   MERGE AUDI-SPECIFIC DATA INTO DATABASE
-========================================== */
-
-audiSpecificDTCs.forEach(dtc => {
-dtcDatabase.push(dtc)
-})
-
 
 /* ==========================================
    GENERATE ADDITIONAL GENERIC CODES
