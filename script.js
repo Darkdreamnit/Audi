@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
     firebaseInitialized = false;
   }
 
+  console.log("DTC Database:", dtcDatabase);
+console.log("DTC Count:", dtcDatabase?.length);
+
   initSubmissionForm();
 
   /* ✅ FIXED: Properly load dropdown */
@@ -440,6 +443,8 @@ function handlemainSearch(query) {
 
   if (!resultsSection || !resultsContainer) return;
 
+
+
   query = query.toLowerCase().trim();
 
   if (!query) {
@@ -448,11 +453,19 @@ function handlemainSearch(query) {
     return;
   }
 
+ // ✅ SHOW LOADING SPINNER HERE
+  resultsContainer.innerHTML = `
+  <div class="col-span-full text-center py-10">
+    <div class="animate-spin w-8 h-8 border-4 border-red-500 border-t-transparent rounded-full mx-auto"></div>
+    <p class="mt-3 text-slate-500">Searching...</p>
+  </div>
+  `;
+
 
   
 
-  // 🔥 SEARCH dtcData
-  const results = dtcData.filter(dtc =>
+  // 🔥 SEARCH dtcDatabase
+  const results = dtcDatabase.filter(dtc =>
     dtc.code.toLowerCase().includes(query) ||
     dtc.description.toLowerCase().includes(query)
   );
@@ -479,15 +492,17 @@ function handlemainSearch(query) {
   `).join("");
 
 }
+
+
+
 /* ==========================================
-LOAD SPINNER
+Description fix incase any description is missing
 ========================================== */
-container.innerHTML = `
-<div class="col-span-full text-center py-10">
-  <div class="animate-spin w-8 h-8 border-4 border-red-500 border-t-transparent rounded-full mx-auto"></div>
-  <p class="mt-3 text-slate-500">Searching...</p>
-</div>
-`;
+
+const results = dtcDatabase.filter(dtc =>
+  dtc.code?.toLowerCase().includes(query) ||
+  dtc.description?.toLowerCase().includes(query)
+);
 
 
 /* ==========================================
