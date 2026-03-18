@@ -151,6 +151,20 @@ document.getElementById("submit-photo")?.addEventListener("change", function(eve
   reader.readAsDataURL(file);
 });
 /* ==========================================
+REMOVE/RESET BUTTON
+========================================== */
+
+function removeImage(){
+  const input = document.getElementById("submit-photo");
+  const preview = document.getElementById("photo-preview");
+  const container = document.getElementById("photo-preview-container");
+
+  input.value = "";
+  preview.src = "";
+  preview.classList.add("hidden");
+  container.classList.remove("hidden");
+}
+/* ==========================================
 MODEL DROPDOWN
 ========================================== */
 
