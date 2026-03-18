@@ -533,4 +533,8 @@ document.querySelectorAll('#dtcSearch, .suggestion-btn').forEach(element => {
             setTimeout(() => performSearch(), 500);
         });
     }
+
+    div.onclick = () => {
+  window.location.href = `dtc.html?code=${dtc.code}`;
+};
 });
