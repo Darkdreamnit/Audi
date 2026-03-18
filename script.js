@@ -430,6 +430,17 @@ likes: (post.likes || 0) + 1
 
 
 /* ==========================================
+LOAD SPINNER
+========================================== */
+container.innerHTML = `
+<div class="col-span-full text-center py-10">
+  <div class="animate-spin w-8 h-8 border-4 border-red-500 border-t-transparent rounded-full mx-auto"></div>
+  <p class="mt-3 text-slate-500">Searching...</p>
+</div>
+`;
+
+
+/* ==========================================
 SEARCH SYSTEM
 ========================================== */
 
