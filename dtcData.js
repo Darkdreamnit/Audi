@@ -1,5 +1,5 @@
 const rawDTCData = [
-  
+
   {
     "code": "DTC",
     "description": "DTC Text"
@@ -13058,83 +13058,63 @@ rawDTCData.forEach(item => {
     fixes: ["Inspect system and diagnose"]
   };
 });
-
 dtcDatabase["P0171"] = {
   code: "P0171",
   description: "System Too Lean (Bank 1)",
 
-  severity: "Medium-High",
-  severityExplanation:
-    "A lean condition means your engine is running with too much air and not enough fuel. Over time, this can cause overheating, misfires, and even internal engine damage if ignored.",
+  severity: "medium",
+  severityExplanation: "Running too lean for extended periods can cause engine overheating, misfires, and long-term damage to valves and pistons.",
 
   difficulty: "Intermediate",
-  repairTime: "1–3 hours",
-  estimatedCost: "$50 – $800",
+  repairTime: "1–2 hours",
+  estimatedCost: "$50 – $300",
+
+  deepDive: "The P0171 code on Audi vehicles indicates that the engine is running with too much air and not enough fuel on Bank 1. This is extremely common on turbocharged Audi engines due to vacuum leaks, PCV failures, and MAF sensor issues. Unlike generic explanations, Audi engines are particularly sensitive to unmetered air, meaning even a small leak can trigger this code.",
 
   symptoms: [
-    "Check engine light stays on",
     "Rough idle, especially at startup",
-    "Engine hesitation or stumbling during acceleration",
-    "Reduced fuel efficiency",
-    "Engine may feel underpowered",
-    "Occasional misfires under load"
+    "Hesitation when accelerating",
+    "Whistling or hissing noise from engine bay",
+    "Poor fuel economy",
+    "Check engine light illuminated"
   ],
 
   causes: [
-    "Vacuum leaks (very common on Audi engines)",
-    "Dirty or faulty Mass Air Flow (MAF) sensor",
-    "Failing PCV system (common Audi issue)",
-    "Low fuel pressure from weak fuel pump",
-    "Clogged or dirty fuel injectors",
-    "Exhaust leak before O2 sensor",
-    "Faulty oxygen (O2) sensor"
+    "Vacuum leaks (very common on Audi)",
+    "Faulty PCV valve or breather system",
+    "Dirty or failing MAF sensor",
+    "Weak fuel pump or clogged filter",
+    "Leaking intake manifold gasket"
+  ],
+
+  diagnosisSteps: [
+    "Scan and confirm P0171 code",
+    "Inspect intake system for vacuum leaks",
+    "Check PCV valve operation",
+    "Test MAF sensor readings",
+    "Measure fuel pressure",
+    "Smoke test intake system"
   ],
 
   fixes: [
-    "Inspect and repair vacuum leaks (hoses, intake manifold, PCV system)",
-    "Clean or replace the MAF sensor",
-    "Check PCV valve and breather system (Audi-specific weak point)",
-    "Test fuel pressure and replace fuel pump if needed",
-    "Clean or replace fuel injectors",
-    "Inspect exhaust system for leaks",
-    "Replace faulty O2 sensor if confirmed"
-  ],
-
-  relatedCodes: ["P0174", "P0300", "P0507"],
-
-  // 🔥 NEW CONTENT SECTIONS
-  deepDive: `
-P0171 is one of the most common codes on Audi engines, especially turbocharged models. 
-Unlike generic lean conditions, Audi vehicles frequently develop this issue due to PCV system failures 
-and vacuum leaks caused by aging rubber components.
-
-Turbo engines amplify this problem because unmetered air disrupts boost calculations, leading to poor performance.
-`,
-
-  diagnosisSteps: [
-    "Scan for additional codes (especially P0174 or misfire codes)",
-    "Inspect all vacuum lines for cracks or disconnections",
-    "Check PCV valve operation and look for excessive crankcase pressure",
-    "Clean the MAF sensor using proper MAF cleaner",
-    "Monitor fuel trims using a scan tool (look for high positive trims)",
-    "Test fuel pressure under load",
-    "Perform smoke test to detect hidden vacuum leaks"
+    "Replace faulty PCV valve",
+    "Repair vacuum leaks",
+    "Clean or replace MAF sensor",
+    "Replace fuel filter or pump",
+    "Reset ECU adaptations"
   ],
 
   commonMistakes: [
-    "Replacing the O2 sensor without diagnosing root cause",
-    "Ignoring small vacuum leaks that worsen over time",
-    "Not checking the PCV system (very common failure on Audi)",
-    "Replacing MAF sensor without cleaning it first",
+    "Replacing O2 sensors unnecessarily",
+    "Ignoring small vacuum leaks",
+    "Not checking PCV system",
     "Skipping fuel pressure testing"
   ],
 
   costBreakdown: {
-    diy: "$0 – $150 (cleaning MAF, fixing small vacuum leaks)",
-    independentShop: "$150 – $500",
-    dealership: "$300 – $800+"
+    diy: "$50 – $150",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $800"
   }
-
-
 };
 
