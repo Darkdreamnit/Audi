@@ -13527,3 +13527,76 @@ dtcDatabase["P000A00"] = {
   relatedCodes: ["P0010", "P0011", "P000B00"]
 };
 
+
+dtcDatabase["P0420"] = {
+  code: "P0420",
+  description: "Catalyst System Efficiency Below Threshold (Bank 1)",
+
+  severity: "Medium",
+  severityExplanation:
+    "This code indicates that the catalytic converter is not operating efficiently. While the vehicle may still drive normally, prolonged driving can lead to increased emissions and potential damage to the catalytic converter or O2 sensors.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$50 – $1400+",
+
+  deepDive:
+    "The P0420 code is one of the most common and frustrating codes on Audi vehicles. It typically indicates that the catalytic converter is no longer operating efficiently. However, in many Audi cases—especially with aftermarket catalytic converters—the issue is not always a completely failed converter, but rather how the downstream O2 sensor reads exhaust gases. This makes diagnosis tricky and often leads to unnecessary part replacements.",
+
+  symptoms: [
+    "Check engine light illuminated",
+    "No noticeable drivability issues (in many cases)",
+    "Reduced fuel efficiency (sometimes)",
+    "Possible sulfur or rotten egg smell from exhaust"
+  ],
+
+  causes: [
+    "Worn or failing catalytic converter",
+    "Aftermarket catalytic converter inefficiency",
+    "Faulty downstream O2 sensor",
+    "Exhaust leaks near catalytic converter",
+    "Engine running rich or lean for extended periods"
+  ],
+
+  diagnosisSteps: [
+    "Scan and confirm P0420 code",
+    "Check for exhaust leaks",
+    "Inspect upstream and downstream O2 sensor readings",
+    "Verify engine is not running rich or lean",
+    "Confirm catalytic converter efficiency using live data",
+    "Determine if converter is OEM or aftermarket"
+  ],
+
+  fixes: [
+    "Replace catalytic converter (OEM recommended)",
+    "Replace faulty O2 sensor",
+    "Repair exhaust leaks",
+    "Fix underlying engine issues (misfires, fuel trims)",
+    "Install O2 spacer (temporary workaround in some cases)"
+  ],
+
+  commonMistakes: [
+    "Replacing O2 sensors without verifying converter health",
+    "Ignoring engine performance issues causing the code",
+    "Installing cheap aftermarket catalytic converters",
+    "Not checking for exhaust leaks"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $300 (sensor or spacer)",
+    independentShop: "$300 – $900",
+    dealership: "$900 – $1400+"
+  },
+
+  // 🔥 SPECIAL FEATURE SECTION (YOUR IDEA)
+  proTip: {
+    title: "Real-World Fix (Before Replacing the Catalytic Converter)",
+    content:
+      "If you’ve already replaced multiple components and still have the P0420 code, some Audi owners have found success using an O2 sensor spacer on the downstream sensor. This creates a slight gap that changes how exhaust gases are read, helping the system stay within acceptable limits—especially with aftermarket catalytic converters. This is not a guaranteed fix, but it has helped many avoid costly catalytic converter replacements.",
+    linkText: "Read Full Fix Guide",
+    link: "https://www.audiworld.com/forums/1-8t-discussion-98/p0420-nightmare-2796888/"
+  },
+
+  relatedCodes: ["P0430", "P0171", "P0300"]
+};
+
