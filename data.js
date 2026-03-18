@@ -180,7 +180,7 @@ const dtcBase = {
    AUTO-GENERATE LARGE DATABASE
 ========================================== */
 
-const dtcDatabase = []
+
 
 /* ==========================================
    AUDI-SPECIFIC DTC EXPANSION (FROM PDF)
