@@ -48,6 +48,98 @@
   border-radius: 10px;
 }
     </style>
+
+    <style>
+/* ==========================================
+GLOBAL DESIGN UPGRADE
+========================================== */
+
+body {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e2e8f0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Glow background */
+body::before {
+  content: "";
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: rgba(239, 68, 68, 0.15);
+  filter: blur(120px);
+  top: -100px;
+  left: -100px;
+  z-index: -1;
+}
+
+/* Cards */
+.card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.01);
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: white;
+  border-radius: 10px;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* Inputs */
+.search-input {
+  background: rgba(15,23,42,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+  width: 100%;
+}
+
+.search-input:focus {
+  border-color: #ef4444;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(239,68,68,0.3);
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.section-sub {
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+/* Smooth feel */
+* {
+  transition: all 0.2s ease-in-out;
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-900">
     <!-- Navigation -->
