@@ -409,44 +409,50 @@ displayCommunityPosts()
 SEARCHABLE DTC DROPDOWN (UI UPGRADE ONLY)
 ========================================== */
 
-function filterDTCs(query) {
-    const resultsBox = document.getElementById('dtc-results');
+function filterDTCs(query){
 
-    if (!query) {
-        resultsBox.classList.add('hidden');
-        return;
-    }
+const resultsBox = document.getElementById("dtc-results");
+if(!resultsBox) return;
 
-    const q = query.toLowerCase();
+if(!query){
+resultsBox.classList.add("hidden");
+return;
+}
 
-    const results = dtcDatabase
-        .filter(dtc =>
-            dtc.code.toLowerCase().includes(q) ||
-            dtc.description.toLowerCase().includes(q)
-        )
-        .slice(0, 20);
+query = query.toLowerCase();
 
-    resultsBox.innerHTML = results.map(dtc => `
-        <div class="p-3 hover:bg-slate-100 cursor-pointer"
-             onclick="selectDTC('${dtc.code}', '${dtc.description.replace(/'/g, "")}')">
-            <strong>${dtc.code}</strong><br>
-            <span class="text-sm text-slate-600">${dtc.description}</span>
-        </div>
-    `).join('');
+const matches = audiCommonDTCs.filter(dtc =>
+dtc.code.toLowerCase().includes(query) ||
+dtc.desc.toLowerCase().includes(query)
+).slice(0,20);
 
-    resultsBox.classList.remove('hidden');
+if(matches.length === 0){
+resultsBox.innerHTML = `<div class="p-3 text-sm text-slate-500">No results found</div>`;
+resultsBox.classList.remove("hidden");
+return;
+}
+
+resultsBox.innerHTML = matches.map(dtc => `
+<div onclick="selectDTC('${dtc.code}')"
+class="p-3 hover:bg-slate-100 cursor-pointer border-b">
+
+<div class="font-semibold text-sm">${dtc.code}</div>
+<div class="text-xs text-slate-500">${dtc.desc}</div>
+
+</div>
+`).join("");
+
+resultsBox.classList.remove("hidden");
+
 }
 
 
-function selectDTC(code, description) {
-    document.getElementById('dtc-code').textContent = code;
-    document.getElementById('dtc-desc').textContent = description;
+function selectDTC(code){
 
-    document.getElementById('dtc-preview').classList.remove('hidden');
-    document.getElementById('dtc-results').classList.add('hidden');
+const dtc = audiCommonDTCs.find(d => d.code === code);
+if(!dtc) return;
 
-    document.getElementById('dtc-search').value = code;
-
+selectedDTC = dtc;
 
 /* 🔥 THIS USES YOUR EXISTING UI — NOT CHANGED */
 handleDTCSelection(code);
