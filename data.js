@@ -524,3 +524,15 @@ estimatedCost:"$100 - $800"
 })
 
 }
+
+/* ==========================================
+   ADD AUDI-SPECIFIC DTCs (SAFE APPEND)
+========================================== */
+
+if (typeof audiSpecificDTCs !== "undefined" && Array.isArray(audiSpecificDTCs)) {
+
+  audiSpecificDTCs.forEach(dtc => {
+    dtcDatabase.push(dtc)
+  })
+
+}
