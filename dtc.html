@@ -155,6 +155,13 @@ body { font-family: 'Inter', sans-serif; }
 // GET CODE FROM URL
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
+const dtc = dtcDatabase[code];
+
+if (dtc) {
+  document.title = `${dtc.code} - ${dtc.description} | Audi DTC`;
+} else {
+  document.title = "Code Not Found | Audi DTC";
+}
 
 // LOAD DATA
 const dtc = dtcDatabase[code];
