@@ -430,6 +430,53 @@ likes: (post.likes || 0) + 1
 
 
 /* ==========================================
+Real Search Function
+========================================== */
+
+function handlemainSearch(query) {
+
+  const resultsSection = document.getElementById("results-section");
+  const resultsContainer = document.getElementById("main-search-results");
+
+  if (!resultsSection || !resultsContainer) return;
+
+  query = query.toLowerCase().trim();
+
+  if (!query) {
+    resultsSection.classList.add("hidden");
+    resultsContainer.innerHTML = "";
+    return;
+  }
+
+  // 🔥 SEARCH dtcDatabase
+  const results = dtcDatabase.filter(dtc =>
+    dtc.code.toLowerCase().includes(query) ||
+    dtc.description.toLowerCase().includes(query)
+  );
+
+  // Show section
+  resultsSection.classList.remove("hidden");
+
+  // No results
+  if (results.length === 0) {
+    resultsContainer.innerHTML = `
+      <div class="col-span-full text-center text-slate-500">
+        No results found
+      </div>
+    `;
+    return;
+  }
+
+  // Render results
+  resultsContainer.innerHTML = results.slice(0, 50).map(dtc => `
+    <div class="card">
+      <div class="code-badge">${dtc.code}</div>
+      <p class="mt-2 text-sm">${dtc.description}</p>
+    </div>
+  `).join("");
+
+}
+/* ==========================================
 LOAD SPINNER
 ========================================== */
 container.innerHTML = `
