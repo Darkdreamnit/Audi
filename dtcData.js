@@ -13058,6 +13058,22 @@ rawDTCData.forEach(item => {
     fixes: ["Inspect system and diagnose"]
   };
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 dtcDatabase["P0171"] = {
   code: "P0171",
   description: "System Too Lean (Bank 1)",
@@ -13116,5 +13132,71 @@ dtcDatabase["P0171"] = {
     independentShop: "$150 – $400",
     dealership: "$300 – $800"
   }
+};
+
+
+dtcDatabase["P000A00"] = {
+  code: "P000A00",
+  description: "Intake Camshaft Position Slow Response (Bank 1)",
+
+  severity: "Medium-High",
+  severityExplanation:
+    "This code indicates the camshaft timing is not adjusting properly. If ignored, it can lead to poor engine performance, misfires, and potential long-term timing system damage.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $900",
+
+  deepDive:
+    "The P000A00 code is common on Audi engines, especially 2.0T models. It means the intake camshaft is not responding quickly enough when the ECU commands timing changes. This is often caused by oil flow issues, a faulty camshaft adjustment valve (N205), or timing chain wear. Audi engines rely heavily on precise cam timing, so even small delays can trigger this fault.",
+
+  symptoms: [
+    "Check engine light illuminated",
+    "Rough idle or unstable engine behavior",
+    "Loss of power during acceleration",
+    "Engine hesitation",
+    "Reduced fuel efficiency"
+  ],
+
+  causes: [
+    "Dirty or low engine oil",
+    "Faulty N205 camshaft adjustment valve",
+    "Clogged oil passages",
+    "Stretched timing chain",
+    "Failing timing chain tensioner",
+    "Wiring issues to camshaft position sensor"
+  ],
+
+  diagnosisSteps: [
+    "Check engine oil level and condition (replace if dirty or incorrect viscosity)",
+    "Scan and confirm P000A00 code",
+    "Inspect N205 camshaft adjustment valve for proper operation",
+    "Check wiring and connectors to camshaft position sensor",
+    "Inspect timing chain and tensioner for wear",
+    "Perform live data scan to monitor camshaft timing response"
+  ],
+
+  fixes: [
+    "Change engine oil and use correct Audi-approved oil",
+    "Replace faulty N205 camshaft adjustment valve",
+    "Repair or replace damaged wiring",
+    "Clean clogged oil passages if necessary",
+    "Replace timing chain and tensioner if worn"
+  ],
+
+  commonMistakes: [
+    "Ignoring oil quality and viscosity issues",
+    "Replacing sensors without checking oil flow",
+    "Overlooking timing chain stretch",
+    "Not inspecting the N205 valve first (common failure point)"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $300",
+    independentShop: "$200 – $700",
+    dealership: "$400 – $900+"
+  },
+
+  relatedCodes: ["P0010", "P0011", "P000B00"]
 };
 
