@@ -1,4 +1,45 @@
 /* ==========================================
+IMAGE COMPRESSION FUNCTION
+========================================== */
+function compressImage(file, maxWidth = 1200, quality = 0.7) {
+  return new Promise((resolve) => {
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      const img = new Image();
+
+      img.onload = function() {
+
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+
+        // Resize if too large
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(blob => {
+          resolve(blob);
+        }, "image/jpeg", quality);
+
+      };
+
+      img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+/* ==========================================
 GLOBAL VARIABLES
 ========================================== */
 
@@ -122,33 +163,27 @@ PREVIEW IMAGE
 
 document.getElementById("submit-photo")?.addEventListener("change", function(event) {
 
-  const file = event.target.files[0];
-
-  const preview = document.getElementById("photo-preview");
+  const files = Array.from(event.target.files);
   const container = document.getElementById("photo-preview-container");
 
-  if (!file) {
-    preview.classList.add("hidden");
-    container.classList.remove("hidden");
-    return;
-  }
+  container.innerHTML = "";
 
-  // Validate image type
-  if (!file.type.startsWith("image/")) {
-    alert("Please upload a valid image file");
-    event.target.value = "";
-    return;
-  }
+  files.forEach(file => {
 
-  const reader = new FileReader();
+    if (!file.type.startsWith("image/")) return;
 
-  reader.onload = function(e) {
-    preview.src = e.target.result;
-    preview.classList.remove("hidden");
-    container.classList.add("hidden");
-  };
+    const reader = new FileReader();
 
-  reader.readAsDataURL(file);
+    reader.onload = function(e) {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      img.className = "w-24 h-24 object-cover rounded m-1";
+      container.appendChild(img);
+    };
+
+    reader.readAsDataURL(file);
+  });
+
 });
 /* ==========================================
 REMOVE/RESET BUTTON
@@ -272,7 +307,9 @@ const cost = document.getElementById("submit-cost").value.trim()
 const author = document.getElementById("submit-name").value.trim() || "Anonymous"
 
 const photoInput = document.getElementById("submit-photo")
-const file = photoInput.files[0]
+const files = Array.from(photoInput.files);
+
+// 🔥 LIMIT IMAGE SIZE TO 3MB
 
 if(file && file.size > 3 * 1024 * 1024){
 alert("Image must be under 3MB")
@@ -281,16 +318,30 @@ if(button) button.disabled = false
 return
 }
 
-let imageURL = null
+let imageURLs = [];
 
-if(file && firebaseInitialized){
+if (files.length && firebaseInitialized) {
 
-const storageRef = firebaseStorage.ref()
-const imageRef = storageRef.child("community/" + Date.now() + "-" + file.name)
+  const storageRef = firebaseStorage.ref();
 
-await imageRef.put(file)
-imageURL = await imageRef.getDownloadURL()
+  for (const file of files) {
 
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Each image must be under 5MB");
+      continue;
+    }
+
+    // 🔥 Compress image before upload
+    const compressed = await compressImage(file);
+
+    const imageRef = storageRef.child("community/" + Date.now() + "-" + file.name);
+
+    await imageRef.put(compressed);
+
+    const url = await imageRef.getDownloadURL();
+
+    imageURLs.push(url);
+  }
 }
 
 const duplicate = communityPosts.find(p =>
@@ -308,7 +359,7 @@ return
 
 const post = {
 code, model, year, solution, cost, author,
-image:imageURL,
+images: imageURLs,
 date:new Date().toISOString(),
 likes:0
 }
@@ -376,7 +427,13 @@ container.innerHTML = posts.map(post=>`
 
 <div class="bg-white rounded-xl shadow border p-4">
 
-${post.image ? `<img src="${post.image}" class="rounded mb-3 w-full">`:""}
+${post.images && post.images.length ? `
+  <div class="flex gap-2 overflow-x-auto mb-3">
+    ${post.images.map(img => `
+      <img src="${img}" class="w-32 h-32 object-cover rounded">
+    `).join("")}
+  </div>
+` : ""}
 
 <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">${post.code}</span>
 
