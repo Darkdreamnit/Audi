@@ -153,9 +153,7 @@ function displayDTCResult(dtc) {
     const result = clone.querySelector('.slide-in');
     
     const detailsBtn = result.querySelector('.details-btn');
-if (detailsBtn) {
-  detailsBtn.href = `dtc.html?code=${dtc.code}`;
-}
+detailsBtn.href = `dtc.html?code=${dtc.code}`;
     
     // Fill in data
     result.querySelector('.code-display').textContent = dtc.code;
@@ -466,5 +464,7 @@ document.querySelectorAll('#dtcSearch, .suggestion-btn').forEach(element => {
         });
     }
 
-   
+    div.onclick = () => {
+  window.location.href = `dtc.html?code=${dtc.code}`;
+};
 });
