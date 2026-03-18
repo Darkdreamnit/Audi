@@ -186,6 +186,8 @@ const dtcDatabase = []
    AUDI-SPECIFIC DTC EXPANSION (FROM PDF)
 ========================================== */
 
+
+
 const audiSpecificDTCs = [
 
 /* ENGINE / AIR / FUEL */
