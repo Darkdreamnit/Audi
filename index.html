@@ -67,6 +67,65 @@
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
         }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            .mobile-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .mobile-text-lg {
+                font-size: 1.5rem;
+                line-height: 2rem;
+            }
+            
+            .mobile-text-xl {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+            
+            .mobile-stack {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .mobile-center {
+                text-align: center;
+            }
+            
+            .mobile-full-width {
+                width: 100%;
+            }
+            
+            .mobile-touch-friendly {
+                padding: 0.75rem 1rem;
+                min-height: 44px;
+            }
+            
+            .mobile-no-overflow {
+                overflow-x: hidden;
+            }
+        }
+        
+        /* Prevent horizontal overflow */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        /* Better touch targets */
+        button, 
+        a, 
+        input, 
+        .clickable {
+            touch-action: manipulation;
+        }
+        
+        /* Better scrolling */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
     </style>
 </head>
 <body class="bg-black text-white min-h-screen">
@@ -77,90 +136,117 @@
                 <div class="w-10 h-10 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-lg flex items-center justify-center">
                     <i data-lucide="activity" class="w-6 h-6"></i>
                 </div>
-                <span class="text-xl font-bold tracking-tight">AUDI<span class="text-[var(--audi-red)]">DTC</span></span>
+                <span class="text-xl font-bold tracking-tight hidden sm:inline">AUDI<span class="text-[var(--audi-red)]">DTC</span></span>
+                <span class="text-xl font-bold tracking-tight sm:hidden">A<span class="text-[var(--audi-red)]">DTC</span></span>
             </div>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="#search" class="hover:text-[var(--audi-red)] transition-colors">Decoder</a>
-                <a href="#browse" class="hover:text-[var(--audi-red)] transition-colors">Browse Codes</a>
-                <a href="#recent" class="hover:text-[var(--audi-red)] transition-colors">Recent Searches</a>
-                <a href="#" class="bg-[var(--audi-blue)] hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors">Dashboard</a>
+                <a href="#search" class="hover:text-[var(--audi-red)] transition-colors mobile-touch-friendly">Decoder</a>
+                <a href="#browse" class="hover:text-[var(--audi-red)] transition-colors mobile-touch-friendly">Browse Codes</a>
+                <a href="#recent" class="hover:text-[var(--audi-red)] transition-colors mobile-touch-friendly">Recent Searches</a>
+                <a href="#" class="bg-[var(--audi-blue)] hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors mobile-touch-friendly">Dashboard</a>
             </div>
-            <button class="md:hidden">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
+            <div class="md:hidden flex items-center">
+                <button id="mobileMenuBtn" class="p-3 mobile-touch-friendly">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden glass-effect border-t border-white/10 hidden">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#search" class="hover:text-[var(--audi-red)] transition-colors py-3 border-b border-white/5 flex items-center mobile-touch-friendly">
+                    <i data-lucide="search" class="w-5 h-5 mr-3 flex-shrink-0"></i>
+                    <span class="flex-grow">Decoder</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                </a>
+                <a href="#browse" class="hover:text-[var(--audi-red)] transition-colors py-3 border-b border-white/5 flex items-center mobile-touch-friendly">
+                    <i data-lucide="list" class="w-5 h-5 mr-3 flex-shrink-0"></i>
+                    <span class="flex-grow">Browse Codes</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                </a>
+                <a href="#recent" class="hover:text-[var(--audi-red)] transition-colors py-3 border-b border-white/5 flex items-center mobile-touch-friendly">
+                    <i data-lucide="history" class="w-5 h-5 mr-3 flex-shrink-0"></i>
+                    <span class="flex-grow">Recent Searches</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                </a>
+                <a href="#" class="bg-[var(--audi-blue)] hover:bg-blue-600 px-4 py-3 rounded-lg transition-colors text-center flex items-center justify-center mobile-touch-friendly mt-4">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5 mr-2 flex-shrink-0"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="dashboard-gradient min-h-screen pt-20 flex items-center">
-        <div class="container mx-auto px-4 py-12 md:py-24">
+        <div class="container mx-auto px-4 py-8 md:py-24">
             <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8">
-                        <div>
+                <div class="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <div class="space-y-6 lg:space-y-8 order-2 lg:order-1">
+                        <div class="text-center lg:text-left">
                             <span class="inline-block bg-[var(--audi-red)]/20 text-[var(--audi-red)] px-3 py-1 rounded-full text-sm font-medium mb-4">
                                 PREMIUM DIAGNOSTIC TOOL
                             </span>
-                            <h1 class="text-4xl md:text-6xl font-black leading-tight">
+                            <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight">
                                 Audi Diagnostic<br>
                                 <span class="text-[var(--audi-red)] text-glow">Trouble Codes</span><br>
                                 Made Simple
                             </h1>
-                            <p class="text-gray-400 text-lg mt-6 max-w-lg">
+                            <p class="text-gray-400 text-base sm:text-lg mt-4 lg:mt-6 max-w-lg mx-auto lg:mx-0">
                                 Instantly decode your Audi fault codes with precision. Our advanced diagnostic platform provides detailed analysis, causes, and recommended fixes.
                             </p>
                         </div>
                         
-                        <div class="flex flex-wrap gap-4">
-                            <a href="#search" class="bg-[var(--audi-red)] hover:bg-red-700 px-8 py-4 rounded-lg font-bold flex items-center space-x-2 transition-all transform hover:scale-105">
+                        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
+                            <a href="#search" class="bg-[var(--audi-red)] hover:bg-red-700 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-bold flex items-center justify-center space-x-2 transition-all active:scale-95 mobile-touch-friendly">
                                 <i data-lucide="search" class="w-5 h-5"></i>
                                 <span>Search Codes</span>
                             </a>
-                            <a href="#browse" class="glass-effect hover:bg-white/10 px-8 py-4 rounded-lg font-bold flex items-center space-x-2 transition-all">
+                            <a href="#browse" class="glass-effect hover:bg-white/10 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-bold flex items-center justify-center space-x-2 transition-all active:scale-95 mobile-touch-friendly">
                                 <i data-lucide="list" class="w-5 h-5"></i>
                                 <span>Browse All Codes</span>
                             </a>
                         </div>
                     </div>
                     
-                    <div class="relative">
-                        <div class="dashboard-grid rounded-2xl p-8 glass-effect border border-white/10">
-                            <div class="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-full blur-xl opacity-30"></div>
+                    <div class="relative order-1 lg:order-2 w-full mb-8 lg:mb-0">
+                        <div class="dashboard-grid rounded-2xl p-6 sm:p-8 glass-effect border border-white/10">
+                            <div class="absolute -top-3 -right-3 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-full blur-xl opacity-30"></div>
                             
-                            <div class="space-y-6">
+                            <div class="space-y-4 md:space-y-6">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-xl font-bold">Interactive DTC Search</h3>
+                                    <h3 class="text-lg sm:text-xl font-bold">Interactive DTC Search</h3>
                                     <div class="flex space-x-2">
-                                        <div class="w-3 h-3 bg-[var(--audi-red)] rounded-full"></div>
-                                        <div class="w-3 h-3 bg-[var(--audi-blue)] rounded-full"></div>
-                                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 sm:w-3 sm:h-3 bg-[var(--audi-red)] rounded-full"></div>
+                                        <div class="w-2 h-2 sm:w-3 sm:h-3 bg-[var(--audi-blue)] rounded-full"></div>
+                                        <div class="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
                                     </div>
                                 </div>
                                 
                                 <div class="relative">
                                     <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
-                                        <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                                        <i data-lucide="search" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400"></i>
                                     </div>
                                     <input 
                                         type="text" 
                                         id="dtcSearch" 
                                         placeholder="Enter DTC (e.g., P0171, U0100, C1234...)" 
-                                        class="w-full bg-black/50 border border-[var(--audi-border)] rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-[var(--audi-red)] focus:ring-2 focus:ring-[var(--audi-red)]/30 transition-all"
+                                        class="w-full bg-black/50 border border-[var(--audi-border)] rounded-xl pl-10 sm:pl-12 pr-12 py-3 sm:py-4 text-sm sm:text-base focus:outline-none focus:border-[var(--audi-red)] focus:ring-2 focus:ring-[var(--audi-red)]/30 transition-all mobile-touch-friendly"
                                     >
                                     <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
-                                        <span class="text-xs bg-[var(--audi-light-gray)] px-2 py-1 rounded text-gray-400">ENTER</span>
+                                        <span class="text-xs bg-[var(--audi-light-gray)] px-2 py-1 rounded text-gray-400 hidden sm:inline">ENTER</span>
                                     </div>
                                 </div>
                                 
-                                <div class="space-y-4">
+                                <div class="space-y-3 md:space-y-4">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-400">Recently Searched</span>
-                                        <button class="text-sm text-[var(--audi-blue)] hover:underline">Clear All</button>
+                                        <span class="text-xs sm:text-sm text-gray-400">Recently Searched</span>
+                                        <button class="text-xs sm:text-sm text-[var(--audi-blue)] hover:underline mobile-touch-friendly">Clear All</button>
                                     </div>
                                     <div class="grid grid-cols-3 gap-2">
-                                        <button class="bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-3 py-2 rounded-lg text-sm transition-colors">P0171</button>
-                                        <button class="bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-3 py-2 rounded-lg text-sm transition-colors">U0100</button>
-                                        <button class="bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-3 py-2 rounded-lg text-sm transition-colors">C0035</button>
+                                        <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-2 py-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm transition-colors mobile-touch-friendly active:scale-95">P0171</button>
+                                        <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-2 py-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm transition-colors mobile-touch-friendly active:scale-95">U0100</button>
+                                        <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-2 py-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm transition-colors mobile-touch-friendly active:scale-95">C0035</button>
                                     </div>
                                 </div>
                             </div>
@@ -172,29 +258,29 @@
     </section>
 
     <!-- Main Search Section -->
-    <section id="search" class="py-20 bg-black">
+    <section id="search" class="py-16 sm:py-20 bg-black">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Advanced DTC Search Tool</h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">Enter any Audi diagnostic trouble code below. Supports P, B, C, and U codes with autocomplete.</p>
+                <div class="text-center mb-8 sm:mb-12">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Advanced DTC Search Tool</h2>
+                    <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">Enter any Audi diagnostic trouble code below. Supports P, B, C, and U codes with autocomplete.</p>
                 </div>
                 
-                <div class="relative mb-8">
+                <div class="relative mb-6 sm:mb-8">
                     <div class="absolute -inset-1 bg-gradient-to-r from-[var(--audi-red)] to-[var(--audi-blue)] rounded-2xl blur opacity-20"></div>
-                    <div class="relative glass-effect rounded-2xl p-2">
-                        <div class="flex items-center space-x-4 p-4">
-                            <div class="flex-shrink-0">
-                                <i data-lucide="search" class="w-6 h-6 text-[var(--audi-red)]"></i>
+                    <div class="relative glass-effect rounded-2xl p-1 sm:p-2">
+                        <div class="flex items-center space-x-2 sm:space-x-4 p-3 sm:p-4">
+                            <div class="flex-shrink-0 hidden sm:block">
+                                <i data-lucide="search" class="w-5 h-5 sm:w-6 sm:h-6 text-[var(--audi-red)]"></i>
                             </div>
                             <input 
                                 type="text" 
                                 id="mainSearch" 
                                 placeholder="Search DTC (e.g., P0300, B1234, U0121, C0568)" 
-                                class="flex-grow bg-transparent text-lg focus:outline-none placeholder-gray-500"
+                                class="flex-grow bg-transparent text-base sm:text-lg focus:outline-none placeholder-gray-500 mobile-touch-friendly"
                                 autocomplete="off"
                             >
-                            <button id="searchBtn" class="bg-[var(--audi-red)] hover:bg-red-700 px-6 py-3 rounded-lg font-bold transition-colors">
+                            <button id="searchBtn" class="bg-[var(--audi-red)] hover:bg-red-700 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold transition-colors text-sm sm:text-base mobile-touch-friendly active:scale-95">
                                 Decode
                             </button>
                         </div>
@@ -202,31 +288,31 @@
                 </div>
                 
                 <!-- Filters -->
-                <div class="flex flex-wrap justify-center gap-3 mb-12">
-                    <button class="filter-btn active glass-effect px-4 py-2 rounded-lg transition-colors" data-filter="all">All Systems</button>
-                    <button class="filter-btn glass-effect px-4 py-2 rounded-lg transition-colors" data-filter="engine">
-                        <i data-lucide="zap" class="w-4 h-4 inline mr-2"></i> Engine
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 md:mb-12">
+                    <button class="filter-btn active glass-effect px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm mobile-touch-friendly active:scale-95" data-filter="all">All Systems</button>
+                    <button class="filter-btn glass-effect px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm mobile-touch-friendly active:scale-95" data-filter="engine">
+                        <i data-lucide="zap" class="w-3 h-3 inline mr-1"></i> Engine
                     </button>
-                    <button class="filter-btn glass-effect px-4 py-2 rounded-lg transition-colors" data-filter="transmission">
-                        <i data-lucide="settings" class="w-4 h-4 inline mr-2"></i> Transmission
+                    <button class="filter-btn glass-effect px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm mobile-touch-friendly active:scale-95" data-filter="transmission">
+                        <i data-lucide="settings" class="w-3 h-3 inline mr-1"></i> Transmission
                     </button>
-                    <button class="filter-btn glass-effect px-4 py-2 rounded-lg transition-colors" data-filter="abs">
-                        <i data-lucide="car" class="w-4 h-4 inline mr-2"></i> ABS
+                    <button class="filter-btn glass-effect px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm mobile-touch-friendly active:scale-95" data-filter="abs">
+                        <i data-lucide="car" class="w-3 h-3 inline mr-1"></i> ABS
                     </button>
-                    <button class="filter-btn glass-effect px-4 py-2 rounded-lg transition-colors" data-filter="electrical">
-                        <i data-lucide="battery" class="w-4 h-4 inline mr-2"></i> Electrical
+                    <button class="filter-btn glass-effect px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm mobile-touch-friendly active:scale-95" data-filter="electrical">
+                        <i data-lucide="battery" class="w-3 h-3 inline mr-1"></i> Electrical
                     </button>
-                    <button class="filter-btn glass-effect px-4 py-2 rounded-lg transition-colors" data-filter="body">
-                        <i data-lucide="shield" class="w-4 h-4 inline mr-2"></i> Body
+                    <button class="filter-btn glass-effect px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm mobile-touch-friendly active:scale-95" data-filter="body">
+                        <i data-lucide="shield" class="w-3 h-3 inline mr-1"></i> Body
                     </button>
                 </div>
                 
                 <!-- Search Results -->
                 <div id="searchResults" class="space-y-6">
                     <!-- Results will appear here -->
-                    <div class="text-center py-12 text-gray-500">
-                        <i data-lucide="search" class="w-16 h-16 mx-auto mb-4 opacity-20"></i>
-                        <p>Enter a DTC code above to begin diagnostic analysis</p>
+                    <div class="text-center py-8 sm:py-12 text-gray-500">
+                        <i data-lucide="search" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 opacity-20"></i>
+                        <p class="text-sm sm:text-base">Enter a DTC code above to begin diagnostic analysis</p>
                     </div>
                 </div>
                 
@@ -252,7 +338,7 @@
                                 </div>
                             </div>
                             
-                            <div class="grid md:grid-cols-2 gap-6">
+                            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
                                 <div class="space-y-4">
                                     <div>
                                         <h4 class="font-bold mb-2 flex items-center">
@@ -282,7 +368,7 @@
                                             <i data-lucide="info" class="w-4 h-4 mr-2"></i>
                                             System Information
                                         </h4>
-                                        <div class="system-info flex items-center space-x-4 text-sm">
+                                        <div class="system-info flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
                                             <span class="system-display glass-effect px-3 py-1 rounded-lg"></span>
                                             <span class="occurrence-display text-gray-400"></span>
                                         </div>
@@ -304,82 +390,82 @@
                 <p class="text-gray-400 max-w-2xl mx-auto">Explore frequently encountered diagnostic trouble codes across Audi models</p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 <!-- DTC Card Template -->
-                <div class="glass-effect rounded-xl p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-2xl font-bold">P0171</span>
-                        <span class="severity-medium px-3 py-1 rounded-full text-sm font-medium">Medium</span>
+                <div class="glass-effect rounded-xl p-4 md:p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1 mobile-touch-friendly">
+                    <div class="flex justify-between items-start mb-3 md:mb-4">
+                        <span class="text-xl md:text-2xl font-bold">P0171</span>
+                        <span class="severity-medium px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">Medium</span>
                     </div>
-                    <h4 class="font-bold mb-2">System Too Lean (Bank 1)</h4>
-                    <p class="text-gray-400 text-sm mb-4">Air/fuel mixture is too lean in bank 1</p>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="bg-[var(--audi-light-gray)] px-3 py-1 rounded">Engine</span>
+                    <h4 class="font-bold mb-1 md:mb-2 text-sm md:text-base">System Too Lean (Bank 1)</h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-3 md:mb-4">Air/fuel mixture is too lean in bank 1</p>
+                    <div class="flex items-center justify-between text-xs md:text-sm">
+                        <span class="bg-[var(--audi-light-gray)] px-2 md:px-3 py-1 rounded">Engine</span>
                         <span class="text-gray-400">Common</span>
                     </div>
                 </div>
                 
-                <div class="glass-effect rounded-xl p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-2xl font-bold">U0100</span>
-                        <span class="severity-high px-3 py-1 rounded-full text-sm font-medium">High</span>
+                <div class="glass-effect rounded-xl p-4 md:p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1 mobile-touch-friendly">
+                    <div class="flex justify-between items-start mb-3 md:mb-4">
+                        <span class="text-xl md:text-2xl font-bold">U0100</span>
+                        <span class="severity-high px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">High</span>
                     </div>
-                    <h4 class="font-bold mb-2">Lost Communication with ECM</h4>
-                    <p class="text-gray-400 text-sm mb-4">Communication error with Engine Control Module</p>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="bg-[var(--audi-light-gray)] px-3 py-1 rounded">Electrical</span>
+                    <h4 class="font-bold mb-1 md:mb-2 text-sm md:text-base">Lost Communication with ECM</h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-3 md:mb-4">Communication error with Engine Control Module</p>
+                    <div class="flex items-center justify-between text-xs md:text-sm">
+                        <span class="bg-[var(--audi-light-gray)] px-2 md:px-3 py-1 rounded">Electrical</span>
                         <span class="text-gray-400">Less Common</span>
                     </div>
                 </div>
                 
-                <div class="glass-effect rounded-xl p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-2xl font-bold">C0035</span>
-                        <span class="severity-critical px-3 py-1 rounded-full text-sm font-medium">Critical</span>
+                <div class="glass-effect rounded-xl p-4 md:p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1 mobile-touch-friendly">
+                    <div class="flex justify-between items-start mb-3 md:mb-4">
+                        <span class="text-xl md:text-2xl font-bold">C0035</span>
+                        <span class="severity-critical px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">Critical</span>
                     </div>
-                    <h4 class="font-bold mb-2">ABS Sensor Circuit</h4>
-                    <p class="text-gray-400 text-sm mb-4">Right front wheel speed sensor circuit malfunction</p>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="bg-[var(--audi-light-gray)] px-3 py-1 rounded">ABS</span>
+                    <h4 class="font-bold mb-1 md:mb-2 text-sm md:text-base">ABS Sensor Circuit</h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-3 md:mb-4">Right front wheel speed sensor circuit malfunction</p>
+                    <div class="flex items-center justify-between text-xs md:text-sm">
+                        <span class="bg-[var(--audi-light-gray)] px-2 md:px-3 py-1 rounded">ABS</span>
                         <span class="text-gray-400">Common</span>
                     </div>
                 </div>
                 
-                <div class="glass-effect rounded-xl p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-2xl font-bold">P0420</span>
-                        <span class="severity-medium px-3 py-1 rounded-full text-sm font-medium">Medium</span>
+                <div class="glass-effect rounded-xl p-4 md:p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1 mobile-touch-friendly">
+                    <div class="flex justify-between items-start mb-3 md:mb-4">
+                        <span class="text-xl md:text-2xl font-bold">P0420</span>
+                        <span class="severity-medium px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">Medium</span>
                     </div>
-                    <h4 class="font-bold mb-2">Catalyst System Efficiency</h4>
-                    <p class="text-gray-400 text-sm mb-4">Catalytic converter efficiency below threshold</p>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="bg-[var(--audi-light-gray)] px-3 py-1 rounded">Engine</span>
+                    <h4 class="font-bold mb-1 md:mb-2 text-sm md:text-base">Catalyst System Efficiency</h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-3 md:mb-4">Catalytic converter efficiency below threshold</p>
+                    <div class="flex items-center justify-between text-xs md:text-sm">
+                        <span class="bg-[var(--audi-light-gray)] px-2 md:px-3 py-1 rounded">Engine</span>
                         <span class="text-gray-400">Very Common</span>
                     </div>
                 </div>
                 
-                <div class="glass-effect rounded-xl p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-2xl font-bold">B1044</span>
-                        <span class="severity-low px-3 py-1 rounded-full text-sm font-medium">Low</span>
+                <div class="glass-effect rounded-xl p-4 md:p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1 mobile-touch-friendly">
+                    <div class="flex justify-between items-start mb-3 md:mb-4">
+                        <span class="text-xl md:text-2xl font-bold">B1044</span>
+                        <span class="severity-low px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">Low</span>
                     </div>
-                    <h4 class="font-bold mb-2">Airbag Resistance Low</h4>
-                    <p class="text-gray-400 text-sm mb-4">Driver's airbag resistance too low</p>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="bg-[var(--audi-light-gray)] px-3 py-1 rounded">Body</span>
+                    <h4 class="font-bold mb-1 md:mb-2 text-sm md:text-base">Airbag Resistance Low</h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-3 md:mb-4">Driver's airbag resistance too low</p>
+                    <div class="flex items-center justify-between text-xs md:text-sm">
+                        <span class="bg-[var(--audi-light-gray)] px-2 md:px-3 py-1 rounded">Body</span>
                         <span class="text-gray-400">Rare</span>
                     </div>
                 </div>
                 
-                <div class="glass-effect rounded-xl p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-2xl font-bold">P0700</span>
-                        <span class="severity-high px-3 py-1 rounded-full text-sm font-medium">High</span>
+                <div class="glass-effect rounded-xl p-4 md:p-6 hover:bg-white/5 transition-all cursor-pointer transform hover:-translate-y-1 mobile-touch-friendly">
+                    <div class="flex justify-between items-start mb-3 md:mb-4">
+                        <span class="text-xl md:text-2xl font-bold">P0700</span>
+                        <span class="severity-high px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">High</span>
                     </div>
-                    <h4 class="font-bold mb-2">Transmission Control System</h4>
-                    <p class="text-gray-400 text-sm mb-4">Malfunction in transmission control system</p>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="bg-[var(--audi-light-gray)] px-3 py-1 rounded">Transmission</span>
+                    <h4 class="font-bold mb-1 md:mb-2 text-sm md:text-base">Transmission Control System</h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-3 md:mb-4">Malfunction in transmission control system</p>
+                    <div class="flex items-center justify-between text-xs md:text-sm">
+                        <span class="bg-[var(--audi-light-gray)] px-2 md:px-3 py-1 rounded">Transmission</span>
                         <span class="text-gray-400">Common</span>
                     </div>
                 </div>
@@ -405,7 +491,7 @@
                     </button>
                 </div>
                 
-                <div id="recentSearches" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div id="recentSearches" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     <!-- Recent searches will be populated here -->
                 </div>
             </div>
@@ -416,9 +502,9 @@
     <footer class="glass-effect border-t border-white/10 py-12">
         <div class="container mx-auto px-4">
             <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-4 gap-8">
-                    <div>
-                        <div class="flex items-center space-x-2 mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="mb-6 md:mb-0">
+                        <div class="flex items-center space-x-2 mb-4 md:mb-6">
                             <div class="w-10 h-10 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-lg flex items-center justify-center">
                                 <i data-lucide="activity" class="w-6 h-6"></i>
                             </div>
@@ -427,8 +513,8 @@
                         <p class="text-gray-400 text-sm">Premium diagnostic tool for Audi vehicles. Not affiliated with Audi AG.</p>
                     </div>
                     
-                    <div>
-                        <h4 class="font-bold mb-4">Quick Links</h4>
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Quick Links</h4>
                         <ul class="space-y-2 text-sm">
                             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Code Database</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Audi Models</a></li>
@@ -437,8 +523,8 @@
                         </ul>
                     </div>
                     
-                    <div>
-                        <h4 class="font-bold mb-4">Resources</h4>
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Resources</h4>
                         <ul class="space-y-2 text-sm">
                             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Technical Service Bulletins</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Wiring Diagrams</a></li>
@@ -447,8 +533,8 @@
                         </ul>
                     </div>
                     
-                    <div>
-                        <h4 class="font-bold mb-4">Community</h4>
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Community</h4>
                         <ul class="space-y-2 text-sm">
                             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Forum</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Expert Help</a></li>
