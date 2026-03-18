@@ -42,73 +42,34 @@ body { font-family: 'Inter', sans-serif; }
 </nav>
 
 <!-- HERO -->
-<section class="max-w-4xl mx-auto px-4 py-10">
+<section class="pt-24 pb-10 text-center fade-in">
+  <h1 id="codeTitle" class="text-4xl md:text-6xl font-black"></h1>
+  <p id="codeDesc" class="text-gray-400 mt-2"></p>
 
-  <!-- TITLE -->
-  <h1 id="codeTitle" class="text-4xl font-bold mb-2"></h1>
-  <p id="codeDesc" class="text-xl text-gray-400 mb-6"></p>
+  <!-- STATS BAR -->
+  <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
 
-  <!-- META INFO -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-    <div class="glass p-4 rounded">
-      <div class="text-sm text-gray-400">Difficulty</div>
+    <div class="glass p-3 rounded text-center">
+      <div class="text-xs text-gray-400">Difficulty</div>
       <div id="difficulty" class="font-bold"></div>
     </div>
-    <div class="glass p-4 rounded">
-      <div class="text-sm text-gray-400">Repair Time</div>
+
+    <div class="glass p-3 rounded text-center">
+      <div class="text-xs text-gray-400">Repair Time</div>
       <div id="repairTime" class="font-bold"></div>
     </div>
-    <div class="glass p-4 rounded">
-      <div class="text-sm text-gray-400">Estimated Cost</div>
+
+    <div class="glass p-3 rounded text-center">
+      <div class="text-xs text-gray-400">Cost</div>
       <div id="cost" class="font-bold"></div>
     </div>
-    <div class="glass p-4 rounded">
-      <div class="text-sm text-gray-400">Severity</div>
+
+    <div class="glass p-3 rounded text-center">
+      <div class="text-xs text-gray-400">Severity</div>
       <div id="severity" class="font-bold"></div>
     </div>
-  </div>
 
-  <!-- INTRO -->
-  <div class="glass p-6 rounded mb-8">
-    <p id="deepDive" class="text-gray-300 leading-relaxed"></p>
   </div>
-
-  <!-- SYMPTOMS -->
-  <div class="glass p-6 rounded mb-6">
-    <h2 class="text-2xl font-bold mb-3">Symptoms of This Code</h2>
-    <ul id="symptoms" class="space-y-2 text-gray-300"></ul>
-  </div>
-
-  <!-- CAUSES -->
-  <div class="glass p-6 rounded mb-6">
-    <h2 class="text-2xl font-bold mb-3">What Causes This on Audi?</h2>
-    <ul id="causes" class="space-y-2 text-gray-300"></ul>
-  </div>
-
-  <!-- DIAGNOSIS -->
-  <div class="glass p-6 rounded mb-6">
-    <h2 class="text-2xl font-bold mb-3">Step-by-Step Diagnosis</h2>
-    <ul id="diagnosisSteps" class="space-y-2 text-gray-300"></ul>
-  </div>
-
-  <!-- FIXES -->
-  <div class="glass p-6 rounded mb-6">
-    <h2 class="text-2xl font-bold mb-3">How to Fix P0171</h2>
-    <ul id="fixes" class="space-y-2 text-gray-300"></ul>
-  </div>
-
-  <!-- MISTAKES -->
-  <div class="glass p-6 rounded mb-6">
-    <h2 class="text-2xl font-bold mb-3">Common Mistakes</h2>
-    <ul id="commonMistakes" class="space-y-2 text-gray-300"></ul>
-  </div>
-
-  <!-- COST BREAKDOWN -->
-  <div class="glass p-6 rounded mb-6">
-    <h2 class="text-2xl font-bold mb-3">Repair Cost Breakdown</h2>
-    <div id="costBreakdown" class="text-gray-300"></div>
-  </div>
-
 </section>
 
 <!-- CONTENT -->
