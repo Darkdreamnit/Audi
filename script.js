@@ -151,6 +151,9 @@ function performSearch() {
 function displayDTCResult(dtc) {
     const clone = template.content.cloneNode(true);
     const result = clone.querySelector('.slide-in');
+    result.onclick = () => {
+  window.location.href = `dtc.html?code=${dtc.code}`;
+};
     const detailsBtn = result.querySelector('.details-btn');
 detailsBtn.href = `dtc.html?code=${dtc.code}`;
     
