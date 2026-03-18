@@ -257,87 +257,50 @@ body {
             <div id="code-detail-content" class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden"></div>
         </div>
 
-        <!-- ==========================================
-FEATURES / WHY USERS COME BACK
-========================================== -->
+        <!-- FEATURE GRID (INTERACTIVE) -->
+<div style="
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+">
 
-<section style="padding: 60px 20px;">
-
-  <div style="max-width: 1100px; margin: auto; text-align: center;">
-
-    <h2 style="font-size: 2rem; font-weight: 700; color: #1e293b;">
-      Why Audi Owners Keep Coming Back
-    </h2>
-
-    <p style="color: #64748b; margin-top: 10px; margin-bottom: 40px;">
-      More than just codes — this is your complete Audi diagnostic companion
-    </p>
-
-    <div style="
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    ">
-
-      <!-- FEATURE 1 -->
-      <div class="card">
-        <div style="font-size: 30px;">🚗</div>
-        <h3 style="font-weight: 600; margin-top: 10px;">My Garage</h3>
-        <p style="color: #64748b; font-size: 14px; margin-top: 8px;">
-          Save your Audi model, track issues, and keep all your vehicle data in one place.
-        </p>
-      </div>
-
-      <!-- FEATURE 2 -->
-      <div class="card">
-        <div style="font-size: 30px;">🧠</div>
-        <h3 style="font-weight: 600; margin-top: 10px;">Smart Diagnosis</h3>
-        <p style="color: #64748b; font-size: 14px; margin-top: 8px;">
-          Get likely causes, repair costs, and expert-level insights instantly.
-        </p>
-      </div>
-
-      <!-- FEATURE 3 -->
-      <div class="card">
-        <div style="font-size: 30px;">⭐</div>
-        <h3 style="font-weight: 600; margin-top: 10px;">Community Fixes</h3>
-        <p style="color: #64748b; font-size: 14px; margin-top: 8px;">
-          Real solutions from real Audi owners — ranked by usefulness.
-        </p>
-      </div>
-
-      <!-- FEATURE 4 -->
-      <div class="card">
-        <div style="font-size: 30px;">📊</div>
-        <h3 style="font-weight: 600; margin-top: 10px;">Common Issues by Model</h3>
-        <p style="color: #64748b; font-size: 14px; margin-top: 8px;">
-          Discover what problems are most common for your specific Audi.
-        </p>
-      </div>
-
-      <!-- FEATURE 5 -->
-      <div class="card">
-        <div style="font-size: 30px;">🔔</div>
-        <h3 style="font-weight: 600; margin-top: 10px;">Live Updates</h3>
-        <p style="color: #64748b; font-size: 14px; margin-top: 8px;">
-          Stay updated when new fixes or better solutions are discovered.
-        </p>
-      </div>
-
-      <!-- FEATURE 6 -->
-      <div class="card">
-        <div style="font-size: 30px;">⚡</div>
-        <h3 style="font-weight: 600; margin-top: 10px;">Instant Search</h3>
-        <p style="color: #64748b; font-size: 14px; margin-top: 8px;">
-          Quickly find any code, symptom, or fix in seconds.
-        </p>
-      </div>
-
-    </div>
-
+  <div class="card" onclick="openFeatureModal('garage')" style="cursor:pointer;">
+    <div style="font-size: 30px;">🚗</div>
+    <h3>My Garage</h3>
+    <p>Save your Audi and track issues.</p>
   </div>
 
-</section>
+  <div class="card" onclick="openFeatureModal('diagnosis')" style="cursor:pointer;">
+    <div style="font-size: 30px;">🧠</div>
+    <h3>Smart Diagnosis</h3>
+    <p>Instant causes, fixes, and costs.</p>
+  </div>
+
+  <div class="card" onclick="openFeatureModal('community')" style="cursor:pointer;">
+    <div style="font-size: 30px;">⭐</div>
+    <h3>Community Fixes</h3>
+    <p>Real solutions ranked by users.</p>
+  </div>
+
+  <div class="card" onclick="openFeatureModal('models')" style="cursor:pointer;">
+    <div style="font-size: 30px;">📊</div>
+    <h3>Common Issues</h3>
+    <p>Top problems by model.</p>
+  </div>
+
+  <div class="card" onclick="openFeatureModal('updates')" style="cursor:pointer;">
+    <div style="font-size: 30px;">🔔</div>
+    <h3>Live Updates</h3>
+    <p>New fixes & trends.</p>
+  </div>
+
+  <div class="card" onclick="openFeatureModal('search')" style="cursor:pointer;">
+    <div style="font-size: 30px;">⚡</div>
+    <h3>Instant Search</h3>
+    <p>Find anything instantly.</p>
+  </div>
+
+</div>
 
             <!-- Model Explorer -->
             <!-- Audi Model Explorer -->
@@ -1014,6 +977,46 @@ document.getElementById("mobile-menu").classList.toggle("hidden")
 }
 
 </script>
+<!-- ==========================================
+FEATURE MODAL
+========================================== -->
+<div id="feature-modal" class="hidden" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+">
 
+  <div style="
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+  ">
+
+    <button onclick="closeFeatureModal()" style="
+      position:absolute;
+      top:10px;
+      right:15px;
+      font-size:20px;
+      border:none;
+      background:none;
+      cursor:pointer;
+    ">✕</button>
+
+    <h2 id="feature-title" style="font-size:1.5rem; font-weight:700;"></h2>
+
+    <p id="feature-description" style="margin-top:10px; color:#64748b;"></p>
+
+    <div id="feature-extra" style="margin-top:20px;"></div>
+
+  </div>
+
+</div>
 </body>
 </html>
