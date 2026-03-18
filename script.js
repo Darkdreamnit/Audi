@@ -80,6 +80,9 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 const recentSearches = document.getElementById('recentSearches');
 const clearRecentBtn = document.getElementById('clearRecent');
 const template = document.getElementById('dtcResultTemplate');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const dtcSearch = document.getElementById('dtcSearch');
 
 // Recent Searches from Local Storage
 let recentCodes = JSON.parse(localStorage.getItem('audiRecentSearches')) || ['P0171', 'U0100', 'C0035'];
@@ -92,10 +95,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show initial state message
     searchResults.innerHTML = `
-        <div class="text-center py-12 text-gray-500">
-            <i data-lucide="search" class="w-16 h-16 mx-auto mb-4 opacity-20"></i>
-            <p>Enter a DTC code above to begin diagnostic analysis</p>
-            <p class="text-sm mt-2 text-gray-600">Try: P0171, U0100, C0035, P0300, P0420</p>
+        <div class="text-center py-8 md:py-12 text-gray-500">
+            <i data-lucide="search" class="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 opacity-20"></i>
+            <p class="text-sm md:text-base">Enter a DTC code above to begin diagnostic analysis</p>
+            <p class="text-xs md:text-sm mt-2 text-gray-600">Try: P0171, U0100, C0035, P0300, P0420</p>
         </div>
     `;
     lucide.createIcons();
@@ -112,6 +115,20 @@ function setupEventListeners() {
             performSearch();
         }
     });
+    
+    // Mobile menu toggle
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.setAttribute('data-lucide', 'menu');
+            } else {
+                icon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        });
+    }
     
     // Filter buttons
     filterBtns.forEach(btn => {
@@ -133,6 +150,54 @@ function setupEventListeners() {
         if (!e.target.closest('.autocomplete-container')) {
             hideAutocomplete();
         }
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('#mobileMenu') && !e.target.closest('#mobileMenuBtn')) {
+            mobileMenu.classList.add('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+        }
+    });
+    
+    // Hero search interaction
+    if (dtcSearch) {
+        dtcSearch.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                mainSearch.value = this.value;
+                document.querySelector('#search').scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    performSearch();
+                    // Close mobile menu if open
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.setAttribute('data-lucide', 'menu');
+                        lucide.createIcons();
+                    }
+                }, 500);
+            }
+        });
+    }
+    
+    // Hero suggestion buttons
+    document.querySelectorAll('.suggestion-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            mainSearch.value = this.textContent;
+            document.querySelector('#search').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                performSearch();
+                // Close mobile menu if open
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                }
+            }, 500);
+        });
     });
 }
 
@@ -237,15 +302,15 @@ function displayDTCResult(dtc) {
 // Show error message
 function showError(message) {
     searchResults.innerHTML = `
-        <div class="slide-in glass-effect rounded-2xl p-8 text-center">
-            <i data-lucide="alert-circle" class="w-16 h-16 mx-auto mb-4 text-[var(--audi-red)]"></i>
-            <h3 class="text-xl font-bold mb-2">Code Not Found</h3>
-            <p class="text-gray-400 mb-4">${message}</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
-                <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-4 py-2 rounded-lg transition-colors">P0171</button>
-                <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-4 py-2 rounded-lg transition-colors">U0100</button>
-                <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-4 py-2 rounded-lg transition-colors">C0035</button>
-                <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-4 py-2 rounded-lg transition-colors">P0300</button>
+        <div class="slide-in glass-effect rounded-2xl p-6 md:p-8 text-center">
+            <i data-lucide="alert-circle" class="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 text-[var(--audi-red)]"></i>
+            <h3 class="text-lg md:text-xl font-bold mb-2">Code Not Found</h3>
+            <p class="text-gray-400 text-sm md:text-base mb-4">${message}</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mt-6">
+                <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-3 py-2 md:px-4 md:py-2 rounded-lg transition-colors text-sm md:text-base mobile-touch-friendly">P0171</button>
+                <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-3 py-2 md:px-4 md:py-2 rounded-lg transition-colors text-sm md:text-base mobile-touch-friendly">U0100</button>
+                <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-3 py-2 md:px-4 md:py-2 rounded-lg transition-colors text-sm md:text-base mobile-touch-friendly">C0035</button>
+                <button class="suggestion-btn bg-[var(--audi-light-gray)] hover:bg-[var(--audi-blue)]/20 px-3 py-2 md:px-4 md:py-2 rounded-lg transition-colors text-sm md:text-base mobile-touch-friendly">P0300</button>
             </div>
         </div>
     `;
@@ -255,6 +320,13 @@ function showError(message) {
         btn.addEventListener('click', function() {
             mainSearch.value = this.textContent;
             performSearch();
+            // Close mobile menu if open
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            }
         });
     });
     
@@ -351,17 +423,17 @@ function showAutocomplete() {
     
     // Create autocomplete container
     const autocomplete = document.createElement('div');
-    autocomplete.className = 'autocomplete-container absolute left-0 right-0 mt-1 z-50';
+    autocomplete.className = 'autocomplete-container absolute left-0 right-0 mt-1 z-50 mobile-no-overflow';
     autocomplete.innerHTML = `
-        <div class="glass-effect rounded-xl overflow-hidden border border-white/10 shadow-xl">
+        <div class="glass-effect rounded-xl overflow-hidden border border-white/10 shadow-xl max-h-80 overflow-y-auto">
             <div class="divide-y divide-white/10">
                 ${matches.map(code => `
-                    <div class="autocomplete-item p-4 hover:bg-white/5 cursor-pointer transition-colors flex justify-between items-center" data-code="${code}">
-                        <div>
-                            <div class="font-bold">${code}</div>
-                            <div class="text-sm text-gray-400">${dtcDatabase[code].description}</div>
+                    <div class="autocomplete-item p-3 md:p-4 hover:bg-white/5 cursor-pointer transition-colors flex justify-between items-center mobile-touch-friendly" data-code="${code}">
+                        <div class="flex-1 min-w-0">
+                            <div class="font-bold text-sm md:text-base truncate">${code}</div>
+                            <div class="text-xs md:text-sm text-gray-400 truncate">${dtcDatabase[code].description}</div>
                         </div>
-                        <span class="text-xs bg-[var(--audi-light-gray)] px-2 py-1 rounded">${dtcDatabase[code].system}</span>
+                        <span class="text-xs bg-[var(--audi-light-gray)] px-2 py-1 rounded ml-2 flex-shrink-0">${dtcDatabase[code].system}</span>
                     </div>
                 `).join('')}
             </div>
@@ -377,6 +449,13 @@ function showAutocomplete() {
         item.addEventListener('click', function() {
             mainSearch.value = this.getAttribute('data-code');
             performSearch();
+            // Close mobile menu if open
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            }
         });
     });
 }
@@ -420,10 +499,10 @@ function shareDTCResult(dtc) {
 function showNotification(message) {
     // Create notification element
     const notification = document.createElement('div');
-    notification.className = 'fixed bottom-4 right-4 glass-effect px-6 py-4 rounded-xl flex items-center space-x-3 z-50 slide-in';
+    notification.className = 'fixed bottom-4 left-4 right-4 md:left-auto md:right-4 glass-effect px-4 md:px-6 py-3 md:py-4 rounded-xl flex items-center space-x-3 z-50 slide-in max-w-md mx-auto md:mx-0';
     notification.innerHTML = `
-        <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
-        <span>${message}</span>
+        <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0"></i>
+        <span class="text-sm md:text-base">${message}</span>
     `;
     
     document.body.appendChild(notification);
