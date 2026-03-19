@@ -394,6 +394,30 @@
         </div>
     </section>
 
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAU2q1pvW13B5x3TH-OP8NfGX9MnM78LVo",
+    authDomain: "audi-dtc.firebaseapp.com",
+    projectId: "audi-dtc",
+    storageBucket: "audi-dtc.firebasestorage.app",
+    messagingSenderId: "35111434704",
+    appId: "1:35111434704:web:b369652ee62d6f169361d5",
+    measurementId: "G-66YJ3NQ36X"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
        <!-- Recent Searches -->
     <section id="recent" class="py-20 bg-black">
         <div class="container mx-auto px-4">

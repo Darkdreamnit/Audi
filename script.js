@@ -302,57 +302,67 @@ function showError(message) {
 }
 
 // Add to recent searches
-function addToRecentSearches(code) {
-    if (!recentCodes.includes(code)) {
-        recentCodes.unshift(code);
-        if (recentCodes.length > 6) {
-            recentCodes.pop();
-        }
-        localStorage.setItem('audiRecentSearches', JSON.stringify(recentCodes));
-        updateRecentSearches();
-    }
+async function addToRecentSearches(code) {
+  try {
+    const { collection, addDoc } = window.firebaseFns;
+
+    await addDoc(collection(window.db, "recentSearches"), {
+      code: code,
+      timestamp: Date.now()
+    });
+
+  } catch (error) {
+    console.error("Error saving search:", error);
+  }
 }
 
 // Update recent searches display
-function updateRecentSearches() {
-    recentSearches.innerHTML = '';
-    
-    if (recentCodes.length === 0) {
-        recentSearches.innerHTML = `
-            <div class="col-span-full text-center py-8 text-gray-500">
-                <i data-lucide="history" class="w-12 h-12 mx-auto mb-4 opacity-20"></i>
-                <p>No recent searches</p>
-            </div>
-        `;
-        return;
+async function updateRecentSearches() {
+  const { collection, getDocs, query, orderBy, limit } = window.firebaseFns;
+
+  recentSearches.innerHTML = "";
+
+  try {
+    const q = query(
+      collection(window.db, "recentSearches"),
+      orderBy("timestamp", "desc"),
+      limit(6)
+    );
+
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      recentSearches.innerHTML = `<p class="text-gray-500">No recent searches</p>`;
+      return;
     }
-    
-    recentCodes.forEach(code => {
-        if (dtcDatabase[code]) {
-            const dtc = dtcDatabase[code];
-            const card = document.createElement('div');
-            card.className = 'glass-effect rounded-xl p-5 hover:bg-white/5 transition-all cursor-pointer';
-            card.innerHTML = `
-                <div class="flex justify-between items-start mb-3">
-                    <span class="text-xl font-bold">${dtc.code}</span>
-                    <span class="text-xs text-gray-500">${getTimeAgo()}</span>
-                </div>
-                <h4 class="font-bold mb-1 truncate">${dtc.description}</h4>
-                <div class="flex items-center justify-between text-sm">
-                    <span class="bg-[var(--audi-light-gray)] px-2 py-1 rounded">${dtc.system}</span>
-                    <span class="severity-${dtc.severity}">${dtc.severity.charAt(0).toUpperCase() + dtc.severity.slice(1)}</span>
-                </div>
-            `;
-            
-            card.addEventListener('click', function() {
-    window.location.href = `dtc.html?code=${dtc.code}`;
-});
-            
-            recentSearches.appendChild(card);
-        }
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+
+      if (dtcDatabase[data.code]) {
+        const dtc = dtcDatabase[data.code];
+
+        const card = document.createElement('div');
+        card.className = 'glass-effect rounded-xl p-5 hover:bg-white/5 cursor-pointer';
+
+        card.innerHTML = `
+          <div class="flex justify-between items-start mb-3">
+            <span class="text-xl font-bold">${dtc.code}</span>
+          </div>
+          <h4 class="font-bold mb-1">${dtc.description}</h4>
+        `;
+
+        card.onclick = () => {
+          window.location.href = `dtc.html?code=${dtc.code}`;
+        };
+
+        recentSearches.appendChild(card);
+      }
     });
-    
-    lucide.createIcons();
+
+  } catch (error) {
+    console.error("Error loading searches:", error);
+  }
 }
 
 // Clear recent searches
