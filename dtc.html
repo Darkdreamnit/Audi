@@ -301,6 +301,19 @@ if (dtc.relatedCodes) {
   });
 }
 
+dtc.quickFacts?.forEach(item => {
+  quickFacts.innerHTML += `<div><strong>${item.label}:</strong> ${item.value}</div>`;
+});
+
+dtc.symptomTable?.forEach(row => {
+  symptomTable.innerHTML += `
+    <tr>
+      <td>${row.issue}</td>
+      <td>${row.likelyCause}</td>
+    </tr>
+  `;
+});
+
 if (dtc.proTip) {
   proTipTitle.innerText = dtc.proTip.title;
   proTipContent.innerText = dtc.proTip.content;

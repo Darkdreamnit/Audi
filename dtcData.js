@@ -14351,15 +14351,4 @@ dtcDatabase["P0420"] = {
   relatedCodes: ["P0430", "P0171", "P0300"]
 };
 
-dtc.quickFacts?.forEach(item => {
-  quickFacts.innerHTML += `<div><strong>${item.label}:</strong> ${item.value}</div>`;
-});
 
-dtc.symptomTable?.forEach(row => {
-  symptomTable.innerHTML += `
-    <tr>
-      <td>${row.issue}</td>
-      <td>${row.likelyCause}</td>
-    </tr>
-  `;
-});
