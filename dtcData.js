@@ -13578,6 +13578,71 @@ dtcDatabase["P0455"] = {
   relatedCodes: ["P0442", "P0440", "P0171"]
 };
 
+dtcDatabase["P0299"] = {
+  code: "P0299",
+  description: "Turbocharger/Supercharger Underboost Condition",
+  category: "engine",
+
+  severity: "high",
+  severityExplanation: "Underboost conditions significantly reduce engine performance and can indicate turbocharger failure or air leaks. Continued driving can worsen damage and lead to costly repairs.",
+
+  difficulty: "Intermediate to Advanced",
+  repairTime: "1–4 hours",
+  estimatedCost: "$100 – $2000+",
+
+  driveability: "Drivable short-term, but expect severe power loss. Driving long-term can worsen turbo damage or lead to complete failure.",
+
+  deepDive: "P0299 is one of the most common turbo-related fault codes on Audi vehicles, especially on 2.0T engines. It means the engine is not reaching the expected boost pressure. Unlike generic explanations, Audi underboost issues are very often caused by mechanical wear in the wastegate linkage, a failing diverter valve, or boost leaks in the intake system. Many owners report sudden loss of power or the vehicle entering limp mode under acceleration.",
+
+  symptoms: [
+    "Significant loss of power, especially under acceleration",
+    "Vehicle enters limp mode (limited speed/RPM)",
+    "Check engine light illuminated",
+    "Whining, hissing, or whooshing noises from engine bay",
+    "Turbo feels inconsistent or weak"
+  ],
+
+  causes: [
+    "Loose or worn wastegate actuator (very common on Audi 2.0T)",
+    "Failing or torn diverter valve diaphragm",
+    "Boost leaks from cracked hoses or intercooler pipes",
+    "Faulty turbocharger (worn bearings or internal damage)",
+    "Faulty boost pressure sensor"
+  ],
+
+  diagnosisSteps: [
+    "Scan vehicle and confirm P0299 code",
+    "Perform visual inspection of all boost hoses and intercooler piping",
+    "Check wastegate actuator for looseness or excessive play",
+    "Test diverter valve for proper operation",
+    "Perform a boost leak test (pressure or smoke test)",
+    "Monitor live boost data using a scan tool"
+  ],
+
+  fixes: [
+    "Tighten or repair wastegate linkage (common fix)",
+    "Replace faulty diverter valve",
+    "Repair or replace damaged boost hoses",
+    "Replace boost pressure sensor if faulty",
+    "Replace turbocharger if internal failure is confirmed"
+  ],
+
+  commonMistakes: [
+    "Replacing the turbocharger too early without checking for boost leaks",
+    "Ignoring the wastegate linkage issue (very common on Audi)",
+    "Overlooking diverter valve failure",
+    "Not performing a proper boost leak test"
+  ],
+
+  costBreakdown: {
+    diy: "$100 – $400",
+    independentShop: "$300 – $1200",
+    dealership: "$800 – $2000+"
+  },
+
+  relatedCodes: ["P0234", "P0101", "P0171"]
+};
+
 dtcDatabase["P0400"] = {
   code: "P0400",
   description: "Exhaust Gas Recirculation (EGR) Flow Malfunction",
