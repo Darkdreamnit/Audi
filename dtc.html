@@ -282,18 +282,7 @@ dtc.commonMistakes?.forEach(m => {
 });
 
 
-dtc.quickFacts?.forEach(item => {
-  quickFacts.innerHTML += `<div><strong>${item.label}:</strong> ${item.value}</div>`;
-});
 
-dtc.symptomTable?.forEach(row => {
-  symptomTable.innerHTML += `
-    <tr>
-      <td>${row.issue}</td>
-      <td>${row.likelyCause}</td>
-    </tr>
-  `;
-});
 
 if (dtc.costBreakdown) {
   costBreakdown.innerHTML = `
@@ -302,16 +291,6 @@ if (dtc.costBreakdown) {
     <div>Dealership: ${dtc.costBreakdown.dealership}</div>
   `;
 }
-
-<table class="w-full text-left border mt-6">
-  <thead>
-    <tr>
-      <th class="p-2">Symptom</th>
-      <th class="p-2">Likely Cause</th>
-    </tr>
-  </thead>
-  <tbody id="symptomTable"></tbody>
-</table>
 
 // RELATED
 if (dtc.relatedCodes) {
