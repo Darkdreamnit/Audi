@@ -175,6 +175,11 @@ function performSearch() {
 function displayDTCResult(dtc) {
     const clone = template.content.cloneNode(true);
     const result = clone.querySelector('.slide-in');
+    result.style.cursor = "pointer";
+
+result.addEventListener("click", () => {
+  window.location.href = `dtc.html?code=${dtc.code}`;
+});
     
     const detailsBtn = result.querySelector('.details-btn');
 detailsBtn.href = `dtc.html?code=${dtc.code}`;
@@ -231,6 +236,12 @@ detailsBtn.href = `dtc.html?code=${dtc.code}`;
     // Button events
     const saveBtn = result.querySelector('.save-btn');
     const shareBtn = result.querySelector('.share-btn');
+
+saveBtn.addEventListener("click", e => e.stopPropagation());
+shareBtn.addEventListener("click", e => e.stopPropagation());
+if (detailsBtn) {
+  detailsBtn.addEventListener("click", e => e.stopPropagation());
+}
     
     saveBtn.addEventListener('click', function() {
         saveDTCToFavorites(dtc.code);
@@ -243,7 +254,7 @@ detailsBtn.href = `dtc.html?code=${dtc.code}`;
     });
     
     // Clear previous results and add new one
-    searchResults.innerHTML = '';
+    
     searchResults.appendChild(result);
     
     // Recreate icons in the new content
@@ -331,9 +342,8 @@ function updateRecentSearches() {
             `;
             
             card.addEventListener('click', function() {
-                mainSearch.value = dtc.code;
-                performSearch();
-            });
+    window.location.href = `dtc.html?code=${dtc.code}`;
+});
             
             recentSearches.appendChild(card);
         }
