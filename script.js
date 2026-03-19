@@ -81,6 +81,15 @@ function setupEventListeners() {
         });
     }
     
+    // Filter buttons
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active', 'bg-[var(--audi-blue)]'));
+            this.classList.add('active', 'bg-[var(--audi-blue)]');
+            // Filter logic would go here
+        });
+    });
+    
     // Clear recent searches
     clearRecentBtn.addEventListener('click', clearRecentSearches);
     
@@ -323,39 +332,7 @@ function updateRecentSearches() {
             
             card.addEventListener('click', function() {
                 mainSearch.value = dtc.code;
-                function performSearch() {
-    const query = mainSearch.value.trim().toLowerCase();
-
-    // Get all codes
-    const allCodes = Object.values(dtcDatabase);
-
-    // Filter results
-    const results = allCodes.filter(dtc => {
-
-        const matchesSearch =
-            dtc.code.toLowerCase().includes(query) ||
-            dtc.description.toLowerCase().includes(query);
-
-        const matchesFilter =
-            currentFilter === "all" ||
-            dtc.category === currentFilter;
-
-        return matchesSearch && matchesFilter;
-    });
-
-    // No results
-    if (results.length === 0) {
-        showError("No matching codes found");
-        return;
-    }
-
-    
-
-    // Show all matching results
-    results.forEach(dtc => {
-        displayDTCResult(dtc);
-    });
-}
+                performSearch();
             });
             
             recentSearches.appendChild(card);

@@ -13579,7 +13579,6 @@ dtcDatabase["P0455"] = {
 };
 
 dtcDatabase["P0400"] = {
-  category: "engine",
   code: "P0400",
   description: "Exhaust Gas Recirculation (EGR) Flow Malfunction",
 
