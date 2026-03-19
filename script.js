@@ -155,6 +155,8 @@ function setupEventListeners() {
 // Perform DTC Search
 function performSearch() {
     searchResults.innerHTML = "";
+    searchResults.style.opacity = "0";
+    searchResults.style.opacity = "1";
     const searchTerm = mainSearch.value.trim().toUpperCase();
     
     if (!searchTerm) {
