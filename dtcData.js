@@ -13643,6 +13643,96 @@ dtcDatabase["P0299"] = {
   relatedCodes: ["P0234", "P0101", "P0171"]
 };
 
+dtcDatabase["P0700"] = {
+  code: "P0700",
+  description: "Transmission Control System Malfunction",
+  category: "transmission",
+
+  severity: "high",
+  severityExplanation: "This code means your transmission control module has detected a fault. While the car may still drive, ignoring it can lead to harsh shifting, limp mode, or long-term transmission damage which can be very expensive to repair.",
+
+  difficulty: "Intermediate to Advanced",
+  repairTime: "1–5 hours",
+  estimatedCost: "$100 – $3000+",
+
+  driveability: "Drivable short-term, but not recommended. The car may enter limp mode and restrict gears to protect the transmission.",
+
+  deepDive: "P0700 is not a problem by itself — it’s a warning. Think of it as your transmission telling you, 'Hey, something is wrong, go look deeper.' On Audi vehicles, this usually means the Transmission Control Module (TCM) has detected an internal issue like a bad solenoid, sensor failure, or fluid problem. In real-world cases, many people replace parts too early without actually scanning the TCM, which leads to wasted money.",
+
+  symptoms: [
+    "Check engine light is on",
+    "Transmission warning message on dash",
+    "Hard, delayed, or jerky shifting",
+    "Vehicle stuck in limp mode (limited gears)",
+    "Car feels sluggish or won’t accelerate properly"
+  ],
+
+  causes: [
+    "Low or dirty transmission fluid",
+    "Faulty shift solenoids",
+    "Damaged wiring or poor electrical connections",
+    "Failing input/output speed sensors",
+    "Valve body issues inside transmission",
+    "Faulty Transmission Control Module (TCM)"
+  ],
+
+  diagnosisSteps: [
+    "Scan vehicle with a tool that can read transmission (TCM) codes",
+    "Write down all additional P07xx or transmission-related codes",
+    "Check transmission fluid level and condition (burnt smell = bad)",
+    "Inspect wiring harnesses and connectors to the transmission",
+    "Test solenoids and sensors using a scan tool or multimeter",
+    "Verify power and ground connections to the TCM"
+  ],
+
+  fixes: [
+    "Top off or replace transmission fluid",
+    "Replace faulty shift solenoids",
+    "Repair or replace damaged wiring",
+    "Replace input/output speed sensors",
+    "Repair or replace valve body",
+    "Replace or reprogram TCM if faulty"
+  ],
+
+  commonMistakes: [
+    "Trying to fix P0700 without scanning the TCM",
+    "Replacing the transmission immediately (often unnecessary)",
+    "Ignoring fluid condition",
+    "Overlooking wiring issues",
+    "Assuming worst-case scenario too early"
+  ],
+
+  costBreakdown: {
+    diy: "$100 – $500",
+    independentShop: "$300 – $1500",
+    dealership: "$800 – $3000+"
+  },
+
+  // 👇 NEW: TABLE DATA FOR BETTER UI
+  quickFacts: [
+    { label: "What it really means", value: "TCM detected a fault (not the actual problem)" },
+    { label: "Most common cause", value: "Low/dirty fluid or solenoid issues" },
+    { label: "Fix difficulty", value: "Depends on underlying issue" },
+    { label: "Can you drive?", value: "Short-term only (limp mode likely)" }
+  ],
+
+  // 👇 ENGAGING TABLE FOR USERS
+  symptomTable: [
+    { issue: "Hard shifting", likelyCause: "Solenoids or valve body" },
+    { issue: "Limp mode", likelyCause: "Severe fault detected by TCM" },
+    { issue: "Delayed shifting", likelyCause: "Low fluid or pressure issue" },
+    { issue: "No acceleration", likelyCause: "Transmission stuck in gear" }
+  ],
+
+  // 👇 HUMAN “REAL TALK” SECTION
+  proTip: {
+    title: "⚠️ Real-World Tip",
+    content: "Don’t panic when you see P0700. This code alone doesn’t mean your transmission is bad. In a lot of Audi cases, it ends up being something simple like fluid condition or a sensor. The key is scanning the transmission module — without that, you’re basically guessing."
+  },
+
+  relatedCodes: ["P0715", "P0720", "P0730"]
+};
+
 dtcDatabase["P0400"] = {
   code: "P0400",
   description: "Exhaust Gas Recirculation (EGR) Flow Malfunction",
