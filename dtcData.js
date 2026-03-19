@@ -13210,6 +13210,228 @@ dtcDatabase["P0300"] = {
   relatedCodes: ["P0301", "P0302", "P0303", "P0304"]
 };
 
+// 🔥 VEHICLE SPEED SENSOR RELATED CODES
+
+dtcDatabase["P0501"] = {
+  code: "P0501",
+  description: "Vehicle Speed Sensor Range/Performance",
+
+  severity: "High",
+  severityExplanation:
+    "This code indicates the speed signal is inconsistent or outside expected values. It can affect transmission shifting and safety systems like ABS, making it important to address quickly.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $600",
+
+  deepDive:
+    "The P0501 code means the vehicle speed signal is present but not behaving as expected. On Audi vehicles, this often shows up as erratic speedometer readings or inconsistent shifting. In many cases, this is caused by a failing wheel speed sensor or a damaged tone ring sending irregular signals. Unlike P0500, which indicates no signal, this code points to a signal that is present but unreliable.",
+
+  symptoms: [
+    "Speedometer fluctuates or reads incorrectly",
+    "Erratic or delayed transmission shifting",
+    "ABS or traction control warning lights",
+    "Cruise control malfunction",
+    "Vehicle may enter limp mode"
+  ],
+
+  causes: [
+    "Failing vehicle speed sensor",
+    "Faulty ABS wheel speed sensor (common)",
+    "Damaged or dirty tone ring",
+    "Wiring issues causing signal interference",
+    "ABS module malfunction"
+  ],
+
+  diagnosisSteps: [
+    "Scan for P0501 and related ABS codes",
+    "Monitor live speed data for inconsistencies",
+    "Inspect wheel speed sensors",
+    "Check tone ring for damage or debris",
+    "Inspect wiring and connectors",
+    "Compare speed readings across wheels"
+  ],
+
+  fixes: [
+    "Replace faulty speed sensor",
+    "Replace ABS wheel speed sensor",
+    "Clean or replace tone ring",
+    "Repair damaged wiring",
+    "Replace ABS module if necessary"
+  ],
+
+  commonMistakes: [
+    "Ignoring inconsistent speed readings",
+    "Replacing the wrong sensor without testing",
+    "Not checking tone ring condition",
+    "Skipping ABS system diagnostics"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $600"
+  },
+
+  proTip: {
+    title: "Inconsistent Speed? Check the Tone Ring",
+    content:
+      "If your speedometer jumps around or shifts feel unpredictable, the issue is often a damaged or dirty tone ring. Even a small crack or debris can cause erratic signals on Audi vehicles.",
+    linkText: "Learn More About Tone Ring Issues",
+    link: "https://www.audiworld.com/forums/"
+  },
+
+  relatedCodes: ["P0500", "P0502", "P0503"]
+};
+
+
+
+dtcDatabase["P0502"] = {
+  code: "P0502",
+  description: "Vehicle Speed Sensor Low Input",
+
+  severity: "High",
+  severityExplanation:
+    "This code indicates the speed signal is too weak or nearly absent. It can cause transmission issues and disable safety systems like ABS and traction control.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $600",
+
+  deepDive:
+    "The P0502 code means the vehicle speed signal is present but too low for the ECU to properly interpret. On Audi vehicles, this is commonly caused by a failing wheel speed sensor or poor electrical connection. In real-world cases, this often leads to a speedometer that barely moves or stays near zero while driving.",
+
+  symptoms: [
+    "Speedometer reads very low or stays at zero",
+    "Transmission shifting issues",
+    "ABS and traction control warning lights",
+    "Cruise control not working",
+    "Vehicle may feel underpowered"
+  ],
+
+  causes: [
+    "Weak or failing vehicle speed sensor",
+    "Faulty ABS wheel speed sensor",
+    "Corroded or loose wiring connections",
+    "Damaged tone ring",
+    "Low voltage signal to ECU"
+  ],
+
+  diagnosisSteps: [
+    "Scan for P0502 and ABS-related codes",
+    "Monitor speed signal using live data",
+    "Inspect wiring and connectors for corrosion",
+    "Test sensor output voltage",
+    "Check ABS wheel speed sensors",
+    "Inspect tone ring condition"
+  ],
+
+  fixes: [
+    "Replace faulty speed sensor",
+    "Replace ABS wheel speed sensor",
+    "Repair wiring or connectors",
+    "Clean or replace tone ring",
+    "Clear codes and verify operation"
+  ],
+
+  commonMistakes: [
+    "Ignoring weak or intermittent signals",
+    "Replacing parts without testing voltage output",
+    "Not checking wiring corrosion",
+    "Overlooking ABS system faults"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $600"
+  },
+
+  proTip: {
+    title: "Low Signal Often Means Wiring Issues",
+    content:
+      "If the speed signal is weak, don’t immediately replace the sensor. On many Audi vehicles, corroded connectors or damaged wiring are the real cause of low signal faults.",
+    linkText: "Learn More About Wiring Issues",
+    link: "https://www.audiworld.com/forums/"
+  },
+
+  relatedCodes: ["P0500", "P0501", "P0503"]
+};
+
+
+
+dtcDatabase["P0503"] = {
+  code: "P0503",
+  description: "Vehicle Speed Sensor Intermittent / Erratic Signal",
+
+  severity: "High",
+  severityExplanation:
+    "This code indicates the speed signal is cutting in and out. This can lead to unpredictable transmission behavior and intermittent loss of safety systems.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $600",
+
+  deepDive:
+    "The P0503 code indicates an intermittent or unstable speed signal. On Audi vehicles, this often shows up as a speedometer that works sometimes and fails at other times. It can also cause random shifting issues or temporary loss of ABS and traction control. In most cases, this is caused by wiring problems or failing wheel speed sensors that lose signal under certain conditions.",
+
+  symptoms: [
+    "Speedometer works intermittently",
+    "Random or unpredictable shifting",
+    "ABS or traction control lights turning on and off",
+    "Cruise control disengaging unexpectedly",
+    "Inconsistent vehicle performance"
+  ],
+
+  causes: [
+    "Intermittent vehicle speed sensor failure",
+    "Faulty ABS wheel speed sensor",
+    "Loose or damaged wiring",
+    "Connector issues",
+    "Damaged tone ring causing inconsistent readings"
+  ],
+
+  diagnosisSteps: [
+    "Scan for P0503 and related ABS codes",
+    "Monitor live speed data for dropouts",
+    "Inspect wiring for loose connections",
+    "Check sensor connectors",
+    "Test sensor output under different conditions",
+    "Inspect tone ring for irregularities"
+  ],
+
+  fixes: [
+    "Replace faulty speed sensor",
+    "Replace ABS wheel speed sensor",
+    "Repair or secure wiring connections",
+    "Clean or replace tone ring",
+    "Clear codes and verify consistent signal"
+  ],
+
+  commonMistakes: [
+    "Ignoring intermittent issues until they worsen",
+    "Replacing parts without testing under real conditions",
+    "Overlooking loose wiring or connectors",
+    "Not checking ABS system involvement"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $600"
+  },
+
+  proTip: {
+    title: "Intermittent Issues Are Often Wiring Related",
+    content:
+      "If the problem comes and goes, focus on wiring and connectors first. Movement, heat, and vibration can cause temporary signal loss in Audi wiring harnesses.",
+    linkText: "Learn More About Intermittent Faults",
+    link: "https://www.audiworld.com/forums/"
+  },
+
+  relatedCodes: ["P0500", "P0501", "P0502"]
+};
+
 // 🔥 CYLINDER-SPECIFIC MISFIRE CODES
 
 dtcDatabase["P0301"] = {
