@@ -13432,6 +13432,78 @@ dtcDatabase["P0503"] = {
   relatedCodes: ["P0500", "P0501", "P0502"]
 };
 
+dtcDatabase["P0442"] = {
+  code: "P0442",
+  description: "Evaporative Emission System Leak Detected (Small Leak)",
+
+  severity: "Low",
+  severityExplanation:
+    "This code indicates a small leak in the EVAP system. It will not usually affect drivability, but it can increase emissions and trigger inspection failures. It should be addressed, but it is not an emergency.",
+
+  difficulty: "Beginner–Intermediate",
+  repairTime: "10 minutes – 2 hours",
+  estimatedCost: "$0 – $300",
+
+  deepDive:
+    "The P0442 code on Audi vehicles indicates a small leak in the EVAP (Evaporative Emission Control) system, which is responsible for capturing and reusing fuel vapors instead of releasing them into the atmosphere. In real-world cases, this is one of the most common and least serious codes—but also one of the most annoying. Many Audi owners see this code appear after refueling, and in a large percentage of cases, the issue ends up being something simple like a loose or worn gas cap. However, because the leak is small, it can also come from cracked plastic lines, failing purge valves, or tiny leaks in the system that are hard to detect without proper testing.",
+
+  symptoms: [
+    "Check engine light illuminated",
+    "Slight fuel smell (especially near rear of vehicle)",
+    "No noticeable performance issues",
+    "Code may appear shortly after refueling"
+  ],
+
+  causes: [
+    "Loose or faulty gas cap (most common)",
+    "Cracked or brittle EVAP hoses (common on Audi)",
+    "Faulty purge valve (N80)",
+    "Faulty vent valve or leak detection pump",
+    "Small leak at fuel filler neck or fuel tank"
+  ],
+
+  diagnosisSteps: [
+    "Check and tighten gas cap (listen for clicks)",
+    "Inspect gas cap seal for cracks or wear",
+    "Clear code and drive to see if it returns",
+    "Visually inspect EVAP hoses for cracks or disconnections",
+    "Inspect purge valve (N80) for proper operation",
+    "Perform smoke test to locate small leaks"
+  ],
+
+  fixes: [
+    "Tighten or replace gas cap",
+    "Replace cracked or damaged EVAP hoses",
+    "Replace faulty purge valve (N80)",
+    "Repair leaks in filler neck or fuel tank",
+    "Replace leak detection pump if needed"
+  ],
+
+  commonMistakes: [
+    "Ignoring the gas cap as a possible cause",
+    "Replacing parts before checking for simple leaks",
+    "Skipping smoke testing for small leaks",
+    "Assuming no symptoms means no issue"
+  ],
+
+  costBreakdown: {
+    diy: "$0 – $100",
+    independentShop: "$100 – $250",
+    dealership: "$150 – $300"
+  },
+
+  // 🔥 INTERNAL LINKING (OPTION 2)
+  proTip: {
+    title: "Start With the Simplest Fix First",
+    content:
+      "Before replacing parts, always check the gas cap and clear the code. Many small EVAP leaks on Audi vehicles are caused by something as simple as a loose or worn cap. If the issue persists, you may be dealing with a larger EVAP system problem.",
+    linkText: "View Larger EVAP Leak (P0455 Guide)",
+    link: "dtc.html?code=P0455"
+  },
+
+  relatedCodes: ["P0455", "P0440", "P0171"]
+};
+
 // 🔥 CYLINDER-SPECIFIC MISFIRE CODES
 
 dtcDatabase["P0301"] = {
