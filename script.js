@@ -40,19 +40,17 @@ let recentCodes = JSON.parse(localStorage.getItem('audiRecentSearches')) || ['P0
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    updateRecentSearches();
+
+    // Wait for Firebase to be ready
+    const waitForFirebase = setInterval(() => {
+        if (window.db && window.firebaseFns) {
+            clearInterval(waitForFirebase);
+            updateRecentSearches();
+        }
+    }, 100);
+
     setupEventListeners();
     populateAutocomplete();
-    
-    // Show initial state message
-    searchResults.innerHTML = `
-        <div class="text-center py-8 md:py-12 text-gray-500">
-            <i data-lucide="search" class="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 opacity-20"></i>
-            <p class="text-sm md:text-base">Enter a DTC code above to begin diagnostic analysis</p>
-            <p class="text-xs md:text-sm mt-2 text-gray-600">Try: P0171, U0100, C0035, P0300, P0420</p>
-        </div>
-    `;
-    lucide.createIcons();
 });
 
 // Event Listeners Setup
