@@ -13716,6 +13716,17 @@ dtcDatabase["P0700"] = {
     { label: "Can you drive?", value: "Short-term only (limp mode likely)" }
   ],
 
+  const symptomTable = document.getElementById("symptomTable");
+
+dtc.symptomTable?.forEach(row => {
+  symptomTable.innerHTML += `
+    <tr class="border-t">
+      <td class="p-2">${row.issue}</td>
+      <td class="p-2">${row.likelyCause}</td>
+    </tr>
+  `;
+});
+
   // 👇 ENGAGING TABLE FOR USERS
   symptomTable: [
     { issue: "Hard shifting", likelyCause: "Solenoids or valve body" },
