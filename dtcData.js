@@ -13716,16 +13716,7 @@ dtcDatabase["P0700"] = {
     { label: "Can you drive?", value: "Short-term only (limp mode likely)" }
   ],
 
-  const symptomTable = document.getElementById("symptomTable");
-
-dtc.symptomTable?.forEach(row => {
-  symptomTable.innerHTML += `
-    <tr class="border-t">
-      <td class="p-2">${row.issue}</td>
-      <td class="p-2">${row.likelyCause}</td>
-    </tr>
-  `;
-});
+  
 
   // 👇 ENGAGING TABLE FOR USERS
   symptomTable: [
@@ -13743,6 +13734,17 @@ dtc.symptomTable?.forEach(row => {
 
   relatedCodes: ["P0715", "P0720", "P0730"]
 };
+
+const symptomTable = document.getElementById("symptomTable");
+
+dtc.symptomTable?.forEach(row => {
+  symptomTable.innerHTML += `
+    <tr class="border-t">
+      <td class="p-2">${row.issue}</td>
+      <td class="p-2">${row.likelyCause}</td>
+    </tr>
+  `;
+});
 
 dtcDatabase["P0400"] = {
   code: "P0400",
