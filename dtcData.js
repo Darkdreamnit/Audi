@@ -13504,6 +13504,79 @@ dtcDatabase["P0442"] = {
   relatedCodes: ["P0455", "P0440", "P0171"]
 };
 
+
+dtcDatabase["P0455"] = {
+  code: "P0455",
+  description: "Evaporative Emission System Leak Detected (Large Leak)",
+
+  severity: "Low–Medium",
+  severityExplanation:
+    "This code indicates a large leak in the EVAP system. While it typically does not affect drivability, it will increase emissions, may cause rough running in some cases, and will prevent the vehicle from passing emissions testing.",
+
+  difficulty: "Beginner–Intermediate",
+  repairTime: "10 minutes – 2 hours",
+  estimatedCost: "$0 – $400",
+
+  deepDive:
+    "The P0455 code on Audi vehicles means the EVAP system cannot hold pressure at all, indicating a large leak. In real-world situations, this is often caused by something simple like a loose or missing gas cap—but if that’s not the issue, the next most common culprit on Audi models is the N80 purge valve. Unlike smaller leaks (P0442), a P0455 usually points to a more obvious failure in the system. Many Audi owners notice this code after refueling or after work has been done near the fuel system. Because Audi uses plastic EVAP lines that can become brittle over time, cracked hoses are also a frequent cause.",
+
+  symptoms: [
+    "Check engine light illuminated",
+    "Fuel smell around the vehicle",
+    "Rough idle (in some cases)",
+    "Hard starting after refueling",
+    "Slight decrease in fuel economy"
+  ],
+
+  causes: [
+    "Loose, missing, or faulty gas cap (most common)",
+    "Faulty N80 purge valve (very common on Audi)",
+    "Cracked or disconnected EVAP hoses",
+    "Faulty vent valve",
+    "Leaks in charcoal canister or fuel tank system"
+  ],
+
+  diagnosisSteps: [
+    "Check and tighten gas cap until it clicks",
+    "Inspect gas cap seal for wear or cracks",
+    "Clear code and drive vehicle to see if it returns",
+    "Inspect EVAP hoses for cracks or disconnections",
+    "Test N80 purge valve operation",
+    "Perform smoke test to locate large leaks quickly"
+  ],
+
+  fixes: [
+    "Tighten or replace gas cap",
+    "Replace faulty N80 purge valve",
+    "Repair or replace cracked EVAP hoses",
+    "Replace faulty vent valve",
+    "Fix leaks in charcoal canister or fuel tank system"
+  ],
+
+  commonMistakes: [
+    "Ignoring the gas cap as the first check",
+    "Replacing multiple parts without testing",
+    "Not checking the N80 purge valve early",
+    "Skipping a smoke test for faster diagnosis"
+  ],
+
+  costBreakdown: {
+    diy: "$0 – $150",
+    independentShop: "$100 – $300",
+    dealership: "$200 – $400"
+  },
+
+  // 🔥 INTERNAL LINKING (OPTION 2)
+  proTip: {
+    title: "Not a Large Leak? It Might Be a Small One",
+    content:
+      "If your gas cap is tight and everything looks fine, you might actually be dealing with a smaller EVAP leak instead. Small leaks are harder to detect and may require a smoke test to find.",
+    linkText: "View Small EVAP Leak Guide (P0442)",
+    link: "dtc.html?code=P0442"
+  },
+
+  relatedCodes: ["P0442", "P0440", "P0171"]
+};
 // 🔥 CYLINDER-SPECIFIC MISFIRE CODES
 
 dtcDatabase["P0301"] = {
