@@ -13061,7 +13061,82 @@ rawDTCData.forEach(item => {
 
 
 
+dtcDatabase["P0500"] = {
+  code: "P0500",
+  description: "Vehicle Speed Sensor 'A' Malfunction",
 
+  severity: "High",
+  severityExplanation:
+    "This code affects how the vehicle reads speed, which directly impacts transmission shifting and safety systems like ABS and traction control. Driving is possible short-term, but it can lead to improper shifting and loss of safety features.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $600",
+
+  deepDive:
+    "The P0500 code on Audi vehicles indicates that the ECU is not receiving a proper speed signal. In real-world cases, this often shows up as a completely dead speedometer or erratic transmission behavior. On many Audi models, the vehicle speed signal doesn’t always come from a single dedicated sensor—it’s often calculated using ABS wheel speed sensors. This means the issue can come from multiple places, including the ABS module, wiring, or even a damaged tone ring. Many Audi owners initially think it's a transmission issue, but it’s usually electrical or sensor-related.",
+
+  symptoms: [
+    "Speedometer not working or reading incorrectly",
+    "Erratic or harsh transmission shifting",
+    "Transmission stuck in one gear (limp mode)",
+    "ABS or traction control (ESP) warning lights",
+    "Cruise control not working",
+    "Vehicle may feel sluggish or limited in power"
+  ],
+
+  causes: [
+    "Faulty vehicle speed sensor (VSS)",
+    "Damaged or corroded wiring harness",
+    "Faulty ABS wheel speed sensor (very common on Audi)",
+    "Bad ABS control module",
+    "Broken or dirty tone ring (reluctor ring)",
+    "Rare: ECU/PCM issue"
+  ],
+
+  diagnosisSteps: [
+    "Scan vehicle for P0500 and any ABS-related codes",
+    "Check if speedometer is completely dead or intermittent",
+    "Inspect wiring and connectors at the sensor and ABS module",
+    "Test vehicle speed sensor output using a multimeter",
+    "Scan ABS module for wheel speed sensor faults",
+    "Inspect tone ring for damage or debris buildup",
+    "Verify signal is reaching ECU"
+  ],
+
+  fixes: [
+    "Replace faulty vehicle speed sensor",
+    "Repair or replace damaged wiring",
+    "Replace faulty ABS wheel speed sensor",
+    "Clean or replace damaged tone ring",
+    "Replace ABS module if confirmed faulty",
+    "Clear codes and test drive"
+  ],
+
+  commonMistakes: [
+    "Assuming it's a transmission problem first",
+    "Replacing the VSS without checking ABS sensors",
+    "Ignoring ABS warning lights",
+    "Not scanning the ABS module for additional codes",
+    "Overlooking wiring damage near wheels or transmission"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $600"
+  },
+
+  proTip: {
+    title: "Check ABS Sensors Before Replacing the Speed Sensor",
+    content:
+      "On many Audi models, the speed signal comes from the ABS system rather than a dedicated sensor. If you have ABS or traction control lights on along with P0500, there’s a very good chance the issue is a faulty wheel speed sensor—not the transmission or main speed sensor.",
+    linkText: "Learn More About ABS Sensor Issues",
+    link: "https://www.audiworld.com/forums/"
+  },
+
+  relatedCodes: ["P0501", "P0502", "P0503"]
+};
 
 
 dtcDatabase["P0300"] = {
@@ -13459,6 +13534,12 @@ dtcDatabase["P0128"] = {
     dealership: "$300 – $500"
   },
 
+
+
+
+
+
+  
   // 🔥 OPTIONAL PRO TIP (nice but not required)
   proTip: {
     title: "Quick Insight Before Replacing Parts",
