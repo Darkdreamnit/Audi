@@ -367,10 +367,8 @@ async function updateRecentSearches() {
 
 // Clear recent searches
 function clearRecentSearches() {
-    recentCodes = [];
-    localStorage.setItem('audiRecentSearches', JSON.stringify(recentCodes));
-    updateRecentSearches();
-    showNotification("Recent searches cleared");
+    recentSearches.innerHTML = "";
+    showNotification("Recent searches cleared (UI only)");
 }
 
 // Autocomplete functionality
