@@ -281,25 +281,6 @@ dtc.commonMistakes?.forEach(m => {
   commonMistakes.innerHTML += `<li>⚠️ ${m}</li>`;
 });
 
-if (dtc.costBreakdown) {
-  costBreakdown.innerHTML = `
-    <div>DIY: ${dtc.costBreakdown.diy}</div>
-    <div>Independent Shop: ${dtc.costBreakdown.independentShop}</div>
-    <div>Dealership: ${dtc.costBreakdown.dealership}</div>
-  `;
-}
-
-// RELATED
-if (dtc.relatedCodes) {
-  dtc.relatedCodes.forEach(rc => {
-    relatedCodes.innerHTML += `
-      <a href="dtc.html?code=${rc}" 
-         class="glass px-3 py-1 rounded hover:bg-white/10 transition">
-         ${rc}
-      </a>
-    `;
-  });
-}
 
 dtc.quickFacts?.forEach(item => {
   quickFacts.innerHTML += `<div><strong>${item.label}:</strong> ${item.value}</div>`;
@@ -313,6 +294,36 @@ dtc.symptomTable?.forEach(row => {
     </tr>
   `;
 });
+
+if (dtc.costBreakdown) {
+  costBreakdown.innerHTML = `
+    <div>DIY: ${dtc.costBreakdown.diy}</div>
+    <div>Independent Shop: ${dtc.costBreakdown.independentShop}</div>
+    <div>Dealership: ${dtc.costBreakdown.dealership}</div>
+  `;
+}
+
+<table class="w-full text-left border mt-6">
+  <thead>
+    <tr>
+      <th class="p-2">Symptom</th>
+      <th class="p-2">Likely Cause</th>
+    </tr>
+  </thead>
+  <tbody id="symptomTable"></tbody>
+</table>
+
+// RELATED
+if (dtc.relatedCodes) {
+  dtc.relatedCodes.forEach(rc => {
+    relatedCodes.innerHTML += `
+      <a href="dtc.html?code=${rc}" 
+         class="glass px-3 py-1 rounded hover:bg-white/10 transition">
+         ${rc}
+      </a>
+    `;
+  });
+}
 
 if (dtc.proTip) {
   proTipTitle.innerText = dtc.proTip.title;
