@@ -13577,6 +13577,80 @@ dtcDatabase["P0455"] = {
 
   relatedCodes: ["P0442", "P0440", "P0171"]
 };
+
+dtcDatabase["P0400"] = {
+  code: "P0400",
+  description: "Exhaust Gas Recirculation (EGR) Flow Malfunction",
+
+  severity: "Medium",
+  severityExplanation:
+    "This code indicates improper EGR flow, which can lead to increased emissions, rough engine performance, and long-term carbon buildup. While the vehicle may still drive, ignoring it can worsen engine efficiency and emissions issues.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$100 – $600",
+
+  deepDive:
+    "The P0400 code on Audi vehicles indicates that the engine is not receiving the correct amount of exhaust gas recirculation. In real-world Audi applications—especially turbocharged engines—this is most commonly caused by carbon buildup clogging the EGR valve or passages. Over time, soot accumulates and restricts airflow, preventing the system from functioning properly. Many Audi owners notice this issue gradually, starting with rough idle or reduced performance. Because Audi systems often rely on vacuum-operated components, even a small vacuum leak can disrupt EGR function and trigger this code.",
+
+  symptoms: [
+    "Check engine light illuminated",
+    "Rough idle or unstable engine behavior",
+    "Reduced engine performance",
+    "Increased exhaust emissions",
+    "Failed emissions test"
+  ],
+
+  causes: [
+    "Carbon buildup in EGR valve or passages (most common)",
+    "Faulty or stuck EGR valve",
+    "Vacuum leaks in EGR system",
+    "Clogged EGR cooler",
+    "Faulty EGR temperature or pressure sensor",
+    "Damaged wiring or connectors"
+  ],
+
+  diagnosisSteps: [
+    "Scan vehicle and confirm P0400 code",
+    "Inspect vacuum lines connected to EGR system",
+    "Check for visible carbon buildup in EGR valve",
+    "Remove and inspect EGR valve and passages",
+    "Test EGR valve operation (vacuum or electronic)",
+    "Inspect wiring and sensors related to EGR system"
+  ],
+
+  fixes: [
+    "Clean carbon buildup from EGR valve and passages",
+    "Replace faulty EGR valve",
+    "Repair or replace vacuum lines",
+    "Clean or replace EGR cooler",
+    "Repair wiring or replace faulty sensors"
+  ],
+
+  commonMistakes: [
+    "Replacing the EGR valve without cleaning passages",
+    "Ignoring vacuum leaks in the system",
+    "Not checking for carbon buildup first",
+    "Overlooking related sensors and wiring"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $600"
+  },
+
+  // 🔥 INTERNAL LINKING (OPTION 2)
+  proTip: {
+    title: "Carbon Buildup Can Affect More Than Just EGR",
+    content:
+      "If your Audi has carbon buildup in the EGR system, it may also affect air-fuel balance and trigger other codes. It's common for EGR-related issues to overlap with fuel trim or emissions problems.",
+    linkText: "Check Fuel System Issues (P0171 Guide)",
+    link: "dtc.html?code=P0171"
+  },
+
+  relatedCodes: ["P0401", "P0171", "P0420"]
+};
 // 🔥 CYLINDER-SPECIFIC MISFIRE CODES
 
 dtcDatabase["P0301"] = {
