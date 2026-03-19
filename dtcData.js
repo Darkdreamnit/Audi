@@ -13398,6 +13398,80 @@ dtcDatabase["P0304"] = {
 
 
 
+dtcDatabase["P0128"] = {
+  code: "P0128",
+  description: "Coolant Thermostat (Coolant Temperature Below Regulating Temperature)",
+
+  severity: "Medium",
+  severityExplanation:
+    "This code means your engine is not reaching proper operating temperature. While it is generally safe to drive short-term, it can reduce fuel efficiency, cause carbon buildup, and lead to long-term engine wear if ignored.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–3 hours",
+  estimatedCost: "$50 – $500",
+
+  deepDive:
+    "The P0128 code on Audi vehicles typically indicates that the engine is running colder than expected. In most cases (around 70%), this is caused by a thermostat stuck open. Audi engines rely heavily on maintaining proper operating temperature, so when the thermostat fails, the engine stays in a 'warm-up mode' longer than it should. This results in richer fuel mixtures, reduced efficiency, and poor heater performance. Due to Audi’s design, the thermostat is often integrated into a housing, making replacement slightly more involved than on other vehicles.",
+
+  symptoms: [
+    "Check engine light illuminated",
+    "Temperature gauge stays low or fluctuates",
+    "Heater blows cold or lukewarm air",
+    "Reduced fuel economy",
+    "Engine takes longer than normal to warm up"
+  ],
+
+  causes: [
+    "Stuck open thermostat (most common)",
+    "Faulty engine coolant temperature (ECT) sensor",
+    "Low coolant level",
+    "Cooling system leaks",
+    "Damaged wiring to temperature sensor"
+  ],
+
+  diagnosisSteps: [
+    "Check coolant level and inspect for leaks",
+    "Scan and confirm P0128 code",
+    "Monitor live engine temperature data while driving",
+    "Verify if engine reaches 170–200°F operating range",
+    "Inspect thermostat operation",
+    "Test or replace ECT sensor if readings seem incorrect"
+  ],
+
+  fixes: [
+    "Replace thermostat assembly (most common fix)",
+    "Top off coolant and repair leaks",
+    "Replace faulty ECT sensor",
+    "Repair damaged wiring",
+    "Clear code and verify proper temperature operation"
+  ],
+
+  commonMistakes: [
+    "Replacing the ECT sensor before checking the thermostat",
+    "Ignoring low coolant levels",
+    "Not verifying actual engine temperature with live data",
+    "Assuming the issue is minor and delaying repair"
+  ],
+
+  costBreakdown: {
+    diy: "$50 – $200",
+    independentShop: "$150 – $400",
+    dealership: "$300 – $500"
+  },
+
+  // 🔥 OPTIONAL PRO TIP (nice but not required)
+  proTip: {
+    title: "Quick Insight Before Replacing Parts",
+    content:
+      "If your temperature gauge never reaches the middle and your heater stays cold, the thermostat is almost always the issue on Audi vehicles. This is one of the few codes where replacing the thermostat first is often the correct move.",
+    linkText: "Learn More About Thermostat Failures",
+    link: "https://www.audiworld.com/forums/"
+  },
+
+  relatedCodes: ["P0117", "P0118", "P2181"]
+};
+
+
 
 
 
