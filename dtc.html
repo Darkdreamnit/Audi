@@ -33,53 +33,34 @@ body { font-family: 'Inter', sans-serif; }
 
 <body class="bg-black text-white">
 
-  <!-- Navigation -->
-    <nav class="glass-effect fixed w-full top-0 z-50 border-b border-white/10">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-lg flex items-center justify-center">
-                    <i data-lucide="activity" class="w-6 h-6"></i>
-                </div>
-                <span class="text-xl font-bold tracking-tight hidden sm:inline">AUDI<span class="text-[var(--audi-red)]">DTC</span></span>
-                <span class="text-xl font-bold tracking-tight sm:hidden">A<span class="text-[var(--audi-red)]">DTC</span></span>
-            </div>
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="#search" class="hover:text-[var(--audi-red)] transition-colors mobile-touch-friendly">Decoder</a>
-                <a href="#browse" class="hover:text-[var(--audi-red)] transition-colors mobile-touch-friendly">Browse Codes</a>
-                <a href="#recent" class="hover:text-[var(--audi-red)] transition-colors mobile-touch-friendly">Recent Searches</a>
-                <a href="#" class="bg-[var(--audi-blue)] hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors mobile-touch-friendly">Dashboard</a>
-            </div>
-            <div class="md:hidden flex items-center">
-                <button id="mobileMenuBtn" class="p-3 mobile-touch-friendly">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden glass-effect border-t border-white/10 hidden">
-            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-                <a href="#search" class="hover:text-[var(--audi-red)] transition-colors py-3 border-b border-white/5 flex items-center mobile-touch-friendly">
-                    <i data-lucide="search" class="w-5 h-5 mr-3 flex-shrink-0"></i>
-                    <span class="flex-grow">Decoder</span>
-                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
-                </a>
-                <a href="#browse" class="hover:text-[var(--audi-red)] transition-colors py-3 border-b border-white/5 flex items-center mobile-touch-friendly">
-                    <i data-lucide="list" class="w-5 h-5 mr-3 flex-shrink-0"></i>
-                    <span class="flex-grow">Browse Codes</span>
-                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
-                </a>
-                <a href="#recent" class="hover:text-[var(--audi-red)] transition-colors py-3 border-b border-white/5 flex items-center mobile-touch-friendly">
-                    <i data-lucide="history" class="w-5 h-5 mr-3 flex-shrink-0"></i>
-                    <span class="flex-grow">Recent Searches</span>
-                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
-                </a>
-                <a href="#" class="bg-[var(--audi-blue)] hover:bg-blue-600 px-4 py-3 rounded-lg transition-colors text-center flex items-center justify-center mobile-touch-friendly mt-4">
-                    <i data-lucide="layout-dashboard" class="w-5 h-5 mr-2 flex-shrink-0"></i>
-                    <span>Dashboard</span>
-                </a>
-            </div>
-        </div>
+<!-- ✅ NAVBAR -->
+<header class="bg-black/80 backdrop-blur border-b border-white/10 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+    
+    <!-- Logo -->
+    <a href="index.html" class="text-xl font-bold">
+      Audi DTC
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex gap-6 text-sm text-gray-300">
+      <a href="index.html" class="hover:text-white">Home</a>
+      <a href="index.html#search" class="hover:text-white">Search</a>
     </nav>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="md:hidden">
+      ☰
+    </button>
+
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden px-4 pb-4">
+    <a href="index.html" class="block py-2">Home</a>
+    <a href="index.html#search" class="block py-2">Search</a>
+  </div>
+</header>
 
 <!-- HERO -->
 <section class="pt-24 pb-10 text-center fade-in">
