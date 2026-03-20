@@ -316,6 +316,7 @@ async function addToRecentSearches(code) {
 
 // Update recent searches display
 async function updateRecentSearches() {
+    console.log("🔥 Loading recent searches...");
   const { collection, getDocs, query, orderBy, limit } = window.firebaseFns;
 
   recentSearches.innerHTML = "";
