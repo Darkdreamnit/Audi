@@ -1,34 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title id="pageTitle">Audi DTC</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<style>
-body { font-family: 'Inter', sans-serif; }
-
-.glass {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-  from { opacity:0; transform: translateY(10px); }
-  to { opacity:1; transform: translateY(0); }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audi DTC Decoder Pro | Premium Diagnostic Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <style>
+        :root {
+            --audi-red: #FF2D00;
+            --audi-blue: #0057FF;
+            --audi-gray: #1A1A1A;
+            --audi-light-gray: #2D2D2D;
+            --audi-border: #404040;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .dashboard-gradient {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0F0F0F 100%);
+        }
+        
+        .pulse-ring {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 45, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 45, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 45, 0, 0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .severity-critical { color: var(--audi-red); }
+        .severity-high { color: #FF6B00; }
+        .severity-medium { color: #FFD600; }
+        .severity-low { color: #00FF88; }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 45, 0, 0.3);
+        }
+        
+        .dashboard-grid {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            .mobile-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .mobile-text-lg {
+                font-size: 1.5rem;
+                line-height: 2rem;
+            }
+            
+            .mobile-text-xl {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+            
+            .mobile-stack {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .mobile-center {
+                text-align: center;
+            }
+            
+            .mobile-full-width {
+                width: 90%;
+            }
+            
+            .mobile-touch-friendly {
+                padding: 0.75rem 1rem;
+                min-height: 44px;
+            }
+            
+            .mobile-no-overflow {
+                overflow-x: hidden;
+            }
+        }
+        
+        /* Prevent horizontal overflow */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        /* Better touch targets */
+        button, 
+        a, 
+        input, 
+        .clickable {
+            touch-action: manipulation;
+        }
+        
+        /* Better scrolling */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
 </head>
 
 <body class="bg-black text-white">
@@ -314,6 +412,8 @@ if (dtc.proTip) {
 
 lucide.createIcons();
 </script>
+
+<script src="script.js"></script>
 
 
 
