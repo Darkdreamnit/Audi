@@ -397,7 +397,7 @@ function showAutocomplete() {
     
     // Create autocomplete container
     const autocomplete = document.createElement('div');
-    autocomplete.className = 'autocomplete-container absolute left-0 right-0 mt-1 z-50 mobile-no-overflow';
+    autocomplete.className = 'autocomplete-container absolute left-0 right-0 mt-2 z-50';
     autocomplete.innerHTML = `
         <div class="glass-effect rounded-xl overflow-hidden border border-white/10 shadow-xl max-h-80 overflow-y-auto">
             <div class="divide-y divide-white/10">
