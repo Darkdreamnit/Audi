@@ -69,11 +69,16 @@
         }
         
         /* Mobile Optimizations */
-        @media (max-width: 640px) {
-            .mobile-padding {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
+        @media (max-width: 768px) {
+  #searchResults {
+    position: relative;
+    z-index: 1;
+  }
+
+  .filter-btn {
+    position: relative;
+    z-index: 2;
+  }
             
             .mobile-text-lg {
                 font-size: 1.5rem;
@@ -314,7 +319,7 @@
                 </div>
                 
                 <!-- Search Results -->
-                <div id="searchResults" class="space-y-6">
+                <div id="searchResults" class="mt-4 md:mt-6">
                     <!-- Results will appear here -->
                     <div class="text-center py-8 sm:py-12 text-gray-500">
                         <i data-lucide="search" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 opacity-20"></i>
