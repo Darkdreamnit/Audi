@@ -13736,6 +13736,74 @@ dtcDatabase["P0700"] = {
 };
 
 
+
+
+
+dtcDatabase["P0340"] = {
+  code: "P0340",
+  description: "Camshaft Position Sensor 'A' Circuit Malfunction (Bank 1)",
+
+  system: "engine",
+  severity: "high",
+  severityExplanation: "This code can cause stalling or prevent the engine from starting. If ignored, it can lead to further timing-related issues and leave you stranded.",
+
+  difficulty: "Intermediate",
+  repairTime: "1–2 hours",
+  estimatedCost: "$80 – $400",
+
+  deepDive: "On Audi engines, P0340 usually shows up when the ECU loses a clean signal from the intake camshaft position sensor. In real-world cases, this often happens due to oil leaking into the sensor connector, brittle wiring near the valve cover, or a failing sensor that starts acting up when the engine is hot. On higher mileage 2.0T engines, this code can also point to timing chain stretch or tensioner wear, especially if it's paired with rough starts or rattling noises on cold startup.",
+
+  symptoms: [
+    "Long crank before the engine starts (very common)",
+    "Engine randomly stalling, especially at idle",
+    "Rough idle or hesitation when accelerating",
+    "Loss of power or sluggish response",
+    "Check engine light illuminated"
+  ],
+
+  causes: [
+    "Failed camshaft position sensor (heat/oil damage)",
+    "Oil contamination inside sensor connector (very common on Audi)",
+    "Damaged or brittle wiring near valve cover",
+    "Loose or corroded electrical connectors",
+    "Weak or failing alternator causing unstable voltage",
+    "Timing chain stretch or incorrect timing alignment"
+  ],
+
+  diagnosisSteps: [
+    "Scan and confirm P0340 code",
+    "Inspect camshaft sensor connector for oil contamination",
+    "Check wiring harness for cracks or exposed wires",
+    "Test sensor resistance (typically ~600–1500 ohms)",
+    "Verify 5V reference and ground at connector",
+    "Monitor live camshaft data using a scan tool",
+    "Inspect timing components if issue persists"
+  ],
+
+  fixes: [
+    "Replace camshaft position sensor",
+    "Clean or repair oil-contaminated connector",
+    "Repair or replace damaged wiring",
+    "Secure loose electrical connections",
+    "Replace failing alternator (if voltage is unstable)",
+    "Address timing chain or tensioner issues if present"
+  ],
+
+  commonMistakes: [
+    "Replacing the sensor without checking for oil in the connector",
+    "Ignoring wiring damage near the valve cover",
+    "Overlooking alternator voltage issues",
+    "Not checking timing chain condition on high mileage engines"
+  ],
+
+  costBreakdown: {
+    diy: "$80 – $150",
+    independentShop: "$150 – $350",
+    dealership: "$300 – $700"
+  }
+};
+
+
 dtcDatabase["P0400"] = {
   code: "P0400",
   description: "Exhaust Gas Recirculation (EGR) Flow Malfunction",
