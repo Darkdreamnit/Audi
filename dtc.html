@@ -356,6 +356,22 @@ if (dtc.proTip) {
   proTipLink.href = dtc.proTip.link;
 }
 
+const mobileBtn = document.getElementById("mobileMenuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+if (mobileBtn && mobileMenu) {
+  mobileBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+
+    const icon = mobileBtn.querySelector("i");
+    icon.setAttribute(
+      "data-lucide",
+      mobileMenu.classList.contains("hidden") ? "menu" : "x"
+    );
+
+    lucide.createIcons();
+  });
+}
 lucide.createIcons();
 </script>
 
