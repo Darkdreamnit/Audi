@@ -97,12 +97,6 @@
             .mobile-full-width {
                 width: 90%;
             }
-            .input {
-  background: #111;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100%;
-}
             
             .mobile-touch-friendly {
                 padding: 0.75rem 1rem;
@@ -504,39 +498,73 @@
         </div>
     </section>
 
-    <div class="glass p-6 rounded-xl mt-10">
-  <h2 class="text-2xl font-bold mb-4">Share Your Fix</h2>
+    <div class="glass-effect rounded-2xl p-6 md:p-8 mt-12 shadow-lg border border-white/10">
+  
+  <h2 class="text-2xl md:text-3xl font-bold mb-2">
+    Share Your Fix
+  </h2>
+  <p class="text-gray-400 mb-6 text-sm md:text-base">
+    Help other Audi owners by sharing what worked for you.
+  </p>
 
-  <form id="fixForm" class="grid gap-4">
+  <form id="fixForm" class="grid gap-5">
 
-    <input type="text" id="userName" placeholder="Your Name" class="input" required>
+    <!-- Name + Vehicle -->
+    <div class="grid md:grid-cols-2 gap-4">
+      <input type="text" id="userName" placeholder="Your Name"
+        class="input-glass" required>
 
-    <input type="text" id="vehicle" placeholder="Vehicle (e.g. Audi A4 2015)" class="input">
+      <input type="text" id="vehicle" placeholder="Audi Model & Year (optional)"
+        class="input-glass">
+    </div>
 
-    <input type="text" id="part" placeholder="Part / Component Fixed" class="input" required>
+    <!-- Part -->
+    <input type="text" id="part"
+      placeholder="What part fixed the issue?"
+      class="input-glass" required>
 
-    <select id="time">
-      <option value="">Time to Fix</option>
-      <option>30 min</option>
-      <option>1 hour</option>
-      <option>2+ hours</option>
-    </select>
+    <!-- Time + Difficulty -->
+    <div class="grid md:grid-cols-2 gap-4">
+      <select id="time" class="input-glass">
+        <option value="">Time to Fix</option>
+        <option>30 min</option>
+        <option>1 hour</option>
+        <option>2+ hours</option>
+      </select>
 
-    <select id="difficulty">
-      <option value="">Difficulty</option>
-      <option>Easy</option>
-      <option>Moderate</option>
-      <option>Hard</option>
-    </select>
+      <select id="difficulty" class="input-glass">
+        <option value="">Difficulty</option>
+        <option>Easy</option>
+        <option>Moderate</option>
+        <option>Hard</option>
+      </select>
+    </div>
 
-    <textarea id="description" placeholder="Explain your fix..." rows="4" required></textarea>
+    <!-- Description -->
+    <textarea id="description"
+      placeholder="Explain what you did and what actually fixed it..."
+      rows="4"
+      class="input-glass resize-none"
+      required></textarea>
 
-    <!-- Image Upload -->
-    <input type="file" id="imageUpload" accept="image/*">
-    <img id="previewImage" class="hidden mt-2 rounded-lg max-h-40"/>
+    <!-- Upload -->
+    <div class="border border-dashed border-white/20 rounded-xl p-4 text-center hover:bg-white/5 transition cursor-pointer relative">
+      <input type="file" id="imageUpload" accept="image/*"
+        class="absolute inset-0 opacity-0 cursor-pointer">
 
-    <button type="submit" id="submitBtn" class="bg-[var(--audi-blue)] py-2 rounded font-bold">
-      Submit Fix
+      <p class="text-sm text-gray-400">
+        📸 Drag & drop or click to upload an image
+      </p>
+
+      <img id="previewImage"
+        class="hidden mt-4 mx-auto rounded-xl max-h-40 shadow-lg"/>
+    </div>
+
+    <!-- Submit -->
+    <button id="submitBtn"
+      class="bg-[var(--audi-blue)] hover:bg-blue-600 transition-all duration-200 py-3 rounded-xl font-bold text-white flex items-center justify-center gap-2">
+      <span id="btnText">Submit Fix</span>
+      <span id="btnLoader" class="hidden animate-spin">⏳</span>
     </button>
 
   </form>
