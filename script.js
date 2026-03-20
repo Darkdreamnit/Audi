@@ -510,3 +510,91 @@ document.querySelectorAll('#dtcSearch, .suggestion-btn').forEach(element => {
 
     
 });
+
+// Load fixes for submit
+
+async function loadFixes() {
+  const code = new URLSearchParams(window.location.search).get("code");
+  const container = document.getElementById("communityFixes");
+
+  container.innerHTML = "<p class='text-gray-400'>Loading fixes...</p>";
+
+  try {
+    const q = query(
+      collection(db, "fixes"),
+      where("code", "==", code)
+    );
+
+    const snapshot = await getDocs(q);
+
+    let fixes = [];
+
+    snapshot.forEach(doc => {
+      fixes.push({ id: doc.id, ...doc.data() });
+    });
+
+    fixes.sort((a, b) => b.createdAt - a.createdAt);
+
+    container.innerHTML = "<h2 class='text-xl font-bold mb-4'>Community Fixes</h2>";
+
+    fixes.forEach(fix => {
+      container.innerHTML += `
+        <div class="glass-effect rounded-xl p-5 mb-5 hover:bg-white/5 transition">
+
+          <div class="flex justify-between">
+            <strong>${fix.name}</strong>
+            <span>${fix.time}</span>
+          </div>
+
+          <div class="text-sm text-gray-400">${fix.vehicle || ""}</div>
+
+          <div class="mt-2"><strong>${fix.part}</strong></div>
+
+          <div class="mt-2 text-gray-300">${fix.description}</div>
+
+          ${fix.image ? `<img src="${fix.image}" class="rounded mt-3 max-h-40"/>` : ""}
+
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = "<p>Error loading fixes</p>";
+  }
+}
+// Initialize firebase for submit
+
+document.getElementById("fixForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const code = new URLSearchParams(window.location.search).get("code");
+
+  const submission = {
+    code,
+    name: userName.value,
+    vehicle: vehicle.value,
+    part: part.value,
+    time: time.value,
+    difficulty: difficulty.value,
+    description: description.value,
+    image: previewImage.src || "",
+    votes: 0,
+    createdAt: Date.now()
+  };
+
+  try {
+    await addDoc(collection(db, "fixes"), submission);
+
+    alert("Fix submitted!");
+
+    this.reset();
+    previewImage.classList.add("hidden");
+
+    loadFixes();
+
+  } catch (err) {
+    console.error(err);
+    alert("Error submitting fix");
+  }
+});
