@@ -498,6 +498,44 @@
         </div>
     </section>
 
+    <div class="glass p-6 rounded-xl mt-10">
+  <h2 class="text-2xl font-bold mb-4">Share Your Fix</h2>
+
+  <form id="fixForm" class="grid gap-4">
+
+    <input type="text" id="userName" placeholder="Your Name" class="input" required>
+
+    <input type="text" id="vehicle" placeholder="Vehicle (e.g. Audi A4 2015)" class="input">
+
+    <input type="text" id="part" placeholder="Part / Component Fixed" class="input" required>
+
+    <select id="time">
+      <option value="">Time to Fix</option>
+      <option>30 min</option>
+      <option>1 hour</option>
+      <option>2+ hours</option>
+    </select>
+
+    <select id="difficulty">
+      <option value="">Difficulty</option>
+      <option>Easy</option>
+      <option>Moderate</option>
+      <option>Hard</option>
+    </select>
+
+    <textarea id="description" placeholder="Explain your fix..." rows="4" required></textarea>
+
+    <!-- Image Upload -->
+    <input type="file" id="imageUpload" accept="image/*">
+    <img id="previewImage" class="hidden mt-2 rounded-lg max-h-40"/>
+
+    <button type="submit" id="submitBtn" class="bg-[var(--audi-blue)] py-2 rounded font-bold">
+      Submit Fix
+    </button>
+
+  </form>
+</div>
+
     <!-- Footer -->
     <footer class="glass-effect border-t border-white/10 py-12">
         <div class="container mx-auto px-4">
