@@ -168,7 +168,7 @@ function performSearch() {
     }
     
     displayDTCResult(dtcDatabase[searchTerm]);
-  
+    addToRecentSearches(searchTerm);
     hideAutocomplete();
 }
 
@@ -302,12 +302,26 @@ function showError(message) {
 // Add to recent searches
 async function addToRecentSearches(code) {
   try {
-    const { collection, addDoc } = window.firebaseFns;
+    const { collection, getDocs, query, addDoc } = window.firebaseFns;
 
-    await addDoc(collection(window.db, "recentSearches"), {
-      code: code,
-      timestamp: Date.now()
+    const colRef = collection(window.db, "recentSearches");
+    const snapshot = await getDocs(colRef);
+
+    let exists = false;
+
+    snapshot.forEach(doc => {
+      if (doc.data().code === code) {
+        exists = true;
+      }
     });
+
+    // Only add if it doesn't exist
+    if (!exists) {
+      await addDoc(colRef, {
+        code: code,
+        timestamp: Date.now()
+      });
+    }
 
   } catch (error) {
     console.error("Error saving search:", error);
