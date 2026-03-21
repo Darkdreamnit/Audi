@@ -30,7 +30,10 @@
      doc,        // ✅ ADD THIS
   setDoc,      // ✅ ADD THIS
     orderBy,
-    limit
+    limit,
+    getDoc,
+  updateDoc,
+  increment
   };
 
  

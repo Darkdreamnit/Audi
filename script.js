@@ -523,19 +523,50 @@ document.querySelectorAll('#dtcSearch, .suggestion-btn').forEach(element => {
 
 setupFeedback();
 
-function setupFeedback() {
+async function setupFeedback() {
   const yesBtn = document.getElementById("yesBtn");
   const noBtn = document.getElementById("noBtn");
   const message = document.getElementById("feedbackMessage");
+  const stats = document.getElementById("feedbackStats");
+
+  const { doc, getDoc, setDoc, updateDoc, increment } = window.firebaseFns;
 
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
+
+  const feedbackRef = doc(window.db, "feedback", code);
+
+  // 🔥 Load existing stats
+  async function loadStats() {
+    const snap = await getDoc(feedbackRef);
+
+    if (!snap.exists()) {
+      stats.textContent = "No feedback yet";
+      return;
+    }
+
+    const data = snap.data();
+    const yes = data.yes || 0;
+    const no = data.no || 0;
+    const total = yes + no;
+
+    if (total === 0) {
+      stats.textContent = "No feedback yet";
+      return;
+    }
+
+    const percent = Math.round((yes / total) * 100);
+
+    stats.textContent = `👍 ${percent}% found this helpful (${yes} yes / ${no} no)`;
+  }
+
+  await loadStats();
 
   // Prevent multiple votes
   const savedVote = localStorage.getItem(`feedback_${code}`);
 
   if (savedVote) {
-    message.textContent = "Thanks! You already gave feedback 👍";
+    message.textContent = "You already voted 👍";
     disableButtons();
     return;
   }
@@ -543,24 +574,42 @@ function setupFeedback() {
   yesBtn.addEventListener("click", () => handleVote("yes"));
   noBtn.addEventListener("click", () => handleVote("no"));
 
-  function handleVote(type) {
-    // Save vote
-    localStorage.setItem(`feedback_${code}`, type);
+  async function handleVote(type) {
+    try {
+      const snap = await getDoc(feedbackRef);
 
-    // Animation
-    const btn = type === "yes" ? yesBtn : noBtn;
-    btn.classList.add("clicked");
+      if (!snap.exists()) {
+        // First time this code is voted on
+        await setDoc(feedbackRef, {
+          yes: type === "yes" ? 1 : 0,
+          no: type === "no" ? 1 : 0
+        });
+      } else {
+        // Update existing counts
+        await updateDoc(feedbackRef, {
+          [type]: increment(1)
+        });
+      }
 
-    // Visual feedback
-    if (type === "yes") {
-      yesBtn.classList.add("bg-green-500", "text-white");
-      message.textContent = "Glad it helped! 🎉";
-    } else {
-      noBtn.classList.add("bg-red-500", "text-white");
-      message.textContent = "Thanks! We'll improve this 🙏";
+      // Save locally to prevent spam
+      localStorage.setItem(`feedback_${code}`, type);
+
+      // UI feedback
+      if (type === "yes") {
+        yesBtn.classList.add("bg-green-500", "text-white");
+        message.textContent = "Glad it helped! 🎉";
+      } else {
+        noBtn.classList.add("bg-red-500", "text-white");
+        message.textContent = "Thanks! We'll improve this 🙏";
+      }
+
+      disableButtons();
+      await loadStats(); // 🔥 refresh stats
+
+    } catch (err) {
+      console.error("Feedback error:", err);
+      message.textContent = "Error submitting feedback";
     }
-
-    disableButtons();
   }
 
   function disableButtons() {
