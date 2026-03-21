@@ -24,4 +24,15 @@
     limit
   };
 
+  window.firebaseFns = {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  doc,       // ✅ ADD
+  setDoc     // ✅ ADD
+};
+
   console.log("✅ Firebase loaded");
