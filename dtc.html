@@ -371,63 +371,45 @@ body { font-family: 'Inter', sans-serif; }
 <script src="dtcData.js"></script>
 
 <script>
-// GET CODE FROM URL
-const params = new URLSearchParams(window.location.search);
-const code = params.get("code");
+document.addEventListener("DOMContentLoaded", () => {
 
-// LOAD DATA
-const dtc = dtcDatabase[code];
+  // GET CODE FROM URL
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
 
-if (!dtc) {
-  document.body.innerHTML = "<h1 style='padding:40px'>Code not found</h1>";
-}
+  // SAFETY CHECK
+  if (!code || !dtcDatabase[code]) {
+    console.error("Invalid or missing DTC code");
 
-// SET TITLE
-document.getElementById("pageTitle").innerText = `${code} Audi Code`;
-document.getElementById("codeTitle").innerText = code;
-document.getElementById("codeDesc").innerText = dtc.description;
+    document.body.innerHTML = `
+      <div style="text-align:center; padding:50px;">
+        <h1>Invalid DTC Code</h1>
+        <p>Please go back and select a valid code.</p>
+      </div>
+    `;
+    return;
+  }
 
-// STATS
-document.getElementById("difficulty").innerText = dtc.difficulty || "N/A";
-document.getElementById("repairTime").innerText = dtc.repairTime || "N/A";
-document.getElementById("cost").innerText = dtc.estimatedCost || "N/A";
-document.getElementById("severity").innerText = dtc.severity;
+  const dtc = dtcDatabase[code];
 
-// SEVERITY COLOR
-const severityEl = document.getElementById("severity");
-if (dtc.severity === "low") severityEl.classList.add("text-green-400");
-if (dtc.severity === "medium") severityEl.classList.add("text-yellow-400");
-if (dtc.severity === "high") severityEl.classList.add("text-red-400");
+  // SAFE FUNCTION
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.innerText = value;
+  }
 
-// WHY IT MATTERS
-document.getElementById("severityExplanation").innerText =
-  dtc.severityExplanation || "No details available.";
+  // SET DATA
+  setText("pageTitle", `${dtc.code} - Audi DTC`);
+  setText("codeDisplay", dtc.code);
+  setText("descriptionDisplay", dtc.description);
 
-// LISTS
-dtc.symptoms.forEach(item => {
-  symptoms.innerHTML += `<li>✔ ${item}</li>`;
+  // 👉 Add more fields the SAME WAY if needed
+
 });
-
-dtc.causes.forEach(item => {
-  causes.innerHTML += `<li>• ${item}</li>`;
-});
-
-dtc.fixes.forEach(item => {
-  fixes.innerHTML += `<li>✔ ${item}</li>`;
-});
-
-deepDive.innerText = dtc.deepDive || "";
-
-dtc.diagnosisSteps?.forEach(step => {
-  diagnosisSteps.innerHTML += `<li>🔧 ${step}</li>`;
-});
-
-dtc.commonMistakes?.forEach(m => {
-  commonMistakes.innerHTML += `<li>⚠️ ${m}</li>`;
-});
+</script>
 
 
-
+<script>
 
 if (dtc.costBreakdown) {
   costBreakdown.innerHTML = `
@@ -475,7 +457,6 @@ if (mobileBtn && mobileMenu) {
 }
 lucide.createIcons();
 </script>
-
 
 
 </body>
