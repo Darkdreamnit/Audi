@@ -598,3 +598,49 @@ document.getElementById("fixForm").addEventListener("submit", async function(e) 
     alert("Error submitting fix");
   }
 });
+
+
+async function loadFixes() {
+  const container = document.getElementById("communityFixes");
+
+  if (!container) {
+    console.warn("communityFixes container not found");
+    return;
+  }
+
+  const code = new URLSearchParams(window.location.search).get("code");
+
+  container.innerHTML = "<p class='text-gray-400'>Loading fixes...</p>";
+
+  try {
+    const q = query(
+      collection(db, "fixes"),
+      where("code", "==", code)
+    );
+
+    const snapshot = await getDocs(q);
+
+    let fixes = [];
+
+    snapshot.forEach(doc => {
+      fixes.push({ id: doc.id, ...doc.data() });
+    });
+
+    fixes.sort((a, b) => b.createdAt - a.createdAt);
+
+    container.innerHTML = "<h2 class='text-xl font-bold mb-4'>Community Fixes</h2>";
+
+    fixes.forEach(fix => {
+      container.innerHTML += `
+        <div class="glass-effect rounded-xl p-5 mb-5">
+          <strong>${fix.name}</strong>
+          <p>${fix.description}</p>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = "<p>Error loading fixes</p>";
+  }
+}
