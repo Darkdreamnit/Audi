@@ -18,6 +18,8 @@
     addDoc,
     getDocs,
     query,
+     doc,        // ✅ ADD THIS
+  setDoc,      // ✅ ADD THIS
     orderBy,
     limit
   };
