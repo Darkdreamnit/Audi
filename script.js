@@ -302,9 +302,10 @@ function showError(message) {
 // Add to recent searches
 async function addToRecentSearches(code) {
   try {
-    const { collection, addDoc } = window.firebaseFns;
+    const { doc, setDoc } = window.firebaseFns;
 
-    await addDoc(collection(window.db, "recentSearches"), {
+    // 🔥 Use the code as the document ID (THIS PREVENTS DUPLICATES)
+    await setDoc(doc(window.db, "recentSearches", code), {
       code: code,
       timestamp: Date.now()
     });
