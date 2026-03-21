@@ -518,6 +518,9 @@ document.querySelectorAll('#dtcSearch, .suggestion-btn').forEach(element => {
     
 });
 
+
+/* Feedback code */
+
 setupFeedback();
 
 function setupFeedback() {
