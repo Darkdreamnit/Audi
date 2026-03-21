@@ -572,39 +572,44 @@ async function loadFixes() {
 }
 // Initialize firebase for submit
 
-document.getElementById("fixForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
+const fixForm = document.getElementById("fixForm");
 
-  const code = new URLSearchParams(window.location.search).get("code");
+if (fixForm) {
+  fixForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-  const submission = {
-    code,
-    name: userName.value,
-    vehicle: vehicle.value,
-    part: part.value,
-    time: time.value,
-    difficulty: difficulty.value,
-    description: description.value,
-    image: previewImage.src || "",
-    votes: 0,
-    createdAt: Date.now()
-  };
+    const { collection, addDoc } = window.firebaseFns;
 
-  try {
-    await addDoc(collection(db, "fixes"), submission);
+    const code = new URLSearchParams(window.location.search).get("code");
 
-    alert("Fix submitted!");
+    const submission = {
+      code,
+      name: userName.value,
+      vehicle: vehicle.value,
+      part: part.value,
+      time: time.value,
+      difficulty: difficulty.value,
+      description: description.value,
+      image: previewImage.src || "",
+      votes: 0,
+      createdAt: Date.now()
+    };
 
-    this.reset();
-    previewImage.classList.add("hidden");
+    try {
+      await addDoc(collection(window.db, "fixes"), submission);
 
-    loadFixes();
+      alert("Fix submitted!");
+      this.reset();
+      previewImage.classList.add("hidden");
 
-  } catch (err) {
-    console.error(err);
-    alert("Error submitting fix");
-  }
-});
+      loadFixes();
+
+    } catch (err) {
+      console.error(err);
+      alert("Error submitting fix");
+    }
+  });
+}
 
 
 async function loadFixes() {
