@@ -620,5 +620,5 @@ async function setupFeedback() {
     noBtn.classList.add("opacity-50", "cursor-not-allowed");
   }
 }
-
+console.log("Feedback system running");
 setupFeedback();
