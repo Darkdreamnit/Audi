@@ -113,3 +113,9 @@
         * {
             -webkit-tap-highlight-color: transparent;
         }
+
+        /* ADD “POP” STYLING to thuumbs up */
+        .feedback-btn.clicked {
+  transform: scale(0.95);
+  opacity: 0.8;
+}

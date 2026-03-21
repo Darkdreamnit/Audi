@@ -517,3 +517,54 @@ document.querySelectorAll('#dtcSearch, .suggestion-btn').forEach(element => {
 
     
 });
+
+setupFeedback();
+
+function setupFeedback() {
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const message = document.getElementById("feedbackMessage");
+
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
+
+  // Prevent multiple votes
+  const savedVote = localStorage.getItem(`feedback_${code}`);
+
+  if (savedVote) {
+    message.textContent = "Thanks! You already gave feedback 👍";
+    disableButtons();
+    return;
+  }
+
+  yesBtn.addEventListener("click", () => handleVote("yes"));
+  noBtn.addEventListener("click", () => handleVote("no"));
+
+  function handleVote(type) {
+    // Save vote
+    localStorage.setItem(`feedback_${code}`, type);
+
+    // Animation
+    const btn = type === "yes" ? yesBtn : noBtn;
+    btn.classList.add("clicked");
+
+    // Visual feedback
+    if (type === "yes") {
+      yesBtn.classList.add("bg-green-500", "text-white");
+      message.textContent = "Glad it helped! 🎉";
+    } else {
+      noBtn.classList.add("bg-red-500", "text-white");
+      message.textContent = "Thanks! We'll improve this 🙏";
+    }
+
+    disableButtons();
+  }
+
+  function disableButtons() {
+    yesBtn.disabled = true;
+    noBtn.disabled = true;
+
+    yesBtn.classList.add("opacity-50", "cursor-not-allowed");
+    noBtn.classList.add("opacity-50", "cursor-not-allowed");
+  }
+}
