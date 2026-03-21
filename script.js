@@ -521,7 +521,7 @@ document.querySelectorAll('#dtcSearch, .suggestion-btn').forEach(element => {
 
 /* Feedback code */
 
-setupFeedback();
+
 
 async function setupFeedback() {
   const yesBtn = document.getElementById("yesBtn");
@@ -620,3 +620,5 @@ async function setupFeedback() {
     noBtn.classList.add("opacity-50", "cursor-not-allowed");
   }
 }
+
+setupFeedback();
