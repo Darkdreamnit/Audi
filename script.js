@@ -168,7 +168,7 @@ function performSearch() {
     }
     
     displayDTCResult(dtcDatabase[searchTerm]);
-    addToRecentSearches(searchTerm);
+  
     hideAutocomplete();
 }
 
