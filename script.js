@@ -32,6 +32,13 @@ const recentSearches = document.getElementById('recentSearches');
 const clearRecentBtn = document.getElementById('clearRecent');
 const template = document.getElementById('dtcResultTemplate');
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+if (mobileMenuBtn) {
+  const icon = mobileMenuBtn.querySelector('i');
+
+  if (icon) {
+    icon.setAttribute('data-lucide', 'menu');
+  }
+}
 const mobileMenu = document.getElementById('mobileMenu');
 const dtcSearch = document.getElementById('dtcSearch');
 
