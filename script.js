@@ -336,11 +336,17 @@ async function updateRecentSearches() {
       return;
     }
 
+
+    /**** This is where we check firebase data ****/
+    const seen = new Set();
+
     snapshot.forEach(doc => {
       const data = doc.data();
 
       if (dtcDatabase[data.code]) {
         const dtc = dtcDatabase[data.code];
+        if (seen.has(data.code)) return; // 🚫 skip duplicates
+  seen.add(data.code);
 
         const card = document.createElement('div');
         card.className = 'glass-effect rounded-xl p-5 hover:bg-white/5 cursor-pointer';
