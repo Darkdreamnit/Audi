@@ -300,30 +300,14 @@ function showError(message) {
 }
 
 // Add to recent searches
-
-
 async function addToRecentSearches(code) {
   try {
     const { collection, addDoc } = window.firebaseFns;
 
-    const colRef = collection(window.db, "recentSearches");
-    const snapshot = await getDocs(colRef);
-
-    let exists = false;
-
-    snapshot.forEach(doc => {
-      if (doc.data().code === code) {
-        exists = true;
-      }
+    await addDoc(collection(window.db, "recentSearches"), {
+      code: code,
+      timestamp: Date.now()
     });
-
-    // Only add if it doesn't exist
-    if (!exists) {
-      await addDoc(colRef, {
-        code: code,
-        timestamp: Date.now()
-      });
-    }
 
   } catch (error) {
     console.error("Error saving search:", error);
