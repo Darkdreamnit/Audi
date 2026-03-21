@@ -1,6 +1,15 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } 
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  doc,        // ✅ ADD THIS
+  setDoc      // ✅ ADD THIS
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAU2q1pvW13B5x3TH-OP8NfGX9MnM78LVo",
@@ -24,15 +33,6 @@
     limit
   };
 
-  window.firebaseFns = {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  limit,
-  doc,       // ✅ ADD
-  setDoc     // ✅ ADD
-};
+ 
 
   console.log("✅ Firebase loaded");
