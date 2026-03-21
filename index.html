@@ -113,22 +113,6 @@
             overflow-x: hidden;
             max-width: 100%;
         }
-
-        .input-glass {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 12px;
-  border-radius: 12px;
-  width: 100%;
-  color: white;
-  transition: all 0.2s ease;
-}
-
-.input-glass:focus {
-  outline: none;
-  border-color: var(--audi-blue);
-  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
-}
         
         /* Better touch targets */
         button, 
@@ -514,10 +498,6 @@
         </div>
     </section>
 
-  
-<!-- Real World Fixes -->
-<div id="communityFixes" class="mt-10"></div>
-
     <!-- Footer -->
     <footer class="glass-effect border-t border-white/10 py-12">
         <div class="container mx-auto px-4">
@@ -573,8 +553,33 @@
 
 
     <script src="dtcData.js"></script>
-    
-  
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } 
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAU2q1pvW13B5x3TH-OP8NfGX9MnM78LVo",
+    authDomain: "audi-dtc.firebaseapp.com",
+    projectId: "audi-dtc",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 🔥 FORCE GLOBAL AVAILABILITY
+  window.db = db;
+  window.firebaseFns = {
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+    limit
+  };
+
+  console.log("✅ Firebase loaded");
+</script>
 
 <!-- IMPORTANT: THIS MUST BE AFTER -->
 <script src="script.js"></script>
