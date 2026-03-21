@@ -339,6 +339,35 @@ body { font-family: 'Inter', sans-serif; }
         </div>
     </footer>
 
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    where
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    // your config
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.db = db;
+
+  window.firebaseFns = {
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    where
+  };
+</script>
+
 <script src="dtcData.js"></script>
 
 <script>
