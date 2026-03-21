@@ -7,8 +7,12 @@
   query,
   orderBy,
   limit,
-  doc,        // ✅ ADD THIS
-  setDoc      // ✅ ADD THIS
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  increment,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -24,16 +28,17 @@
   window.db = db;
   window.firebaseFns = {
     collection,
-    addDoc,
-    getDocs,
-    query,
-     doc,        // ✅ ADD THIS
-  setDoc,      // ✅ ADD THIS
-    orderBy,
-    limit,
-    getDoc,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  doc,
+  setDoc,
+  getDoc,
   updateDoc,
-  increment
+  increment,
+  deleteDoc
   };
 
  
