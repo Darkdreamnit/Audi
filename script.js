@@ -300,9 +300,11 @@ function showError(message) {
 }
 
 // Add to recent searches
+
+
 async function addToRecentSearches(code) {
   try {
-    const { collection, getDocs, query, addDoc } = window.firebaseFns;
+    const { collection, addDoc } = window.firebaseFns;
 
     const colRef = collection(window.db, "recentSearches");
     const snapshot = await getDocs(colRef);
