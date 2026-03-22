@@ -688,6 +688,22 @@ async function setupUserFixes() {
   const time = document.getElementById("fixTime").value;
   const imageFile = document.getElementById("fixImage").files[0];
 
+  // 🔥 FILE size VALIDATION
+if (imageFile) {
+  const maxSize = 2 * 1024 * 1024; // 2MB
+  const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+  if (!allowedTypes.includes(imageFile.type)) {
+    message.textContent = "Only JPG, PNG, or WEBP images allowed";
+    return;
+  }
+
+  if (imageFile.size > maxSize) {
+    message.textContent = "Image must be under 2MB";
+    return;
+  }
+}
+
   const submitText = document.getElementById("submitText");
   const spinner = document.getElementById("submitSpinner");
 
@@ -716,6 +732,26 @@ async function setupUserFixes() {
       await uploadBytes(storageRef, imageFile);
       imageUrl = await getDownloadURL(storageRef);
     }
+
+
+
+    // 💾 
+
+const fileInput = document.getElementById("fixImage");
+const fileInfo = document.getElementById("fileInfo");
+
+if (fileInput) {
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+
+    if (!file) return;
+
+    const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+
+    fileInfo.textContent = `${file.name} (${sizeMB} MB)`;
+  });
+}
+
 
     // 💾 Save to Firestore
     await addDoc(collection(window.db, "fixes"), {
