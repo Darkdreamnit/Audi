@@ -532,7 +532,14 @@ async function setupFeedback() {
   const { doc, getDoc, setDoc, updateDoc, increment } = window.firebaseFns;
 const { ref, uploadBytes, getDownloadURL } = window.firebaseFns;
   const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
+
+// 🔥 Detect static page
+let code = params.get("code");
+
+if (!code) {
+  const path = window.location.pathname;
+  code = path.split("/").pop().replace(".html", "").toUpperCase();
+}
 
   const feedbackRef = doc(window.db, "feedback", code);
 
@@ -642,7 +649,14 @@ async function setupUserFixes() {
   const { collection, addDoc, getDocs, query, orderBy } = window.firebaseFns;
 
   const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
+
+// 🔥 Detect static page
+let code = params.get("code");
+
+if (!code) {
+  const path = window.location.pathname;
+  code = path.split("/").pop().replace(".html", "").toUpperCase();
+}
 
   const fixList = document.getElementById("fixList");
   const submitBtn = document.getElementById("submitFixBtn");
