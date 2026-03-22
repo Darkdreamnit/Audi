@@ -233,9 +233,41 @@ body { font-family: 'Inter', sans-serif; }
 
   </div>
 
+  <!-- Feedback color-->
+
   <p id="feedbackMessage" class="mt-4 text-sm text-gray-400"></p>
 
 <p id="feedbackStats" class="mt-3 text-lg font-semibold text-blue-400"></p>
+
+</div>
+
+<div class="mt-12">
+
+  <h2 class="text-2xl font-bold mb-4 text-center">🛠 User Submitted Fixes</h2>
+
+  <!-- FORM -->
+  <div class="bg-gray-900 p-6 rounded-xl mb-8 max-w-xl mx-auto">
+
+    <input id="fixName" placeholder="Your name"
+      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
+
+    <textarea id="fixDescription" placeholder="What fixed the issue?"
+      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white"></textarea>
+
+    <input id="fixTime" placeholder="Time to fix (e.g. 1 hour)"
+      class="w-full mb-4 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
+
+    <button id="submitFixBtn"
+      class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition">
+      Submit Fix
+    </button>
+
+    <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
+
+  </div>
+
+  <!-- FIX LIST -->
+  <div id="fixList" class="space-y-4 max-w-xl mx-auto"></div>
 
 </div>
 
