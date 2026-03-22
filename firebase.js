@@ -31,12 +31,11 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const storage = getStorage(app);
-  window.storage = storage;
+  
 
-  // 🔥 FORCE GLOBAL AVAILABILITY
-  window.db = db;
-  window.firebaseFns = {
-    collection,
+  // 🔥 FORCE GLOBAL AVAILABILITY EXPORTS
+ window.firebaseFns = {
+  collection,
   addDoc,
   getDocs,
   query,
@@ -47,11 +46,18 @@
   getDoc,
   updateDoc,
   increment,
-  deleteDoc,
+  deleteDoc
+};
+
+window.firebaseStorage = {
+  storage,
   ref,
   uploadBytes,
   getDownloadURL
-  };
+};
+
+
+  
 
  
 

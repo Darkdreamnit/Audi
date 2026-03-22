@@ -698,10 +698,10 @@ async function setupUserFixes() {
 
     // 📸 Upload image if exists
     if (imageFile) {
-      const { ref, uploadBytes, getDownloadURL } = window.firebaseFns;
+      const { storage, ref, uploadBytes, getDownloadURL } = window.firebaseStorage;
 
       const storageRef = ref(
-        window.storage,
+        storage,
         `fixImages/${code}_${Date.now()}`
       );
 
