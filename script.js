@@ -533,12 +533,13 @@ async function setupFeedback() {
 const { ref, uploadBytes, getDownloadURL } = window.firebaseFns;
   const params = new URLSearchParams(window.location.search);
 
-// 🔥 Detect static page
 let code = params.get("code");
 
+// 🔥 Handle static pages like p0171.html
 if (!code) {
   const path = window.location.pathname;
-  code = path.split("/").pop().replace(".html", "").toUpperCase();
+  const fileName = path.split("/").pop();
+  code = fileName.replace(".html", "").toUpperCase();
 }
 
   const feedbackRef = doc(window.db, "feedback", code);
@@ -648,14 +649,15 @@ setupUserFixes();
 async function setupUserFixes() {
   const { collection, addDoc, getDocs, query, orderBy } = window.firebaseFns;
 
-  const params = new URLSearchParams(window.location.search);
+ const params = new URLSearchParams(window.location.search);
 
-// 🔥 Detect static page
 let code = params.get("code");
 
+// 🔥 Handle static pages like p0171.html
 if (!code) {
   const path = window.location.pathname;
-  code = path.split("/").pop().replace(".html", "").toUpperCase();
+  const fileName = path.split("/").pop();
+  code = fileName.replace(".html", "").toUpperCase();
 }
 
   const fixList = document.getElementById("fixList");
