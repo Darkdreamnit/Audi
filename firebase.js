@@ -26,6 +26,7 @@ import {
     apiKey: "AIzaSyAU2q1pvW13B5x3TH-OP8NfGX9MnM78LVo",
     authDomain: "audi-dtc.firebaseapp.com",
     projectId: "audi-dtc",
+    storageBucket: "audi-dtc.appspot.com" // 🔥 ADD THIS
   };
 
 
