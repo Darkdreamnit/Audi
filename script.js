@@ -179,8 +179,23 @@ function displayDTCResult(dtc) {
     result.style.cursor = "pointer";
 
 result.addEventListener("click", () => {
-  window.location.href = `dtc.html?code=${dtc.code}`;
+  const code = dtc.code.toLowerCase();
+
+  // 🔥 Try static page first
+  fetch(`${code}.html`, { method: "HEAD" })
+    .then(res => {
+      if (res.ok) {
+        window.location.href = `${code}.html`;
+      } else {
+        window.location.href = `dtc.html?code=${dtc.code}`;
+      }
+    })
+    .catch(() => {
+      window.location.href = `dtc.html?code=${dtc.code}`;
+    });
 });
+
+
     
     const detailsBtn = result.querySelector('.details-btn');
 detailsBtn.href = `dtc.html?code=${dtc.code}`;
