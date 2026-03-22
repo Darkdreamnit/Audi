@@ -245,26 +245,40 @@ body { font-family: 'Inter', sans-serif; }
 
   <h2 class="text-2xl font-bold mb-4 text-center">🛠 User Submitted Fixes</h2>
 
-  <!-- FORM -->
-  <div class="bg-gray-900 p-6 rounded-xl mb-8 max-w-xl mx-auto">
+  <!-- User submitted fix FORM -->
+ 
+ <div class="bg-gray-900 p-6 rounded-xl mb-8 max-w-xl mx-auto">
 
-    <input id="fixName" placeholder="Your name"
-      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
+  <input id="fixName" placeholder="Your name"
+    class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
 
-    <textarea id="fixDescription" placeholder="What fixed the issue?"
-      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white"></textarea>
+  <textarea id="fixDescription" placeholder="What fixed the issue?"
+    class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white"></textarea>
 
-    <input id="fixTime" placeholder="Time to fix (e.g. 1 hour)"
-      class="w-full mb-4 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
+  <!-- ⏱ DROPDOWN -->
+  <select id="fixTime"
+    class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white">
+    <option value="">Select repair time</option>
+    <option>15–30 minutes</option>
+    <option>30–60 minutes</option>
+    <option>1–2 hours</option>
+    <option>2–4 hours</option>
+    <option>Half day</option>
+    <option>Full day</option>
+  </select>
 
-    <button id="submitFixBtn"
-      class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition">
-      Submit Fix
-    </button>
+  <!-- 📸 IMAGE UPLOAD -->
+  <input type="file" id="fixImage"
+    class="w-full mb-4 text-sm text-gray-400" />
 
-    <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
+  <button id="submitFixBtn"
+    class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition">
+    Submit Fix
+  </button>
 
-  </div>
+  <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
+
+</div>
 
   <!-- FIX LIST -->
   <div id="fixList" class="space-y-4 max-w-xl mx-auto"></div>
