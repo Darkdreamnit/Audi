@@ -510,36 +510,43 @@ lucide.createIcons();
 
 <script>
   // 🔥 FAQ STRUCTURED DATA (SEO BOOST)
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": `Can I drive with ${dtc.code}?`,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": document.getElementById("faqDrive").textContent
+setTimeout(() => {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Can I drive with ${dtc.code}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": document.getElementById("faqDrive").textContent
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What causes ${dtc.code}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": document.getElementById("faqCauses").textContent
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `How much does it cost to fix ${dtc.code}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": document.getElementById("faqCost").textContent
+        }
       }
-    },
-    {
-      "@type": "Question",
-      "name": `What causes ${dtc.code}?`,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": document.getElementById("faqCauses").textContent
-      }
-    },
-    {
-      "@type": "Question",
-      "name": `How much does it cost to fix ${dtc.code}?`,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": document.getElementById("faqCost").textContent
-      }
-    }
-  ]
-};
+    ]
+  };
+
+  const scriptTag = document.createElement("script");
+  scriptTag.type = "application/ld+json";
+  scriptTag.textContent = JSON.stringify(faqSchema);
+  document.head.appendChild(scriptTag);
+}, 100);
 
 const scriptTag = document.createElement("script");
 scriptTag.type = "application/ld+json";
