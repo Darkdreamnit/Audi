@@ -146,6 +146,30 @@ body { font-family: 'Inter', sans-serif; }
   <p id="severityExplanation" class="text-gray-300"></p>
 </div>
 
+<!-- FAQ SECTION -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+
+  <div class="space-y-4">
+
+    <div>
+      <h3 class="font-semibold text-lg">Can I drive with this code?</h3>
+      <p id="faqDrive" class="text-gray-300"></p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-lg">What causes this code?</h3>
+      <p id="faqCauses" class="text-gray-300"></p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-lg">How much does it cost to fix?</h3>
+      <p id="faqCost" class="text-gray-300"></p>
+    </div>
+
+  </div>
+</div>
+
 <!-- SYMPTOMS -->
 <div class="glass p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">Symptoms</h2>
@@ -422,6 +446,27 @@ if (dtc.costBreakdown) {
   `;
 }
 
+
+// 🔥 FAQ: Can I drive?
+const driveEl = document.getElementById("faqDrive");
+
+if (dtc.severity === "low") {
+  driveEl.textContent = "Yes, you can usually continue driving, but the issue should be fixed soon.";
+} else if (dtc.severity === "medium") {
+  driveEl.textContent = "You can drive short distances, but it may worsen over time.";
+} else {
+  driveEl.textContent = "No. This issue is serious and should be fixed immediately.";
+}
+
+// 🔥 FAQ: Causes
+document.getElementById("faqCauses").textContent =
+  dtc.causes?.join(", ") || "Common causes include sensor failures, wiring issues, or worn components.";
+
+// 🔥 FAQ: Cost
+document.getElementById("faqCost").textContent =
+  `Typical repair cost ranges from ${dtc.estimatedCost || "$100–$1000"} depending on the issue.`;
+
+
 // RELATED
 if (dtc.relatedCodes) {
   dtc.relatedCodes.forEach(rc => {
@@ -459,6 +504,45 @@ if (mobileBtn && mobileMenu) {
   });
 }
 lucide.createIcons();
+</script>
+
+<script>
+  // 🔥 FAQ STRUCTURED DATA (SEO BOOST)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Can I drive with ${dtc.code}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": document.getElementById("faqDrive").textContent
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `What causes ${dtc.code}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": document.getElementById("faqCauses").textContent
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `How much does it cost to fix ${dtc.code}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": document.getElementById("faqCost").textContent
+      }
+    }
+  ]
+};
+
+const scriptTag = document.createElement("script");
+scriptTag.type = "application/ld+json";
+scriptTag.textContent = JSON.stringify(faqSchema);
+document.head.appendChild(scriptTag);
 </script>
 
 <script type="module" src="firebase.js"></script>
