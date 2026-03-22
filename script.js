@@ -622,3 +622,6 @@ async function setupFeedback() {
 }
 console.log("Feedback system running");
 setupFeedback();
+
+console.log("DTC page loaded");
+setupFeedback();
