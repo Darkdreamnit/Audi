@@ -61,6 +61,7 @@ body { font-family: 'Inter', sans-serif; }
 
 </header>
 
+
 <!-- HERO -->
 <section class="pt-24 pb-10 text-center">
   <h1 class="text-4xl md:text-6xl font-black">P0171</h1>
@@ -347,6 +348,14 @@ body { font-family: 'Inter', sans-serif; }
 
 <script>
 lucide.createIcons();
+
+// MOBILE MENU TOGGLE
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+});
 </script>
 
 <script src="dtcData.js"></script>
