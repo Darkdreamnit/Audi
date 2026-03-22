@@ -530,7 +530,7 @@ async function setupFeedback() {
   const stats = document.getElementById("feedbackStats");
 
   const { doc, getDoc, setDoc, updateDoc, increment } = window.firebaseFns;
-
+const { ref, uploadBytes, getDownloadURL } = window.firebaseFns;
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
 
