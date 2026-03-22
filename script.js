@@ -565,6 +565,14 @@ async function setupFeedback() {
   // Prevent multiple votes
   const savedVote = localStorage.getItem(`feedback_${code}`);
 
+  if (savedVote === "yes") {
+  yesBtn.classList.add("bg-green-500", "text-white");
+}
+
+if (savedVote === "no") {
+  noBtn.classList.add("bg-red-500", "text-white");
+}
+
   if (savedVote) {
     message.textContent = "You already voted 👍";
     disableButtons();
@@ -620,8 +628,8 @@ async function setupFeedback() {
     noBtn.classList.add("opacity-50", "cursor-not-allowed");
   }
 }
+
+console.log("DTC page loaded");
 console.log("Feedback system running");
 setupFeedback();
 
-console.log("DTC page loaded");
-setupFeedback();
