@@ -733,9 +733,16 @@ if (imageFile) {
       imageUrl = await getDownloadURL(storageRef);
     }
 
+    // Fuzzy matches
+
+    const results = Object.values(dtcDatabase).filter(dtc =>
+  dtc.code.includes(searchTerm) ||
+  dtc.description.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
 
-    // 💾 
+
+    // 💾 Check file size limit 4mb
 
 const fileInput = document.getElementById("fixImage");
 const fileInfo = document.getElementById("fileInfo");
@@ -746,7 +753,7 @@ if (fileInput) {
 
     if (!file) return;
 
-    const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+    const sizeMB = (file.size / (1024 * 1024)).toFixed(4);
 
     fileInfo.textContent = `${file.name} (${sizeMB} MB)`;
   });
