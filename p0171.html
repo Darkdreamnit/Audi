@@ -141,6 +141,425 @@ body { font-family: 'Inter', sans-serif; }
 
 </section>
 
+
+
+<!-- CONTENT -->
+<section class="max-w-5xl mx-auto px-4 space-y-8 pb-20 fade-in">
+
+<!-- WHY IT MATTERS -->
+<div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl">
+  <h2 class="text-xl font-bold text-red-400 mb-2">Why This Matters</h2>
+  <p id="severityExplanation" class="text-gray-300"></p>
+</div>
+
+
+
+<!-- SYMPTOMS -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Symptoms</h2>
+  <ul id="symptoms" class="space-y-2 text-gray-300"></ul>
+</div>
+
+<!-- CAUSES -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Causes</h2>
+  <ul id="causes" class="space-y-2 text-gray-300"></ul>
+</div>
+
+<!-- FIXES -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">How to Fix</h2>
+  <ul id="fixes" class="space-y-2 text-gray-300"></ul>
+</div>
+
+<div class="p-6 rounded-xl mb-8 border border-yellow-400/40 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 shadow-lg relative overflow-hidden">
+
+  <!-- Glow Accent -->
+  <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-500"></div>
+
+  <!-- Header -->
+  <div class="flex items-center gap-2 mb-3">
+    <span class="text-yellow-400 text-xl">💡</span>
+    <h2 class="text-2xl font-bold text-yellow-300" id="proTipTitle"></h2>
+  </div>
+
+  <!-- Content -->
+  <p id="proTipContent" class="text-gray-200 mb-4 leading-relaxed"></p>
+
+  <!-- CTA BUTTON -->
+  <a id="proTipLink"
+     target="_blank"
+     class="inline-block bg-yellow-400 text-black px-5 py-2 rounded-lg font-bold hover:bg-yellow-300 transition">
+  </a>
+
+</div>
+
+<!-- RELATED -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Related Codes</h2>
+  <div id="relatedCodes" class="flex flex-wrap gap-2"></div>
+</div>
+
+<div class="glass p-6 rounded">
+  <h2 class="font-bold mb-2">Detailed Overview</h2>
+  <p id="deepDive"></p>
+</div>
+
+<div class="glass p-6 rounded">
+  <h2 class="font-bold mb-2">Step-by-Step Diagnosis</h2>
+  <ul id="diagnosisSteps"></ul>
+</div>
+
+<div class="glass p-6 rounded">
+  <h2 class="font-bold mb-2">Common Mistakes</h2>
+  <ul id="commonMistakes"></ul>
+</div>
+
+<div class="glass p-6 rounded">
+  <h2 class="font-bold mb-2">Cost Breakdown</h2>
+  <div id="costBreakdown"></div>
+</div>
+
+</section>
+
+<div id="feedbackBox" class="mt-10 text-center">
+
+  <h3 class="text-xl font-bold mb-4">Was this fix helpful?</h3>
+
+  <div class="flex justify-center gap-4">
+
+    <button id="yesBtn"
+      class="feedback-btn bg-green-500/20 border border-green-500 text-green-400 px-6 py-3 rounded-xl transition-all duration-300 hover:bg-green-500 hover:text-white hover:scale-105">
+      👍 Yes
+    </button>
+
+    <button id="noBtn"
+      class="feedback-btn bg-red-500/20 border border-red-500 text-red-400 px-6 py-3 rounded-xl transition-all duration-300 hover:bg-red-500 hover:text-white hover:scale-105">
+      👎 No
+    </button>
+    
+
+  </div>
+
+  <!-- Feedback color-->
+
+  <p id="feedbackMessage" class="mt-4 text-sm text-gray-400"></p>
+
+<p id="feedbackStats" class="mt-3 text-lg font-semibold text-blue-400"></p>
+
+</div>
+
+<div class="mt-12">
+
+  <h2 class="text-2xl font-bold mb-4 text-center">🛠 User Submitted Fixes</h2>
+
+  <!-- User submitted fix FORM -->
+ 
+ <div class="bg-gray-900 p-6 rounded-xl mb-8 max-w-xl mx-auto">
+
+  <input id="fixName" placeholder="Your name"
+    class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
+
+  <textarea id="fixDescription" placeholder="What fixed the issue?"
+    class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white"></textarea>
+
+  <!-- ⏱ DROPDOWN -->
+  <select id="fixTime"
+    class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white">
+    <option value="">Select repair time</option>
+    <option>15–30 minutes</option>
+    <option>30–60 minutes</option>
+    <option>1–2 hours</option>
+    <option>2–4 hours</option>
+    <option>Half day</option>
+    <option>Full day</option>
+  </select>
+
+  <!-- 📸 IMAGE UPLOAD -->
+  <input type="file" id="fixImage"
+    class="w-full mb-4 text-sm text-gray-400" />
+    <p id="fileInfo" class="text-xs text-gray-500 mt-1"></p>
+
+  <button id="submitFixBtn"
+  class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition flex items-center justify-center gap-2">
+
+  <span id="submitText">Submit Fix</span>
+
+  <span id="submitSpinner" class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"></span>
+
+</button>
+
+  <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
+
+</div>
+
+  <!-- FIX LIST -->
+  <div id="fixList" class="space-y-4 max-w-xl mx-auto"></div>
+
+</div>
+
+<!-- FAQ SECTION -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+
+  <div class="space-y-4">
+
+    <div>
+      <h3 class="font-semibold text-lg">Can I drive with this code?</h3>
+      <p id="faqDrive" class="text-gray-300"></p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-lg">What causes this code?</h3>
+      <p id="faqCauses" class="text-gray-300"></p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-lg">How much does it cost to fix?</h3>
+      <p id="faqCost" class="text-gray-300"></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+    <footer class="glass-effect border-t border-white/10 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="mb-6 md:mb-0">
+                        <div class="flex items-center space-x-2 mb-4 md:mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-lg flex items-center justify-center">
+                                <i data-lucide="activity" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-xl font-bold">AUDI<span class="text-[var(--audi-red)]">DTC</span></span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Premium diagnostic tool for Audi vehicles. Not affiliated with Audi AG.</p>
+                    </div>
+                    
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Quick Links</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Code Database</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Audi Models</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Diagnostic Guide</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Reset Procedures</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Resources</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Technical Service Bulletins</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Wiring Diagrams</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Repair Manuals</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Software Updates</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Community</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Forum</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Expert Help</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Mobile App</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API Access</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-white/10 mt-8 pt-8 text-center text-gray-400 text-sm">
+                    <p>© 2024 Audi DTC Decoder Pro. All information is for educational purposes only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script src="dtcData.js"></script>
+
+<script>
+// GET CODE FROM URL
+const params = new URLSearchParams(window.location.search);
+const code = params.get("code");
+
+// LOAD DATA
+const dtc = dtcDatabase[code];
+
+if (!dtc) {
+  document.body.innerHTML = "<h1 style='padding:40px'>Code not found</h1>";
+}
+
+// SET TITLE
+// 🔥 SEO TITLE
+document.title = `${dtc.code} Audi Code – Causes, Fix & Cost`;
+
+// 🔥 META DESCRIPTION
+let metaDesc = document.querySelector('meta[name="description"]');
+
+if (!metaDesc) {
+  metaDesc = document.createElement('meta');
+  metaDesc.name = "description";
+  document.head.appendChild(metaDesc);
+}
+
+metaDesc.content = `${dtc.code} Audi fault code: ${dtc.description}. Learn symptoms, causes, fixes, repair cost, and if it's safe to drive.`;
+
+// STATS
+document.getElementById("difficulty").innerText = dtc.difficulty || "N/A";
+document.getElementById("repairTime").innerText = dtc.repairTime || "N/A";
+document.getElementById("cost").innerText = dtc.estimatedCost || "N/A";
+document.getElementById("severity").innerText = dtc.severity;
+
+// SEVERITY COLOR
+const severityEl = document.getElementById("severity");
+if (dtc.severity === "low") severityEl.classList.add("text-green-400");
+if (dtc.severity === "medium") severityEl.classList.add("text-yellow-400");
+if (dtc.severity === "high") severityEl.classList.add("text-red-400");
+
+// WHY IT MATTERS
+document.getElementById("severityExplanation").innerText =
+  dtc.severityExplanation || "No details available.";
+
+// LISTS
+dtc.symptoms.forEach(item => {
+  symptoms.innerHTML += `<li>✔ ${item}</li>`;
+});
+
+dtc.causes.forEach(item => {
+  causes.innerHTML += `<li>• ${item}</li>`;
+});
+
+dtc.fixes.forEach(item => {
+  fixes.innerHTML += `<li>✔ ${item}</li>`;
+});
+
+deepDive.innerText = dtc.deepDive || "";
+
+dtc.diagnosisSteps?.forEach(step => {
+  diagnosisSteps.innerHTML += `<li>🔧 ${step}</li>`;
+});
+
+dtc.commonMistakes?.forEach(m => {
+  commonMistakes.innerHTML += `<li>⚠️ ${m}</li>`;
+});
+
+
+
+
+if (dtc.costBreakdown) {
+  costBreakdown.innerHTML = `
+    <div>DIY: ${dtc.costBreakdown.diy}</div>
+    <div>Independent Shop: ${dtc.costBreakdown.independentShop}</div>
+    <div>Dealership: ${dtc.costBreakdown.dealership}</div>
+  `;
+}
+
+
+// 🔥 FAQ: Can I drive?
+const driveEl = document.getElementById("faqDrive");
+
+if (dtc.severity === "low") {
+  driveEl.textContent = "Yes, you can usually continue driving, but the issue should be fixed soon.";
+} else if (dtc.severity === "medium") {
+  driveEl.textContent = "You can drive short distances, but it may worsen over time.";
+} else {
+  driveEl.textContent = "No. This issue is serious and should be fixed immediately.";
+}
+
+// 🔥 FAQ: Causes
+document.getElementById("faqCauses").textContent =
+  dtc.causes?.join(", ") || "Common causes include sensor failures, wiring issues, or worn components.";
+
+// 🔥 FAQ: Cost
+document.getElementById("faqCost").textContent =
+  `Typical repair cost ranges from ${dtc.estimatedCost || "$100–$1000"} depending on the issue.`;
+
+
+// RELATED
+if (dtc.relatedCodes) {
+  dtc.relatedCodes.forEach(rc => {
+    relatedCodes.innerHTML += `
+      <a href="dtc.html?code=${rc}" 
+         class="glass px-3 py-1 rounded hover:bg-white/10 transition">
+         ${rc}
+      </a>
+    `;
+  });
+}
+
+if (dtc.proTip) {
+  proTipTitle.innerText = dtc.proTip.title;
+  proTipContent.innerText = dtc.proTip.content;
+
+  proTipLink.innerText = dtc.proTip.linkText;
+  proTipLink.href = dtc.proTip.link;
+}
+
+const mobileBtn = document.getElementById("mobileMenuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+if (mobileBtn && mobileMenu) {
+  mobileBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+
+    const icon = mobileBtn.querySelector("i");
+    icon.setAttribute(
+      "data-lucide",
+      mobileMenu.classList.contains("hidden") ? "menu" : "x"
+    );
+
+    lucide.createIcons();
+  });
+}
+lucide.createIcons();
+</script>
+
+<script>
+  // 🔥 FAQ STRUCTURED DATA (SEO BOOST)
+setTimeout(() => {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Can I drive with ${dtc.code}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": document.getElementById("faqDrive").textContent
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What causes ${dtc.code}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": document.getElementById("faqCauses").textContent
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `How much does it cost to fix ${dtc.code}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": document.getElementById("faqCost").textContent
+        }
+      }
+    ]
+  };
+
+  const scriptTag = document.createElement("script");
+  scriptTag.type = "application/ld+json";
+  scriptTag.textContent = JSON.stringify(faqSchema);
+  document.head.appendChild(scriptTag);
+}, 100);
+
+const scriptTag = document.createElement("script");
+scriptTag.type = "application/ld+json";
+scriptTag.textContent = JSON.stringify(faqSchema);
+document.head.appendChild(scriptTag);
+</script>
+
 <!-- SEO STRUCTURED DATA -->
 <script type="application/ld+json">
 {
