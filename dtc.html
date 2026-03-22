@@ -384,6 +384,19 @@ if (!dtc) {
 }
 
 // SET TITLE
+// 🔥 SEO TITLE
+document.title = `${dtc.code} Audi Code – Causes, Fix & Cost`;
+
+// 🔥 META DESCRIPTION
+let metaDesc = document.querySelector('meta[name="description"]');
+
+if (!metaDesc) {
+  metaDesc = document.createElement('meta');
+  metaDesc.name = "description";
+  document.head.appendChild(metaDesc);
+}
+
+metaDesc.content = `${dtc.code} Audi fault code: ${dtc.description}. Learn symptoms, causes, fixes, repair cost, and if it's safe to drive.`;
 
 // STATS
 document.getElementById("difficulty").innerText = dtc.difficulty || "N/A";
