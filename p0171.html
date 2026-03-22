@@ -21,6 +21,46 @@ body { font-family: 'Inter', sans-serif; }
 
 <body class="bg-black text-white">
 
+    <!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
+
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+
+    <!-- LOGO -->
+    <a href="index.html" class="text-xl font-bold tracking-wide">
+      Audi<span class="text-blue-500">Codes</span>
+    </a>
+
+    <!-- DESKTOP NAV -->
+    <nav class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+      <a href="index.html" class="hover:text-white transition">Home</a>
+      <a href="#" class="hover:text-white transition">All Codes</a>
+      <a href="#" class="hover:text-white transition">Guides</a>
+    </nav>
+
+    <!-- HAMBURGER -->
+    <button id="menuBtn" class="md:hidden flex flex-col gap-1.5">
+
+      <span class="w-6 h-0.5 bg-white transition-all"></span>
+      <span class="w-6 h-0.5 bg-white transition-all"></span>
+      <span class="w-6 h-0.5 bg-white transition-all"></span>
+
+    </button>
+
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu"
+    class="hidden flex-col bg-black border-t border-white/10 px-4 py-4 space-y-3 text-gray-300 md:hidden">
+
+    <a href="index.html" class="block hover:text-white">Home</a>
+    <a href="#" class="block hover:text-white">All Codes</a>
+    <a href="#" class="block hover:text-white">Guides</a>
+
+  </div>
+
+</header>
+
 <!-- HERO -->
 <section class="pt-24 pb-10 text-center">
   <h1 class="text-4xl md:text-6xl font-black">P0171</h1>
