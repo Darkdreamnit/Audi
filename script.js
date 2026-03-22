@@ -681,36 +681,55 @@ async function setupUserFixes() {
 
   // ➕ Submit fix
   submitBtn.addEventListener("click", async () => {
-    const name = document.getElementById("fixName").value.trim();
-    const description = document.getElementById("fixDescription").value.trim();
-    const time = document.getElementById("fixTime").value.trim();
+  const name = document.getElementById("fixName").value.trim();
+  const description = document.getElementById("fixDescription").value.trim();
+  const time = document.getElementById("fixTime").value;
+  const imageFile = document.getElementById("fixImage").files[0];
 
-    if (!description) {
-      message.textContent = "Please enter a fix description";
-      return;
+  if (!description) {
+    message.textContent = "Please enter a fix description";
+    return;
+  }
+
+  try {
+    let imageUrl = "";
+
+    // 📸 Upload image if exists
+    if (imageFile) {
+      const { ref, uploadBytes, getDownloadURL } = window.firebaseFns;
+
+      const storageRef = ref(
+        window.storage,
+        `fixImages/${code}_${Date.now()}`
+      );
+
+      await uploadBytes(storageRef, imageFile);
+      imageUrl = await getDownloadURL(storageRef);
     }
 
-    try {
-      await addDoc(collection(window.db, "fixes"), {
-        code: code,
-        name: name || "Anonymous",
-        description,
-        time,
-        timestamp: Date.now()
-      });
+    // 💾 Save to Firestore
+    await addDoc(collection(window.db, "fixes"), {
+      code: code,
+      name: name || "Anonymous",
+      description,
+      time,
+      imageUrl,
+      timestamp: Date.now()
+    });
 
-      message.textContent = "✅ Fix submitted!";
+    message.textContent = "✅ Fix submitted!";
 
-      // Clear form
-      document.getElementById("fixName").value = "";
-      document.getElementById("fixDescription").value = "";
-      document.getElementById("fixTime").value = "";
+    // Clear form
+    document.getElementById("fixName").value = "";
+    document.getElementById("fixDescription").value = "";
+    document.getElementById("fixTime").value = "";
+    document.getElementById("fixImage").value = "";
 
-      await loadFixes();
+    await loadFixes();
 
-    } catch (err) {
-      console.error(err);
-      message.textContent = "Error submitting fix";
-    }
-  });
+  } catch (err) {
+    console.error(err);
+    message.textContent = "Error submitting fix";
+  }
+});
 }
