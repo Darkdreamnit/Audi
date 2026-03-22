@@ -633,3 +633,84 @@ console.log("DTC page loaded");
 console.log("Feedback system running");
 setupFeedback();
 
+
+/***** Logic for Submissions ***** */
+
+setupUserFixes();
+
+async function setupUserFixes() {
+  const { collection, addDoc, getDocs, query, orderBy } = window.firebaseFns;
+
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
+
+  const fixList = document.getElementById("fixList");
+  const submitBtn = document.getElementById("submitFixBtn");
+  const message = document.getElementById("submitMessage");
+
+  // 🔄 Load fixes
+  async function loadFixes() {
+    fixList.innerHTML = "";
+
+    const q = query(
+      collection(window.db, "fixes"),
+      orderBy("timestamp", "desc")
+    );
+
+    const snapshot = await getDocs(q);
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+
+      if (data.code !== code) return;
+
+      const div = document.createElement("div");
+      div.className = "bg-gray-800 p-4 rounded-xl";
+
+      div.innerHTML = `
+        <p class="text-sm text-gray-400">${data.name || "Anonymous"}</p>
+        <p class="mt-1">${data.description}</p>
+        <p class="text-xs text-gray-500 mt-2">⏱ ${data.time || "N/A"}</p>
+      `;
+
+      fixList.appendChild(div);
+    });
+  }
+
+  await loadFixes();
+
+  // ➕ Submit fix
+  submitBtn.addEventListener("click", async () => {
+    const name = document.getElementById("fixName").value.trim();
+    const description = document.getElementById("fixDescription").value.trim();
+    const time = document.getElementById("fixTime").value.trim();
+
+    if (!description) {
+      message.textContent = "Please enter a fix description";
+      return;
+    }
+
+    try {
+      await addDoc(collection(window.db, "fixes"), {
+        code: code,
+        name: name || "Anonymous",
+        description,
+        time,
+        timestamp: Date.now()
+      });
+
+      message.textContent = "✅ Fix submitted!";
+
+      // Clear form
+      document.getElementById("fixName").value = "";
+      document.getElementById("fixDescription").value = "";
+      document.getElementById("fixTime").value = "";
+
+      await loadFixes();
+
+    } catch (err) {
+      console.error(err);
+      message.textContent = "Error submitting fix";
+    }
+  });
+}
