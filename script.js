@@ -198,7 +198,7 @@ result.addEventListener("click", () => {
 
     
     const detailsBtn = result.querySelector('.details-btn');
-detailsBtn.href = `${code}.html`;
+detailsBtn.href = `dtc.html?code=${dtc.code}`;
     
     // Fill in data
     result.querySelector('.code-display').textContent = dtc.code;
