@@ -12,7 +12,11 @@
   getDoc,
   updateDoc,
   increment,
-  deleteDoc
+  deleteDoc,
+   getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -21,8 +25,13 @@
     projectId: "audi-dtc",
   };
 
+
+// 🔥 DATABASE INIT
+
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  const storage = getStorage(app);
+  window.storage = storage;
 
   // 🔥 FORCE GLOBAL AVAILABILITY
   window.db = db;
@@ -38,7 +47,10 @@
   getDoc,
   updateDoc,
   increment,
-  deleteDoc
+  deleteDoc,
+  ref,
+  uploadBytes,
+  getDownloadURL
   };
 
  
