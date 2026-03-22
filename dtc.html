@@ -146,29 +146,7 @@ body { font-family: 'Inter', sans-serif; }
   <p id="severityExplanation" class="text-gray-300"></p>
 </div>
 
-<!-- FAQ SECTION -->
-<div class="glass p-6 rounded-xl">
-  <h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
 
-  <div class="space-y-4">
-
-    <div>
-      <h3 class="font-semibold text-lg">Can I drive with this code?</h3>
-      <p id="faqDrive" class="text-gray-300"></p>
-    </div>
-
-    <div>
-      <h3 class="font-semibold text-lg">What causes this code?</h3>
-      <p id="faqCauses" class="text-gray-300"></p>
-    </div>
-
-    <div>
-      <h3 class="font-semibold text-lg">How much does it cost to fix?</h3>
-      <p id="faqCost" class="text-gray-300"></p>
-    </div>
-
-  </div>
-</div>
 
 <!-- SYMPTOMS -->
 <div class="glass p-6 rounded-xl">
@@ -314,6 +292,30 @@ body { font-family: 'Inter', sans-serif; }
 
 </div>
 
+<!-- FAQ SECTION -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+
+  <div class="space-y-4">
+
+    <div>
+      <h3 class="font-semibold text-lg">Can I drive with this code?</h3>
+      <p id="faqDrive" class="text-gray-300"></p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-lg">What causes this code?</h3>
+      <p id="faqCauses" class="text-gray-300"></p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-lg">How much does it cost to fix?</h3>
+      <p id="faqCost" class="text-gray-300"></p>
+    </div>
+
+  </div>
+</div>
+
 <!-- Footer -->
     <footer class="glass-effect border-t border-white/10 py-12">
         <div class="container mx-auto px-4">
@@ -382,19 +384,6 @@ if (!dtc) {
 }
 
 // SET TITLE
-// 🔥 SEO TITLE
-document.title = `${dtc.code} Audi Code – Causes, Fix & Cost`;
-
-// 🔥 META DESCRIPTION
-let metaDesc = document.querySelector('meta[name="description"]');
-
-if (!metaDesc) {
-  metaDesc = document.createElement('meta');
-  metaDesc.name = "description";
-  document.head.appendChild(metaDesc);
-}
-
-metaDesc.content = `${dtc.code} Audi fault code: ${dtc.description}. Learn symptoms, causes, fixes, repair cost, and if it's safe to drive.`;
 
 // STATS
 document.getElementById("difficulty").innerText = dtc.difficulty || "N/A";
