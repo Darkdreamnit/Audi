@@ -542,6 +542,15 @@ if (!code) {
   code = fileName.replace(".html", "").toUpperCase();
 }
 
+console.log("CODE:", code);
+
+// 🔥 Handle static pages like p0171.html
+if (!code) {
+  const path = window.location.pathname;
+  const fileName = path.split("/").pop();
+  code = fileName.replace(".html", "").toUpperCase();
+}
+
   const feedbackRef = doc(window.db, "feedback", code);
 
   // 🔥 Load existing stats
@@ -660,6 +669,15 @@ if (!code) {
   code = fileName.replace(".html", "").toUpperCase();
 }
 
+console.log("CODE:", code);
+
+// 🔥 Handle static pages like p0171.html
+if (!code) {
+  const path = window.location.pathname;
+  const fileName = path.split("/").pop();
+  code = fileName.replace(".html", "").toUpperCase();
+}
+
   const fixList = document.getElementById("fixList");
   const submitBtn = document.getElementById("submitFixBtn");
   const message = document.getElementById("submitMessage");
@@ -751,10 +769,27 @@ if (imageFile) {
 
     // Fuzzy matches
 
+    const mainSearch = document.getElementById("mainSearch");
+
+// ✅ Only run search if search bar exists
+if (mainSearch) {
+
+  mainSearch.addEventListener("input", () => {
+
+    const searchTerm = mainSearch.value.toLowerCase();
+
     const results = Object.values(dtcDatabase).filter(dtc =>
-  dtc.code.includes(searchTerm) ||
-  dtc.description.toLowerCase().includes(searchTerm.toLowerCase())
-);
+      dtc.code.toLowerCase().includes(searchTerm) ||
+      dtc.description.toLowerCase().includes(searchTerm)
+    );
+
+    console.log("Search results:", results);
+
+    // 👉 keep your existing render logic here
+
+  });
+
+}
 
 
 
