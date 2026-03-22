@@ -272,9 +272,13 @@ body { font-family: 'Inter', sans-serif; }
     class="w-full mb-4 text-sm text-gray-400" />
 
   <button id="submitFixBtn"
-    class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition">
-    Submit Fix
-  </button>
+  class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition flex items-center justify-center gap-2">
+
+  <span id="submitText">Submit Fix</span>
+
+  <span id="submitSpinner" class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"></span>
+
+</button>
 
   <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
 

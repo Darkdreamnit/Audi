@@ -688,12 +688,20 @@ async function setupUserFixes() {
   const time = document.getElementById("fixTime").value;
   const imageFile = document.getElementById("fixImage").files[0];
 
+  const submitText = document.getElementById("submitText");
+  const spinner = document.getElementById("submitSpinner");
+
   if (!description) {
     message.textContent = "Please enter a fix description";
     return;
   }
 
   try {
+    // 🔥 START LOADING STATE
+    submitBtn.disabled = true;
+    submitText.textContent = "Submitting...";
+    spinner.classList.remove("hidden");
+
     let imageUrl = "";
 
     // 📸 Upload image if exists
@@ -732,6 +740,11 @@ async function setupUserFixes() {
   } catch (err) {
     console.error(err);
     message.textContent = "Error submitting fix";
+  } finally {
+    // 🔥 STOP LOADING STATE
+    submitBtn.disabled = false;
+    submitText.textContent = "Submit Fix";
+    spinner.classList.add("hidden");
   }
 });
 }
