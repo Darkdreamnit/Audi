@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>P0301 Audi Code – Causes, Fix & Cost</title>
+
+<meta name="description" content="P0301 Audi fault code: Cylinder 1 Misfire Detected. Learn symptoms, causes, fixes, repair cost, and if it's safe to drive.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Inter', sans-serif; }
+
+.glass {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform: translateY(10px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+.nav-link {
+  position: relative;
+  color: #aaa;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover { color: white; }
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: red;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after { width: 100%; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease;
+}
+</style>
+</head>
+
+<body class="bg-black text-white">
+
+<!-- NAVBAR (UNCHANGED) -->
+<header class="sticky top-0 z-50 bg-black/70 backdrop-blur-md border-b border-white/10">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+
+    <a href="index.html">
+      <div class="text-xl font-bold tracking-tight">
+        AUDI<span class="text-red-500">DTC</span>
+      </div>
+    </a>
+
+    <nav class="hidden md:flex gap-8 text-sm font-medium">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#search" class="nav-link">Search</a>
+    </nav>
+
+    <button id="mobileMenuBtn" class="md:hidden p-2">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+    </button>
+
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 animate-slideDown">
+    <a href="index.html" class="block py-3 border-b border-white/10">Home</a>
+    <a href="index.html#search" class="block py-3">Search</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="pt-24 pb-10 text-center fade-in">
+  <h1 id="codeTitle" class="text-4xl md:text-6xl font-black">P0301</h1>
+  <p id="codeDesc" class="text-gray-400 mt-2">Cylinder 1 Misfire Detected</p>
+
+  <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
+    <div class="glass p-3 rounded text-center"><div class="text-xs text-gray-400">Difficulty</div><div id="difficulty">Medium</div></div>
+    <div class="glass p-3 rounded text-center"><div class="text-xs text-gray-400">Repair Time</div><div id="repairTime">1–3 hours</div></div>
+    <div class="glass p-3 rounded text-center"><div class="text-xs text-gray-400">Cost</div><div id="cost">$150–$800</div></div>
+    <div class="glass p-3 rounded text-center"><div class="text-xs text-gray-400">Severity</div><div id="severity" class="text-red-400">High</div></div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="max-w-5xl mx-auto px-4 space-y-8 pb-20 fade-in">
+
+<div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl">
+<h2 class="text-xl font-bold text-red-400 mb-2">Why This Matters</h2>
+<p id="severityExplanation">A misfire in cylinder 1 can cause engine damage and reduce performance if not addressed quickly.</p>
+</div>
+
+<div class="glass p-6 rounded-xl">
+<h2 class="text-xl font-bold mb-3">Symptoms</h2>
+<ul id="symptoms" class="space-y-2 text-gray-300">
+<li>✔ Rough idle</li>
+<li>✔ Engine shaking</li>
+<li>✔ Loss of power</li>
+</ul>
+</div>
+
+<div class="glass p-6 rounded-xl">
+<h2 class="text-xl font-bold mb-3">Causes</h2>
+<ul id="causes" class="space-y-2 text-gray-300">
+<li>• Faulty ignition coil</li>
+<li>• Worn spark plug</li>
+<li>• Fuel injector issue</li>
+</ul>
+</div>
+
+<div class="glass p-6 rounded-xl">
+<h2 class="text-xl font-bold mb-3">How to Fix</h2>
+<ul id="fixes" class="space-y-2 text-gray-300">
+<li>✔ Replace ignition coil</li>
+<li>✔ Replace spark plug</li>
+<li>✔ Inspect injector</li>
+</ul>
+</div>
+
+<!-- PRO TIP -->
+<div class="p-6 rounded-xl border border-yellow-400/40 bg-yellow-500/10">
+<h2 id="proTipTitle" class="font-bold text-yellow-300 mb-2">Pro Tip</h2>
+<p id="proTipContent">Swap the ignition coil with another cylinder to quickly identify if the coil is faulty.</p>
+<a id="proTipLink" href="#" class="text-yellow-400 underline">Learn More</a>
+</div>
+
+<!-- RELATED -->
+<div class="glass p-6 rounded-xl">
+<h2 class="text-xl font-bold mb-3">Related Codes</h2>
+<div id="relatedCodes" class="flex flex-wrap gap-2">
+<a href="p0300.html" class="glass px-3 py-1 rounded">P0300</a>
+<a href="p0302.html" class="glass px-3 py-1 rounded">P0302</a>
+<a href="p0303.html" class="glass px-3 py-1 rounded">P0303</a>
+</div>
+</div>
+
+<div class="glass p-6 rounded">
+<h2 class="font-bold mb-2">Detailed Overview</h2>
+<p id="deepDive">The P0301 code indicates a misfire in cylinder 1, commonly caused by ignition or fuel system issues.</p>
+</div>
+
+<div class="glass p-6 rounded">
+<h2 class="font-bold mb-2">Step-by-Step Diagnosis</h2>
+<ul id="diagnosisSteps">
+<li>🔧 Scan and confirm P0301 code</li>
+<li>🔧 Swap ignition coil</li>
+<li>🔧 Inspect spark plug</li>
+<li>🔧 Check injector</li>
+<li>🔧 Compression test</li>
+</ul>
+</div>
+
+<div class="glass p-6 rounded">
+<h2 class="font-bold mb-2">Common Mistakes</h2>
+<ul id="commonMistakes">
+<li>⚠️ Replacing parts blindly</li>
+<li>⚠️ Ignoring coil issues</li>
+</ul>
+</div>
+
+<div class="glass p-6 rounded">
+<h2 class="font-bold mb-2">Cost Breakdown</h2>
+<div id="costBreakdown">
+<div>DIY: $50–$200</div>
+<div>Shop: $200–$600</div>
+<div>Dealer: $400–$1000</div>
+</div>
+</div>
+
+</section>
+
+<!-- KEEP THESE SYSTEMS -->
+<div id="feedbackBox"></div>
+
+<div class="mt-12">
+<div id="fixList"></div>
+</div>
+
+<!-- FAQ -->
+<div class="glass p-6 rounded-xl">
+<h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+<p id="faqDrive">Do not drive long with this code.</p>
+<p id="faqCauses">Ignition or fuel issues.</p>
+<p id="faqCost">$150–$800</p>
+</div>
+
+<!-- FOOTER (UNCHANGED) -->
+<footer class="border-t border-white/10 py-10 text-center text-gray-400 text-sm">
+<p>© Audi DTC</p>
+</footer>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
