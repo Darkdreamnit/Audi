@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>U0100 Audi Code – Lost Communication with ECM/PCM</title>
+<meta name="description" content="U0100 Audi code explained. Learn symptoms, causes, and step-by-step fixes for lost communication with ECM/PCM. Full diagnostic guide.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Inter', sans-serif; }
+.glass { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px); }
+</style>
+</head>
+
+<body class="bg-black text-white">
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+
+    <a href="index.html" class="text-xl font-bold">
+      AUDI<span class="text-red-500">DTC</span>
+    </a>
+
+    <nav class="hidden md:flex gap-6 text-sm text-gray-300">
+      <a href="index.html">Home</a>
+      <a href="#">All Codes</a>
+      <a href="#">Guides</a>
+    </nav>
+
+    <button id="menuBtn" class="md:hidden flex flex-col gap-1.5">
+      <span class="w-6 h-0.5 bg-white"></span>
+      <span class="w-6 h-0.5 bg-white"></span>
+      <span class="w-6 h-0.5 bg-white"></span>
+    </button>
+
+  </div>
+
+  <div id="mobileMenu" class="hidden flex-col bg-black border-t border-white/10 px-4 py-4 space-y-3 md:hidden">
+    <a href="index.html">Home</a>
+    <a href="#">All Codes</a>
+    <a href="#">Guides</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="pt-24 pb-10 text-center">
+  <h1 class="text-5xl font-black">U0100</h1>
+  <p class="text-gray-400 mt-2">Lost Communication with ECM/PCM</p>
+
+  <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
+    <div class="glass p-3 rounded"><div class="text-xs">Difficulty</div><div class="font-bold">Advanced</div></div>
+    <div class="glass p-3 rounded"><div class="text-xs">Time</div><div class="font-bold">1–4 hrs</div></div>
+    <div class="glass p-3 rounded"><div class="text-xs">Cost</div><div class="font-bold">$50–$1500+</div></div>
+    <div class="glass p-3 rounded"><div class="text-xs">Severity</div><div class="font-bold text-red-400">High</div></div>
+  </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-4 space-y-8 pb-20">
+
+<!-- WHY -->
+<div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl">
+  <h2 class="text-xl font-bold text-red-400 mb-2">Why This Matters</h2>
+  <p class="text-gray-300">
+    The U0100 code is one of the more serious communication-related faults you can encounter on an Audi. It means the vehicle’s main computer (ECM/PCM) is no longer communicating with other modules over the CAN bus network. Since modern Audi vehicles rely heavily on this communication system, losing connection can cause major drivability issues, including stalling, no-start conditions, or the vehicle entering limp mode. Ignoring this issue can leave you stranded unexpectedly and may point to deeper electrical problems within the vehicle.
+  </p>
+</div>
+
+<!-- SYMPTOMS -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Symptoms</h2>
+
+  <p class="text-gray-300 mb-4">
+    When U0100 is present, the vehicle often shows serious warning signs because the main control module is no longer communicating properly. These symptoms can appear suddenly and may come and go depending on electrical conditions.
+  </p>
+
+  <ul class="space-y-3 text-gray-300">
+    <li><strong>Check Engine Light:</strong> The CEL will illuminate as soon as communication is lost between modules.</li>
+    <li><strong>Engine Stalling:</strong> The vehicle may randomly stall because critical data is no longer being shared.</li>
+    <li><strong>No-Start Condition:</strong> In severe cases, the car may crank but not start due to lack of ECM communication.</li>
+    <li><strong>Limp Mode:</strong> The vehicle may limit power drastically to protect itself.</li>
+    <li><strong>Multiple System Warnings:</strong> ABS, traction control, and other systems may also malfunction due to communication failure.</li>
+  </ul>
+</div>
+
+<!-- CAUSES -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Causes</h2>
+
+  <p class="text-gray-300 mb-4">
+    U0100 is typically caused by electrical or communication failures rather than mechanical issues. Understanding the root cause is critical, as replacing parts without proper diagnosis can be very expensive.
+  </p>
+
+  <ul class="space-y-3 text-gray-300">
+    <li><strong>Low Battery Voltage:</strong> Weak or dying batteries can interrupt CAN bus communication, especially during startup.</li>
+    <li><strong>Wiring or Connector Damage:</strong> Broken, corroded, or loose wires can disrupt communication signals between modules.</li>
+    <li><strong>Blown Fuses:</strong> A blown fuse supplying power to the ECM or related modules can cause total communication loss.</li>
+    <li><strong>Faulty ECM/PCM:</strong> In rare cases, the engine control module itself may fail internally.</li>
+  </ul>
+</div>
+
+<!-- FIX -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">How to Fix (Step-by-Step)</h2>
+
+  <p class="text-gray-300 mb-4">
+    Diagnosing U0100 requires a methodical approach. Start with the simplest electrical checks before assuming a module failure.
+  </p>
+
+  <ol class="space-y-3 text-gray-300 list-decimal ml-5">
+    <li><strong>Check Battery Voltage:</strong> Ensure the battery is fully charged (at least 12V) and terminals are clean and secure.</li>
+    <li><strong>Inspect Grounds:</strong> Poor grounding can cause intermittent communication loss.</li>
+    <li><strong>Check Fuses:</strong> Verify all ECM and control module fuses are intact.</li>
+    <li><strong>Inspect Wiring Harness:</strong> Look for damaged, loose, or corroded CAN bus wires.</li>
+    <li><strong>Scan All Modules:</strong> Use a professional scan tool to identify where communication is failing.</li>
+    <li><strong>Test or Replace ECM (if necessary):</strong> Only after ruling out all other causes should the ECM be considered faulty.</li>
+  </ol>
+</div>
+
+<!-- PRO TIP -->
+<div class="p-6 rounded-xl border border-yellow-400/40 bg-yellow-500/10">
+  <h2 class="text-xl font-bold text-yellow-300 mb-2">💡 Pro Tip</h2>
+  <p class="text-gray-200">
+    Always check your battery first. Many U0100 cases are caused by low voltage or poor connections—not a failed computer. Replacing the ECM without verifying power and wiring can lead to unnecessary costs.
+  </p>
+</div>
+
+<!-- FAQ -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+
+  <div class="space-y-4 text-gray-300">
+    <p><strong>Can I drive with U0100?</strong><br>
+    It’s not recommended. The vehicle may stall or fail to start unexpectedly.</p>
+
+    <p><strong>Is U0100 serious?</strong><br>
+    Yes, it’s a high-severity code because it affects communication with the main engine computer.</p>
+
+    <p><strong>How much does it cost to fix?</strong><br>
+    Costs range from $50 for simple wiring fixes to over $1500 if the ECM needs replacement.</p>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Related Codes</h2>
+  <div class="flex gap-2 flex-wrap">
+    <a href="u0101.html" class="glass px-3 py-1 rounded">U0101</a>
+    <a href="u0121.html" class="glass px-3 py-1 rounded">U0121</a>
+  </div>
+</div>
+
+</section>
+
+<!-- WAS THIS FIX HELPFUL -->
+<div id="feedbackBox" class="mt-10 text-center">
+  <h3 class="text-xl font-bold mb-4">Was this fix helpful?</h3>
+
+  <div class="flex justify-center gap-4">
+    <button id="yesBtn" class="bg-green-500/20 border border-green-500 px-6 py-3 rounded-xl">👍 Yes</button>
+    <button id="noBtn" class="bg-red-500/20 border border-red-500 px-6 py-3 rounded-xl">👎 No</button>
+  </div>
+
+  <p id="feedbackMessage" class="mt-4 text-sm text-gray-400"></p>
+  <p id="feedbackStats" class="mt-3 text-lg font-semibold text-blue-400"></p>
+</div>
+
+<!-- USER FIXES -->
+<div class="mt-12">
+
+  <h2 class="text-2xl font-bold mb-4 text-center">🛠 User Submitted Fixes</h2>
+
+  <div class="bg-gray-900 p-6 rounded-xl mb-8 max-w-xl mx-auto">
+
+    <input id="fixName" placeholder="Your name"
+      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
+
+    <textarea id="fixDescription" placeholder="What fixed the issue?"
+      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white"></textarea>
+
+    <select id="fixTime"
+      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white">
+      <option value="">Select repair time</option>
+      <option>15–30 minutes</option>
+      <option>30–60 minutes</option>
+      <option>1–2 hours</option>
+      <option>2–4 hours</option>
+      <option>Half day</option>
+      <option>Full day</option>
+    </select>
+
+    <input type="file" id="fixImage"
+      class="w-full mb-4 text-sm text-gray-400" />
+    <p id="fileInfo" class="text-xs text-gray-500 mt-1"></p>
+
+    <button id="submitFixBtn"
+      class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition flex items-center justify-center gap-2">
+
+      <span id="submitText">Submit Fix</span>
+
+      <span id="submitSpinner"
+        class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"></span>
+
+    </button>
+
+    <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
+
+  </div>
+
+  <div id="fixList" class="space-y-4 max-w-xl mx-auto"></div>
+
+</div>
+
+<!-- FULL FOOTER -->
+<footer class="glass-effect border-t border-white/10 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="mb-6 md:mb-0">
+                        <div class="flex items-center space-x-2 mb-4 md:mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-lg flex items-center justify-center">
+                                <i data-lucide="activity" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-xl font-bold">AUDI<span class="text-[var(--audi-red)]">DTC</span></span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Premium diagnostic tool for Audi vehicles. Not affiliated with Audi AG.</p>
+                    </div>
+                    
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Quick Links</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Code Database</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Audi Models</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Diagnostic Guide</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Reset Procedures</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Resources</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Technical Service Bulletins</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Wiring Diagrams</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Repair Manuals</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Software Updates</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-bold mb-3 md:mb-4">Community</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Forum</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Expert Help</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Mobile App</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API Access</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-white/10 mt-8 pt-8 text-center text-gray-400 text-sm">
+                    <p>© 2024 Audi DTC Decoder Pro. All information is for educational purposes only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!-- SEO STRUCTURED DATA -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Can I drive with U0100?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Driving is not recommended as the vehicle may stall or fail to start."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What causes U0100?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Common causes include low battery voltage, wiring issues, blown fuses, or a faulty ECM."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How much does it cost to fix U0100?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Costs range from $50 for wiring repairs to over $1500 for ECM replacement."
+   }
+  }
+ ]
+}
+</script>
+
+<script>
+lucide.createIcons();
+
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+});
+</script>
+
+<script src="dtcData.js"></script>
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
