@@ -9,7 +9,6 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -20,8 +19,36 @@ body { font-family: 'Inter', sans-serif; }
 
 <body class="bg-black text-white">
 
+<!-- HEADER -->
+<header class="fixed top-0 w-full glass-effect z-50">
+  <div class="container mx-auto px-4 flex justify-between items-center py-4">
+    <div class="flex items-center space-x-2">
+      <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-blue-500 rounded-lg flex items-center justify-center">
+        <i data-lucide="activity" class="w-6 h-6"></i>
+      </div>
+      <span class="text-xl font-bold">AUDI<span class="text-red-500">DTC</span></span>
+    </div>
+
+    <nav class="hidden md:flex space-x-6 text-sm">
+      <a href="#" class="hover:text-red-400">Codes</a>
+      <a href="#" class="hover:text-red-400">Models</a>
+      <a href="#" class="hover:text-red-400">Guides</a>
+    </nav>
+
+    <button id="menuBtn" class="md:hidden">
+      <i data-lucide="menu"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden px-4 pb-4">
+    <a href="#" class="block py-2">Codes</a>
+    <a href="#" class="block py-2">Models</a>
+    <a href="#" class="block py-2">Guides</a>
+  </div>
+</header>
+
 <!-- HERO -->
-<section class="pt-24 pb-10 text-center">
+<section class="pt-28 pb-10 text-center">
   <h1 class="text-5xl font-black">P0500</h1>
   <p class="text-gray-400 mt-2">Vehicle Speed Sensor 'A' Malfunction</p>
 
@@ -51,7 +78,7 @@ body { font-family: 'Inter', sans-serif; }
 <div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl">
   <h2 class="text-xl font-bold text-red-300 mb-2">Why This Matters</h2>
   <p class="text-gray-300">
-    This code affects how the vehicle reads speed, which directly impacts transmission shifting and safety systems like ABS and traction control. Driving is possible short-term, but it can lead to improper shifting, reduced drivability, and loss of important safety features. Ignoring this issue increases the risk of unsafe driving conditions and potential secondary damage to drivetrain components.
+    This fault directly affects how your vehicle understands speed, which is critical for transmission behavior, ABS functionality, and traction control systems. While the car may still be drivable, incorrect speed data can cause unsafe driving conditions, unpredictable shifting, and loss of important safety features. Addressing it early helps prevent further complications and potential drivetrain damage.
   </p>
 </div>
 
@@ -59,9 +86,9 @@ body { font-family: 'Inter', sans-serif; }
 <div class="glass-effect p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">Deep Dive</h2>
   <p class="text-gray-300">
-    The P0500 code on Audi vehicles indicates that the ECU is not receiving a proper speed signal. In real-world cases, this often shows up as a completely dead speedometer or erratic transmission behavior. On many Audi models, the vehicle speed signal doesn’t always come from a single dedicated sensor—it’s often calculated using ABS wheel speed sensors. This means the issue can originate from multiple components, including individual wheel sensors, wiring harnesses, or the ABS control module itself.
+    The P0500 code on Audi vehicles indicates that the ECU is not receiving a valid speed signal. Unlike older vehicles that rely on a single speed sensor, many modern Audi systems calculate vehicle speed using multiple wheel speed sensors through the ABS system. This means a failure in one wheel sensor, wiring issue, or even a damaged tone ring can trigger this code.
     <br><br>
-    Because Audi integrates speed data across multiple systems, a failure in one component can cascade into several warning lights and drivability issues. Many owners mistakenly assume a transmission failure due to harsh shifting, but the root cause is often an electrical or sensor-related issue. Identifying whether the problem is signal loss, signal inconsistency, or module failure is the key to avoiding unnecessary repairs.
+    In real-world scenarios, drivers often notice this problem when the speedometer stops working entirely or behaves unpredictably. Transmission shifting may also become erratic because the gearbox depends on speed data to determine when to change gears. Many people initially assume the transmission itself is failing, but the root issue is usually electrical or sensor-related.
   </p>
 </div>
 
@@ -70,22 +97,22 @@ body { font-family: 'Inter', sans-serif; }
 <h2 class="text-xl font-bold mb-3">Symptoms</h2>
 
 <p><strong>✔ Speedometer not working or reading incorrectly</strong><br>
-One of the most obvious signs of a P0500 code is a completely dead or inaccurate speedometer. This occurs when the ECU receives no usable speed signal, making it impossible for the vehicle to calculate speed correctly.</p>
+This symptom appears when the ECU cannot interpret or receive speed data, resulting in a completely dead or fluctuating speedometer during driving.</p>
 
 <p><strong>✔ Erratic or harsh transmission shifting</strong><br>
-Since the transmission relies heavily on speed data to determine shift points, missing or incorrect input can cause delayed shifts, harsh engagement, or unpredictable gear changes.</p>
+Without accurate speed input, the transmission struggles to determine proper shift timing, leading to rough or delayed gear changes.</p>
 
 <p><strong>✔ Transmission stuck in limp mode</strong><br>
-To protect itself, the vehicle may enter limp mode and limit available gears. This is a safety mechanism triggered when critical data like speed cannot be verified.</p>
+The vehicle may restrict itself to limited gears to prevent damage when it cannot rely on critical speed information.</p>
 
 <p><strong>✔ ABS or traction control warning lights</strong><br>
-Because these systems depend on the same speed signals, faults often appear together. This is especially common on Audi vehicles where systems are highly integrated.</p>
+Because these systems rely on the same sensor data, faults often trigger multiple warning lights at once.</p>
 
 <p><strong>✔ Cruise control not working</strong><br>
-Cruise control requires accurate speed data to function. When the signal is lost, the system disables itself entirely.</p>
+Cruise control systems require stable speed input and will disable automatically when data becomes unreliable.</p>
 
-<p><strong>✔ Reduced performance or sluggish driving feel</strong><br>
-The engine and transmission may operate in a restricted mode due to unreliable data, causing reduced acceleration and overall performance.</p>
+<p><strong>✔ Reduced performance</strong><br>
+The vehicle may feel sluggish due to system limitations imposed when speed data is missing or inconsistent.</p>
 
 </div>
 
@@ -94,22 +121,22 @@ The engine and transmission may operate in a restricted mode due to unreliable d
 <h2 class="text-xl font-bold mb-3">Causes</h2>
 
 <p><strong>• Faulty vehicle speed sensor (VSS)</strong><br>
-A failed sensor can completely stop speed data from being transmitted to the ECU, making this one of the primary causes of the P0500 code.</p>
+A failed sensor prevents speed data from reaching the ECU, making it one of the primary triggers for this code.</p>
 
 <p><strong>• Damaged or corroded wiring harness</strong><br>
-Electrical issues such as broken wires, corrosion, or loose connectors can interrupt the signal even if the sensor itself is functioning properly.</p>
+Electrical interruptions caused by broken wires or corrosion can stop the signal even if the sensor itself is functional.</p>
 
 <p><strong>• Faulty ABS wheel speed sensor</strong><br>
-On many Audi models, the speed signal is derived from ABS sensors. A failure in one of these sensors is one of the most common real-world causes.</p>
+On Audi vehicles, this is one of the most common causes since speed data is often derived from wheel sensors.</p>
 
 <p><strong>• Bad ABS control module</strong><br>
-The module responsible for processing wheel speed data may fail internally, preventing proper communication with the ECU.</p>
+If the module fails, it may not process or transmit speed data correctly to the ECU.</p>
 
-<p><strong>• Broken or dirty tone ring (reluctor ring)</strong><br>
-The tone ring generates the signal that the sensor reads. Damage, rust, or debris can disrupt this signal and cause erratic readings.</p>
+<p><strong>• Broken or dirty tone ring</strong><br>
+Debris or physical damage to the tone ring disrupts the signal pattern needed for accurate readings.</p>
 
-<p><strong>• Rare ECU/PCM issue</strong><br>
-Although uncommon, a fault within the ECU itself can result in misinterpretation or loss of the speed signal.</p>
+<p><strong>• Rare ECU issue</strong><br>
+In uncommon cases, the ECU itself may misinterpret or fail to process incoming speed signals.</p>
 
 </div>
 
@@ -117,26 +144,26 @@ Although uncommon, a fault within the ECU itself can result in misinterpretation
 <div class="glass-effect p-6 rounded-xl">
 <h2 class="text-xl font-bold mb-3">Step-by-Step Diagnosis</h2>
 
-<p><strong>1. Scan vehicle for P0500 and related ABS codes</strong><br>
-Begin by identifying all stored fault codes. Additional ABS-related codes often point directly to the root cause.</p>
+<p><strong>1. Scan for P0500 and related ABS codes</strong><br>
+This helps determine whether the issue originates from the ABS system or a standalone sensor.</p>
 
-<p><strong>2. Observe speedometer behavior</strong><br>
-Determine whether the speedometer is completely non-functional or intermittently failing. This helps narrow down whether the issue is total signal loss or inconsistency.</p>
+<p><strong>2. Check speedometer behavior</strong><br>
+Observing whether it is dead or intermittent provides clues about signal loss versus inconsistency.</p>
 
 <p><strong>3. Inspect wiring and connectors</strong><br>
-Check for visible damage, corrosion, or loose connections at both the sensor and ABS module.</p>
+Look for visible damage or loose connections that could interrupt communication.</p>
 
 <p><strong>4. Test vehicle speed sensor output</strong><br>
-Use a multimeter or scan tool to verify that the sensor is producing a signal within expected parameters.</p>
+Use diagnostic tools to confirm whether the sensor is producing a valid signal.</p>
 
-<p><strong>5. Scan ABS module for wheel speed faults</strong><br>
-If the vehicle uses wheel speed sensors for signal calculation, identify any failing sensors.</p>
+<p><strong>5. Scan ABS module</strong><br>
+Check for faults in wheel speed sensors that may be contributing to the issue.</p>
 
-<p><strong>6. Inspect tone ring condition</strong><br>
-Look for cracks, missing teeth, or debris buildup that could interfere with signal generation.</p>
+<p><strong>6. Inspect tone ring</strong><br>
+Ensure there are no cracks, rust, or debris affecting signal generation.</p>
 
-<p><strong>7. Verify signal is reaching the ECU</strong><br>
-Ensure that the data is being transmitted correctly from the sensor or module to the ECU.</p>
+<p><strong>7. Verify signal to ECU</strong><br>
+Confirm that speed data is properly reaching and being processed by the ECU.</p>
 
 </div>
 
@@ -149,15 +176,15 @@ Ensure that the data is being transmitted correctly from the sensor or module to
 <li>✔ Replace faulty ABS wheel speed sensor</li>
 <li>✔ Clean or replace damaged tone ring</li>
 <li>✔ Replace ABS module if necessary</li>
-<li>✔ Clear codes and perform a test drive</li>
+<li>✔ Clear codes and test drive</li>
 </ul>
 </div>
 
 <!-- PRO TIP -->
 <div class="p-6 rounded-xl border border-blue-400/40 bg-blue-500/10">
-<h2 class="text-xl font-bold text-blue-300 mb-2">Check ABS Sensors Before Replacing the Speed Sensor</h2>
+<h2 class="text-xl font-bold text-blue-300 mb-2">Check ABS Sensors First</h2>
 <p class="text-gray-200">
-On many Audi models, the speed signal comes from the ABS system rather than a dedicated sensor. If you have ABS or traction control lights on along with P0500, there’s a very strong chance the issue is a faulty wheel speed sensor. Diagnosing the ABS system first can save time, money, and unnecessary part replacements.
+On many Audi vehicles, the speed signal is calculated through the ABS system rather than a single sensor. If you see ABS or traction control warnings alongside P0500, it’s very likely a wheel speed sensor issue rather than a transmission problem.
 </p>
 </div>
 
@@ -302,7 +329,7 @@ On many Audi models, the speed signal comes from the ABS system rather than a de
    "name": "How much does it cost to fix P0500?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Typical cost ranges from $100 to $600 depending on the repair."
+    "text": "Typical cost ranges from $100 to $600."
    }
   }
  ]
@@ -312,7 +339,6 @@ On many Audi models, the speed signal comes from the ABS system rather than a de
 <script>
 lucide.createIcons();
 
-// MOBILE MENU (SAFE)
 const menuBtn = document.getElementById("menuBtn");
 const mobileMenu = document.getElementById("mobileMenu");
 
