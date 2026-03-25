@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>P0420 Audi Code – Catalytic Converter Efficiency Below Threshold</title>
+<meta name="description" content="P0420 Audi code explained. Learn symptoms, causes, fixes, and costs for catalytic converter efficiency issues. Full diagnosis guide included.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Inter', sans-serif; }
+.glass { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px); }
+</style>
+</head>
+
+<body class="bg-black text-white">
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+
+    <a href="index.html" class="text-xl font-bold">
+      AUDI<span class="text-red-500">DTC</span>
+    </a>
+
+    <nav class="hidden md:flex gap-6 text-sm text-gray-300">
+      <a href="index.html">Home</a>
+      <a href="#">All Codes</a>
+      <a href="#">Guides</a>
+    </nav>
+
+    <button id="menuBtn" class="md:hidden flex flex-col gap-1.5">
+      <span class="w-6 h-0.5 bg-white"></span>
+      <span class="w-6 h-0.5 bg-white"></span>
+      <span class="w-6 h-0.5 bg-white"></span>
+    </button>
+
+  </div>
+
+  <div id="mobileMenu" class="hidden flex-col bg-black border-t border-white/10 px-4 py-4 space-y-3 md:hidden">
+    <a href="index.html">Home</a>
+    <a href="#">All Codes</a>
+    <a href="#">Guides</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="pt-24 pb-10 text-center">
+  <h1 class="text-5xl font-black">P0420</h1>
+  <p class="text-gray-400 mt-2">Catalytic Converter Efficiency Below Threshold (Bank 1)</p>
+
+  <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
+    <div class="glass p-3 rounded"><div class="text-xs">Difficulty</div><div class="font-bold">Intermediate</div></div>
+    <div class="glass p-3 rounded"><div class="text-xs">Time</div><div class="font-bold">1–3 hrs</div></div>
+    <div class="glass p-3 rounded"><div class="text-xs">Cost</div><div class="font-bold">$200–$2000+</div></div>
+    <div class="glass p-3 rounded"><div class="text-xs">Severity</div><div class="font-bold text-yellow-400">Medium</div></div>
+  </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-4 space-y-8 pb-20">
+
+<!-- WHY -->
+<div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl">
+  <h2 class="text-xl font-bold text-red-400 mb-2">Why This Matters</h2>
+  <p class="text-gray-300">
+    The P0420 code means your catalytic converter is no longer efficiently reducing harmful emissions. While your Audi may still drive normally at first, this issue directly impacts emissions output and fuel efficiency. Over time, a failing catalytic converter can lead to reduced engine performance, increased fuel consumption, and potential damage to other components. If ignored, it can also cause your vehicle to fail emissions testing and, in severe cases, restrict exhaust flow leading to noticeable power loss.
+  </p>
+</div>
+
+<!-- SYMPTOMS -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Symptoms</h2>
+
+  <p class="text-gray-300 mb-4">
+    P0420 often starts off subtly, which is why many drivers ignore it at first. However, as the catalytic converter degrades further, performance issues can become more noticeable.
+  </p>
+
+  <ul class="space-y-3 text-gray-300">
+    <li><strong>Check Engine Light:</strong> This is usually the only symptom early on, triggered when the ECU detects inefficient catalytic converter performance.</li>
+    <li><strong>Reduced Engine Power:</strong> A clogged or failing converter can restrict exhaust flow, causing sluggish acceleration and poor throttle response.</li>
+    <li><strong>Poor Fuel Economy:</strong> The engine may compensate for inefficiencies, leading to increased fuel consumption.</li>
+    <li><strong>Exhaust Smell:</strong> In some cases, you may notice a sulfur or “rotten egg” smell from the exhaust.</li>
+  </ul>
+</div>
+
+<!-- CAUSES -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Causes</h2>
+
+  <p class="text-gray-300 mb-4">
+    While a failed catalytic converter is the most common cause of P0420, it’s important to understand that converters usually fail because of another underlying issue.
+  </p>
+
+  <ul class="space-y-3 text-gray-300">
+    <li><strong>Failed Catalytic Converter:</strong> Over time, internal components break down due to heat, age, or contamination from oil or fuel.</li>
+    <li><strong>Faulty Downstream O2 Sensor:</strong> The rear oxygen sensor may send incorrect readings, making the ECU think the converter is failing.</li>
+    <li><strong>Exhaust Leaks:</strong> Leaks before or near the catalytic converter can introduce extra oxygen, skewing sensor readings.</li>
+    <li><strong>Engine Problems:</strong> Misfires, rich fuel mixtures, or oil burning can damage the catalytic converter prematurely.</li>
+  </ul>
+</div>
+
+<!-- FIX -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">How to Fix (Step-by-Step)</h2>
+
+  <p class="text-gray-300 mb-4">
+    Diagnosing P0420 correctly is critical because replacing a catalytic converter without fixing the root cause will result in the problem coming back.
+  </p>
+
+  <ol class="space-y-3 text-gray-300 list-decimal ml-5">
+    <li><strong>Check for Exhaust Leaks:</strong> Inspect the exhaust manifold, pipes, and connections for leaks that could affect sensor readings.</li>
+    <li><strong>Scan for Additional Codes:</strong> If you see misfire or fuel-related codes, fix those first before addressing P0420.</li>
+    <li><strong>Monitor O2 Sensor Data:</strong> Use a scan tool to compare upstream and downstream sensor readings. If they behave similarly, the converter is likely failing.</li>
+    <li><strong>Inspect the Catalytic Converter:</strong> Look for signs of clogging, overheating, or internal damage.</li>
+    <li><strong>Replace Faulty Components:</strong> Replace the catalytic converter or sensors as needed based on diagnosis.</li>
+    <li><strong>Clear Code and Test Drive:</strong> Verify the repair by clearing the code and monitoring system readiness.</li>
+  </ol>
+</div>
+
+<!-- PRO TIP -->
+<div class="p-6 rounded-xl border border-yellow-400/40 bg-yellow-500/10">
+  <h2 class="text-xl font-bold text-yellow-300 mb-2">💡 Pro Tip</h2>
+  <p class="text-gray-200">
+    Don’t replace the catalytic converter right away. Many P0420 cases are actually caused by failing oxygen sensors or small exhaust leaks. Always confirm with live data before committing to a costly repair.
+  </p>
+</div>
+
+<!-- FAQ -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+
+  <div class="space-y-4 text-gray-300">
+    <p><strong>Can I drive with P0420?</strong><br>
+    Yes, but long-term driving can reduce performance and damage the exhaust system.</p>
+
+    <p><strong>Is P0420 serious?</strong><br>
+    It’s moderate. It won’t immediately break your car, but it should be fixed to avoid bigger issues.</p>
+
+    <p><strong>How much does it cost to fix?</strong><br>
+    Costs range from $200 for sensors to over $2000 for a catalytic converter replacement.</p>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="glass p-6 rounded-xl">
+  <h2 class="text-xl font-bold mb-3">Related Codes</h2>
+  <div class="flex gap-2 flex-wrap">
+    <a href="p0430.html" class="glass px-3 py-1 rounded">P0430</a>
+    <a href="p0171.html" class="glass px-3 py-1 rounded">P0171</a>
+  </div>
+</div>
+
+</section>
+
+<!-- WAS THIS FIX HELPFUL -->
+<div id="feedbackBox" class="mt-10 text-center">
+  <h3 class="text-xl font-bold mb-4">Was this fix helpful?</h3>
+
+  <div class="flex justify-center gap-4">
+    <button id="yesBtn" class="bg-green-500/20 border border-green-500 px-6 py-3 rounded-xl">👍 Yes</button>
+    <button id="noBtn" class="bg-red-500/20 border border-red-500 px-6 py-3 rounded-xl">👎 No</button>
+  </div>
+
+  <p id="feedbackMessage" class="mt-4 text-sm text-gray-400"></p>
+  <p id="feedbackStats" class="mt-3 text-lg font-semibold text-blue-400"></p>
+</div>
+
+<!-- USER FIXES -->
+<div class="mt-12">
+
+  <h2 class="text-2xl font-bold mb-4 text-center">🛠 User Submitted Fixes</h2>
+
+  <div class="bg-gray-900 p-6 rounded-xl mb-8 max-w-xl mx-auto">
+
+    <input id="fixName" placeholder="Your name"
+      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
+
+    <textarea id="fixDescription" placeholder="What fixed the issue?"
+      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white"></textarea>
+
+    <select id="fixTime"
+      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white">
+      <option value="">Select repair time</option>
+      <option>15–30 minutes</option>
+      <option>30–60 minutes</option>
+      <option>1–2 hours</option>
+      <option>2–4 hours</option>
+      <option>Half day</option>
+      <option>Full day</option>
+    </select>
+
+    <input type="file" id="fixImage"
+      class="w-full mb-4 text-sm text-gray-400" />
+    <p id="fileInfo" class="text-xs text-gray-500 mt-1"></p>
+
+    <button id="submitFixBtn"
+      class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition flex items-center justify-center gap-2">
+
+      <span id="submitText">Submit Fix</span>
+
+      <span id="submitSpinner"
+        class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"></span>
+
+    </button>
+
+    <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
+
+  </div>
+
+  <div id="fixList" class="space-y-4 max-w-xl mx-auto"></div>
+
+</div>
+
+<!-- FULL FOOTER -->
+<footer class="glass-effect border-t border-white/10 py-12">
+  <div class="container mx-auto px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+
+        <div>
+          <span class="text-xl font-bold">AUDI<span class="text-red-500">DTC</span></span>
+          <p class="text-gray-400 text-sm mt-2">Premium diagnostic tool for Audi vehicles.</p>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#">Code Database</a></li>
+            <li><a href="#">Audi Models</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">Resources</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#">Repair Manuals</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">Community</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#">Forum</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="border-t border-white/10 mt-8 pt-8 text-center text-gray-400 text-sm">
+        © 2024 Audi DTC Decoder Pro
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+
+document.getElementById("menuBtn").onclick = () => {
+  document.getElementById("mobileMenu").classList.toggle("hidden");
+};
+</script>
+
+<script src="dtcData.js"></script>
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
