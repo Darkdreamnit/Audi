@@ -1,0 +1,38 @@
+MASTER TEMPLATE v2.1 (LOCKED)
+
+All generated HTML DTC pages MUST strictly include:
+
+✅ Full Header (no simplification)
+✅ Hero section with code, description, severity, cost, time
+✅ “Why This Matters” section
+✅ Deep Dive section (fully expanded, blog-style)
+✅ Symptoms (expanded, human-readable, SEO optimized)
+✅ Causes (expanded, explanatory, real-world context)
+✅ Step-by-Step Diagnosis (detailed, blog-style walkthrough)
+✅ Fixes section
+✅ Common Mistakes section
+✅ Pro Tip section (when applicable)
+✅ FAQ section
+✅ Related Codes section
+
+✅ FULL “Was this fix helpful” section (interactive, complete)
+✅ FULL User Fixes section (EXACT code, no edits)
+✅ FULL Footer (EXACT code, no edits)
+
+✅ SEO structured data included (FAQ schema)
+✅ Mobile menu script included
+✅ lucide icons initialized
+
+STRICT RULES:
+❌ NO placeholders
+❌ NO missing sections
+❌ NO shortened content
+❌ NO modified User Fixes or Footer
+❌ MUST expand Symptoms, Causes, and Diagnosis like a blog
+
+All pages must be:
+✔ Production-ready
+✔ Fully styled
+✔ Consistent with P0171 structure
+✔ SEO optimized
+✔ Copy-paste ready
