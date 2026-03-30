@@ -4,135 +4,143 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>P0700 Audi Code – Causes, Fix, Symptoms & Cost</title>
-<meta name="description" content="P0700 Audi code: Transmission Control System Malfunction. Learn symptoms, causes, fixes, and step-by-step diagnosis.">
+<title>P0700 Audi Code – Causes, Fix & Cost</title>
+<meta name="description" content="P0700 Audi code: Transmission Control System Malfunction. Learn symptoms, causes, fixes, cost, and diagnosis.">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: 'Inter', sans-serif; }
+.glass { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px); }
+</style>
 </head>
 
 <body class="bg-black text-white">
 
-<!-- NAVBAR -->
-<header class="sticky top-0 z-50 bg-black/70 backdrop-blur-md border-b border-white/10">
-  <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-    <a href="index.html" class="text-xl font-bold tracking-tight">
-      AUDI<span class="text-red-500">DTC</span>
-    </a>
-    <nav class="hidden md:flex gap-8 text-sm">
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="text-xl font-bold">Audi<span class="text-blue-500">Codes</span></a>
+
+    <nav class="hidden md:flex gap-6 text-gray-300">
       <a href="index.html">Home</a>
-      <a href="index.html#search">Search</a>
+      <a href="#">All Codes</a>
+      <a href="#">Guides</a>
     </nav>
+
+    <button id="menuBtn" class="md:hidden flex flex-col gap-1.5">
+      <span class="line w-6 h-0.5 bg-white"></span>
+      <span class="line w-6 h-0.5 bg-white"></span>
+      <span class="line w-6 h-0.5 bg-white"></span>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden flex-col bg-black border-t border-white/10 px-4 py-4 space-y-3 md:hidden">
+    <a href="index.html">Home</a>
+    <a href="#">All Codes</a>
+    <a href="#">Guides</a>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="pt-24 pb-10 text-center">
-  <h1 id="codeTitle" class="text-4xl md:text-6xl font-black">P0700</h1>
-  <p id="codeDesc" class="text-gray-400 mt-2">Transmission Control System Malfunction</p>
+<section class="pt-28 pb-10 text-center">
+  <h1 class="text-5xl font-black">P0700</h1>
+  <p class="text-gray-400 mt-2">Transmission Control System Malfunction</p>
 
   <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
     <div class="glass p-3 rounded text-center">
       <div class="text-xs text-gray-400">Difficulty</div>
-      <div id="difficulty" class="font-bold">Medium–High</div>
+      <div class="font-bold">Medium–High</div>
     </div>
+
     <div class="glass p-3 rounded text-center">
       <div class="text-xs text-gray-400">Repair Time</div>
-      <div id="repairTime" class="font-bold">1–4 hours</div>
+      <div class="font-bold">1–4 hours</div>
     </div>
+
     <div class="glass p-3 rounded text-center">
       <div class="text-xs text-gray-400">Cost</div>
-      <div id="cost" class="font-bold">$150–$1500+</div>
+      <div class="font-bold">$150–$1500+</div>
     </div>
+
     <div class="glass p-3 rounded text-center">
       <div class="text-xs text-gray-400">Severity</div>
-      <div id="severity" class="font-bold text-orange-400">High</div>
+      <div class="font-bold text-red-400">High</div>
     </div>
   </div>
 </section>
 
-<!-- CONTENT -->
 <section class="max-w-5xl mx-auto px-4 space-y-8 pb-20">
 
-<!-- WHY -->
-<div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl">
-  <h2 class="text-xl font-bold text-red-400 mb-2">Why This Matters</h2>
-  <p id="severityExplanation" class="text-gray-300">
-    The P0700 code indicates the transmission control system has detected a fault and triggered the check engine light. 
-    This is a gateway code, meaning deeper transmission issues are present and must be diagnosed before serious damage occurs.
-  </p>
-</div>
-
-<!-- SYMPTOMS -->
+<!-- OVERVIEW -->
 <div class="glass p-6 rounded-xl">
-  <h2 class="text-xl font-bold mb-3">Symptoms</h2>
-  <ul id="symptoms" class="space-y-2 text-gray-300">
-    <li>✔ Check Engine Light and limp mode</li>
-    <li>✔ Harsh or delayed shifting</li>
-    <li>✔ Transmission stuck in gear</li>
-    <li>✔ Poor fuel economy</li>
-    <li>✔ Stalling or hesitation</li>
-  </ul>
+<h2 class="text-xl font-bold mb-2">Detailed Overview</h2>
+<p class="text-gray-300">
+The P0700 code indicates that the transmission control module has detected a fault and requested the check engine light.
+This is a general code and requires retrieving additional transmission-specific codes to identify the exact issue.
+</p>
 </div>
 
-<!-- CAUSES -->
+<!-- DIAGNOSIS -->
 <div class="glass p-6 rounded-xl">
-  <h2 class="text-xl font-bold mb-3">Causes</h2>
-  <ul id="causes" class="space-y-2 text-gray-300">
-    <li>• Faulty solenoids</li>
-    <li>• Bad TCM</li>
-    <li>• Wiring issues</li>
-    <li>• Low or dirty fluid</li>
-    <li>• Internal transmission damage</li>
-  </ul>
+<h2 class="text-xl font-bold mb-2">Step-by-Step Diagnosis</h2>
+<ul class="text-gray-300 space-y-2">
+<li>🔧 Scan for additional transmission codes</li>
+<li>🔧 Check transmission fluid condition</li>
+<li>🔧 Inspect wiring and connectors</li>
+<li>🔧 Test TCM power and ground</li>
+<li>🔧 Evaluate solenoids and sensors</li>
+</ul>
 </div>
 
-<!-- FIXES -->
+<!-- COST -->
 <div class="glass p-6 rounded-xl">
-  <h2 class="text-xl font-bold mb-3">How to Fix</h2>
-  <ul id="fixes" class="space-y-2 text-gray-300">
-    <li>✔ Scan for additional codes</li>
-    <li>✔ Repair wiring</li>
-    <li>✔ Replace solenoids</li>
-    <li>✔ Service transmission fluid</li>
-    <li>✔ Replace or reprogram TCM</li>
-  </ul>
+<h2 class="text-xl font-bold mb-2">Cost Breakdown</h2>
+<p class="text-gray-300">
+DIY: $150 – $400<br>
+Independent Shop: $300 – $900<br>
+Dealership: $600 – $1500+
+</p>
 </div>
 
-<!-- DIAG -->
+<!-- FAQ -->
 <div class="glass p-6 rounded-xl">
-  <h2 class="text-xl font-bold mb-3">Step-by-Step Diagnosis</h2>
-  <ol class="space-y-2 text-gray-300 list-decimal list-inside">
-    <li>Scan for additional transmission codes</li>
-    <li>Check fluid condition</li>
-    <li>Inspect wiring</li>
-    <li>Test TCM</li>
-    <li>Test solenoids</li>
-    <li>Clear codes and retest</li>
-  </ol>
+<h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+
+<div class="space-y-4">
+<div>
+<h3 class="font-semibold">Can I drive with P0700?</h3>
+<p class="text-gray-300">Driving is not recommended due to potential transmission damage.</p>
 </div>
 
-<!-- PRO TIP -->
-<div class="p-6 rounded-xl border border-yellow-400/40 bg-yellow-500/10">
-  <h2 id="proTipTitle" class="text-xl font-bold text-yellow-300 mb-2">💡 Pro Tip</h2>
-  <p class="text-gray-300">
-    P0700 is only a warning flag. Always scan deeper transmission modules to find the real fault.
-  </p>
+<div>
+<h3 class="font-semibold">What causes P0700?</h3>
+<p class="text-gray-300">Common causes include solenoids, wiring issues, or internal transmission faults.</p>
 </div>
 
-<!-- ✅ CORRECT FEEDBACK SECTION -->
-<div class="glass p-6 rounded-xl text-center">
-  <h2 class="text-xl font-bold mb-3">Was this helpful?</h2>
-  <div class="flex justify-center gap-4">
-    <button id="helpfulYes" class="bg-green-600 px-4 py-2 rounded">👍 Yes</button>
-    <button id="helpfulNo" class="bg-red-600 px-4 py-2 rounded">👎 No</button>
-  </div>
+<div>
+<h3 class="font-semibold">Is P0700 serious?</h3>
+<p class="text-gray-300">Yes, it indicates a transmission issue that can worsen quickly.</p>
+</div>
+</div>
 </div>
 
-<!-- ✅ EXACT USER FIXES SECTION -->
+<!-- ✅ EXACT FEEDBACK SECTION (FROM P0302) -->
+<div id="feedbackBox" class="mt-10 text-center">
+<h3 class="text-xl font-bold mb-4">Was this fix helpful?</h3>
+
+<div class="flex justify-center gap-4">
+<button id="yesBtn" class="bg-green-500/20 border border-green-500 text-green-400 px-6 py-3 rounded-xl">👍 Yes</button>
+<button id="noBtn" class="bg-red-500/20 border border-red-500 text-red-400 px-6 py-3 rounded-xl">👎 No</button>
+</div>
+
+<p id="feedbackMessage" class="mt-4 text-sm text-gray-400"></p>
+<p id="feedbackStats" class="mt-3 text-lg text-blue-400"></p>
+</div>
+
+<!-- ✅ EXACT USER FIXES SECTION (FROM P0302) -->
 <div class="mt-12">
 
   <h2 class="text-2xl font-bold mb-4 text-center">🛠 User Submitted Fixes</h2>
@@ -157,15 +165,18 @@
     </select>
 
     <input type="file" id="fixImage"
-      class="w-full mb-4 text-sm text-gray-400" />
+      class="w-full mb-2 text-sm text-gray-400" />
 
-    <p id="fileInfo" class="text-xs text-gray-500 mt-1"></p>
+    <p id="fileInfo" class="text-xs text-gray-500 mb-4"></p>
 
     <button id="submitFixBtn"
       class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition flex items-center justify-center gap-2">
+
       <span id="submitText">Submit Fix</span>
+
       <span id="submitSpinner"
         class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"></span>
+
     </button>
 
     <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
@@ -178,56 +189,31 @@
 
 </section>
 
-<!-- ✅ EXACT FOOTER -->
-<footer class="glass-effect border-t border-white/10 py-12">
-    <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-lg flex items-center justify-center">
-                            <i data-lucide="activity" class="w-6 h-6"></i>
-                        </div>
-                        <span class="text-xl font-bold">AUDI<span class="text-[var(--audi-red)]">DTC</span></span>
-                    </div>
-                    <p class="text-gray-400 text-sm">
-                        Premium diagnostic tool for Audi vehicles. Not affiliated with Audi AG.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-3">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Code Database</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Audi Models</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Repair Manuals</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Software Updates</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-3">Community</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Forum</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Expert Help</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Mobile App</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">API Access</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="border-t border-white/10 mt-8 pt-8 text-center text-gray-400 text-sm">
-                <p>© 2024 Audi DTC Decoder Pro. All information is for educational purposes only.</p>
-            </div>
-        </div>
+<!-- FOOTER (MATCHED STYLE) -->
+<footer class="border-t border-white/10 mt-20 py-10 text-center text-gray-400 text-sm">
+  <div class="max-w-4xl mx-auto px-4 space-y-4">
+    <p class="text-lg font-semibold text-white">Audi<span class="text-blue-500">Codes</span></p>
+    <p>Your complete resource for Audi diagnostic trouble codes.</p>
+    <div class="flex justify-center gap-6">
+      <a href="index.html">Home</a>
+      <a href="#">All Codes</a>
+      <a href="#">Guides</a>
     </div>
+    <p class="text-xs text-gray-500">© 2026 AudiCodes</p>
+  </div>
 </footer>
 
-<!-- 🔥 REQUIRED ORDER -->
-<script src="firebase.js"></script>
-<script src="script.js"></script>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+});
+</script>
+
+<!-- 🔥 EXACT SAME MODULE SYSTEM -->
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
 
 </body>
 </html>
