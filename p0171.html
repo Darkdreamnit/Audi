@@ -101,7 +101,10 @@ body { font-family: 'Inter', sans-serif; }
 <div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl">
   <h2 class="text-xl font-bold text-red-400 mb-2">Why This Matters</h2>
   <p class="text-gray-300">
-    A lean condition means the engine is getting too much air or not enough fuel. If left unresolved, it can cause poor performance, engine damage, or overheating.
+    A lean condition (P0171) is one of those issues that seems minor at first, but it can quietly cause serious long-term damage if ignored. I’ve seen engines run “okay” with this code for weeks, only to develop misfires, overheating, or even burned valves later on. What’s happening is simple — the engine is pulling in more air than fuel, which throws off the combustion balance. When that mixture gets too lean, combustion temperatures rise, and the engine starts to struggle to maintain smooth operation.
+  </p>
+  <p class="text-gray-300 mt-3">
+    In real-world cases, this often starts as a small vacuum leak or a slightly dirty sensor, but over time the ECU compensates more and more until it hits its limit and throws the code. If you keep driving like this, you’re not just losing performance — you’re slowly stressing internal components. Fixing it early is almost always cheaper and much easier than waiting until it turns into multiple codes or mechanical damage.
   </p>
 </div>
 
@@ -109,42 +112,80 @@ body { font-family: 'Inter', sans-serif; }
 <div class="glass p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">Symptoms</h2>
   <ul class="space-y-2 text-gray-300">
-    <li>✔ Check engine light</li>
-    <li>✔ Rough idle</li>
-    <li>✔ Poor acceleration</li>
-    <li>✔ Engine hesitation</li>
+    <li>✔ Check engine light that may come and go at first</li>
+    <li>✔ Rough or unstable idle, especially when cold</li>
+    <li>✔ Sluggish acceleration or lack of power under load</li>
+    <li>✔ Noticeable hesitation when pressing the gas</li>
   </ul>
+
+  <p class="mt-4 text-gray-300">
+    From experience, the rough idle is usually the first thing people notice — the car just doesn’t feel smooth anymore. In some cases, it almost feels like a slight misfire, especially at stoplights. Acceleration can feel delayed, like the engine is “thinking” before responding.
+  </p>
+
+  <p class="mt-3 text-gray-300">
+    Another big clue is how the car behaves under load. Going uphill or merging onto the highway often makes the problem more obvious. In more advanced cases, you might even hear light knocking or pinging, which is a sign the air-fuel mixture is too lean and combustion is getting too hot.
+  </p>
 </div>
 
 <!-- CAUSES -->
 <div class="glass p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">Causes</h2>
   <ul class="space-y-2 text-gray-300">
-    <li>• Vacuum leak</li>
-    <li>• Dirty or faulty MAF sensor</li>
-    <li>• Weak fuel pump</li>
-    <li>• Clogged fuel injectors</li>
+    <li>• Vacuum leaks (cracked hoses, intake leaks, PCV issues)</li>
+    <li>• Dirty or faulty MAF (Mass Air Flow) sensor</li>
+    <li>• Weak fuel pump or low fuel pressure</li>
+    <li>• Clogged or partially blocked fuel injectors</li>
   </ul>
+
+  <p class="mt-4 text-gray-300">
+    In real-world diagnostics, vacuum leaks are by far the most common cause. I’ve personally seen tiny cracks in hoses — barely visible — trigger this code. The tricky part is that these leaks don’t always make noise, so you have to inspect carefully or use smoke testing to find them.
+  </p>
+
+  <p class="mt-3 text-gray-300">
+    The MAF sensor is another frequent culprit. When it gets dirty, it underreports incoming air, which makes the ECU think less fuel is needed. This creates a lean condition even though everything else is working fine. Cleaning it is often a quick and inexpensive fix.
+  </p>
+
+  <p class="mt-3 text-gray-300">
+    Fuel-related issues are less common but more serious. A weak pump or clogged injectors can physically limit how much fuel reaches the engine. When that happens, the lean condition becomes more noticeable under acceleration or high load.
+  </p>
 </div>
 
 <!-- FIXES -->
 <div class="glass p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">How to Fix</h2>
   <ul class="space-y-2 text-gray-300">
-    <li>✔ Clean or replace MAF sensor</li>
-    <li>✔ Repair vacuum leaks</li>
-    <li>✔ Replace fuel filter</li>
-    <li>✔ Inspect fuel system</li>
+    <li>✔ Clean or replace the MAF sensor</li>
+    <li>✔ Inspect and repair any vacuum leaks</li>
+    <li>✔ Replace clogged fuel filter or weak fuel pump</li>
+    <li>✔ Clean or service fuel injectors</li>
   </ul>
+
+  <p class="mt-4 text-gray-300">
+    The most effective approach is to start simple and work your way up. In many cases, cleaning the MAF sensor and checking for vacuum leaks solves the problem immediately. I always recommend inspecting hoses first — it’s quick, free, and often the root cause.
+  </p>
+
+  <p class="mt-3 text-gray-300">
+    If that doesn’t fix it, the next step is testing fuel delivery. Checking fuel pressure can quickly tell you if the pump or filter is restricting flow. From there, injector cleaning or replacement may be needed if fuel delivery is uneven.
+  </p>
+
+  <p class="mt-3 text-gray-300">
+    The key is not to throw parts at the problem. P0171 is a system imbalance, so proper diagnosis saves time and money. Most successful fixes come from identifying the exact source of unmetered air or restricted fuel.
+  </p>
 </div>
 
 <!-- PRO TIP -->
 <div class="p-6 rounded-xl border border-yellow-400/40 bg-yellow-500/10">
   <h2 class="text-xl font-bold text-yellow-300 mb-2">💡 Pro Tip</h2>
   <p class="text-gray-200">
-    Start by checking for vacuum leaks before replacing parts. Many P0171 issues are caused by cracked hoses.
+    Start with a vacuum leak check before replacing anything. I’ve seen countless P0171 cases where a $5 cracked hose caused the entire issue. If you have access to a smoke machine, use it — it can reveal leaks you’d never find visually.
+  </p>
+
+  <p class="text-gray-200 mt-3">
+    Also, don’t overlook the MAF sensor. Even if it doesn’t look dirty, a proper MAF cleaner can restore accurate readings and instantly fix the lean condition. These two steps alone solve a huge percentage of P0171 cases.
   </p>
 </div>
+
+</section>
 
 <!-- FAQ -->
 <div class="glass p-6 rounded-xl">
