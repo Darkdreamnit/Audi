@@ -198,7 +198,21 @@ result.addEventListener("click", () => {
 
     
     const detailsBtn = result.querySelector('.details-btn');
-detailsBtn.href = `dtc.html?code=${dtc.code}`;
+
+    /**** Button to mactch recent searches ****/
+const code = dtc.code.toLowerCase();
+
+fetch(`${code}.html`, { method: "HEAD" })
+  .then(res => {
+    if (res.ok) {
+      detailsBtn.href = `${code}.html`;
+    } else {
+      detailsBtn.href = `dtc.html?code=${dtc.code}`;
+    }
+  })
+  .catch(() => {
+    detailsBtn.href = `dtc.html?code=${dtc.code}`;
+  });
     
     // Fill in data
     result.querySelector('.code-display').textContent = dtc.code;
@@ -373,9 +387,24 @@ async function updateRecentSearches() {
           <h4 class="font-bold mb-1">${dtc.description}</h4>
         `;
 
+
+        /**** This section checks if recent search has static pages ****/
+
         card.onclick = () => {
-          window.location.href = `dtc.html?code=${dtc.code}`;
-        };
+  const code = dtc.code.toLowerCase();
+
+  fetch(`${code}.html`, { method: "HEAD" })
+    .then(res => {
+      if (res.ok) {
+        window.location.href = `${code}.html`;
+      } else {
+        window.location.href = `dtc.html?code=${dtc.code}`;
+      }
+    })
+    .catch(() => {
+      window.location.href = `dtc.html?code=${dtc.code}`;
+    });
+};
 
         recentSearches.appendChild(card);
       }
