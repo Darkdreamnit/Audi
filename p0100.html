@@ -61,10 +61,8 @@
 <div class="bg-red-500/10 border border-red-500/20 p-6 rounded-xl">
   <h2 class="text-xl font-bold text-red-400 mb-2">Why This Matters</h2>
   <p id="severityExplanation" class="text-gray-300">
-    The P0700 code in Audi vehicles indicates that the Transmission Control Module (TCM) has detected a fault 
-    and requested the Check Engine Light. This is not a standalone failure—it is a gateway code that signals deeper 
-    transmission issues. Ignoring it can lead to overheating, slipping gears, or total transmission failure, which 
-    is one of the most expensive repairs on a vehicle.
+    The P0700 code indicates the transmission control system has detected a fault and triggered the check engine light. 
+    This is a gateway code, meaning deeper transmission issues are present and must be diagnosed before serious damage occurs.
   </p>
 </div>
 
@@ -72,11 +70,11 @@
 <div class="glass p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">Symptoms</h2>
   <ul id="symptoms" class="space-y-2 text-gray-300">
-    <li>✔ Check Engine Light and limp mode activation</li>
-    <li>✔ Harsh, delayed, or erratic shifting behavior</li>
-    <li>✔ Transmission stuck in a single gear</li>
-    <li>✔ Reduced fuel efficiency due to improper gear ratios</li>
-    <li>✔ Stalling or hesitation during acceleration</li>
+    <li>✔ Check Engine Light and limp mode</li>
+    <li>✔ Harsh or delayed shifting</li>
+    <li>✔ Transmission stuck in gear</li>
+    <li>✔ Poor fuel economy</li>
+    <li>✔ Stalling or hesitation</li>
   </ul>
 </div>
 
@@ -84,11 +82,11 @@
 <div class="glass p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">Causes</h2>
   <ul id="causes" class="space-y-2 text-gray-300">
-    <li>• Failed transmission solenoids or sensors</li>
-    <li>• Faulty or damaged Transmission Control Module (TCM)</li>
-    <li>• Wiring harness issues, shorts, or corrosion</li>
-    <li>• Low, dirty, or burnt transmission fluid</li>
-    <li>• Internal transmission mechanical damage</li>
+    <li>• Faulty solenoids</li>
+    <li>• Bad TCM</li>
+    <li>• Wiring issues</li>
+    <li>• Low or dirty fluid</li>
+    <li>• Internal transmission damage</li>
   </ul>
 </div>
 
@@ -96,11 +94,11 @@
 <div class="glass p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">How to Fix</h2>
   <ul id="fixes" class="space-y-2 text-gray-300">
-    <li>✔ Retrieve and diagnose additional transmission codes</li>
-    <li>✔ Replace faulty solenoids or sensors</li>
-    <li>✔ Repair damaged wiring or connectors</li>
-    <li>✔ Perform transmission fluid service</li>
-    <li>✔ Replace or reprogram the TCM if necessary</li>
+    <li>✔ Scan for additional codes</li>
+    <li>✔ Repair wiring</li>
+    <li>✔ Replace solenoids</li>
+    <li>✔ Service transmission fluid</li>
+    <li>✔ Replace or reprogram TCM</li>
   </ul>
 </div>
 
@@ -108,12 +106,12 @@
 <div class="glass p-6 rounded-xl">
   <h2 class="text-xl font-bold mb-3">Step-by-Step Diagnosis</h2>
   <ol class="space-y-2 text-gray-300 list-decimal list-inside">
-    <li>Scan for additional Audi/VW-specific transmission codes</li>
-    <li>Check transmission fluid level and condition</li>
-    <li>Inspect wiring harnesses and connectors for damage</li>
-    <li>Test TCM power supply and ground circuits</li>
-    <li>Evaluate solenoid and sensor performance</li>
-    <li>Clear codes and perform road test</li>
+    <li>Scan for additional transmission codes</li>
+    <li>Check fluid condition</li>
+    <li>Inspect wiring</li>
+    <li>Test TCM</li>
+    <li>Test solenoids</li>
+    <li>Clear codes and retest</li>
   </ol>
 </div>
 
@@ -121,21 +119,20 @@
 <div class="p-6 rounded-xl border border-yellow-400/40 bg-yellow-500/10">
   <h2 id="proTipTitle" class="text-xl font-bold text-yellow-300 mb-2">💡 Pro Tip</h2>
   <p class="text-gray-300">
-    P0700 does not tell you what is broken—it only tells you where to look. Always use a scanner capable of accessing 
-    Audi transmission modules, or you risk misdiagnosing the issue and replacing the wrong parts.
+    P0700 is only a warning flag. Always scan deeper transmission modules to find the real fault.
   </p>
 </div>
 
-<!-- FEEDBACK -->
-<div class="glass p-6 rounded-xl">
+<!-- ✅ CORRECT FEEDBACK SECTION -->
+<div class="glass p-6 rounded-xl text-center">
   <h2 class="text-xl font-bold mb-3">Was this helpful?</h2>
-  <div class="flex gap-4">
-    <button onclick="vote('yes')" class="bg-green-600 px-4 py-2 rounded">👍 Yes</button>
-    <button onclick="vote('no')" class="bg-red-600 px-4 py-2 rounded">👎 No</button>
+  <div class="flex justify-center gap-4">
+    <button id="helpfulYes" class="bg-green-600 px-4 py-2 rounded">👍 Yes</button>
+    <button id="helpfulNo" class="bg-red-600 px-4 py-2 rounded">👎 No</button>
   </div>
 </div>
 
-<!-- EXACT USER FIXES SECTION -->
+<!-- ✅ EXACT USER FIXES SECTION -->
 <div class="mt-12">
 
   <h2 class="text-2xl font-bold mb-4 text-center">🛠 User Submitted Fixes</h2>
@@ -166,12 +163,9 @@
 
     <button id="submitFixBtn"
       class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition flex items-center justify-center gap-2">
-
       <span id="submitText">Submit Fix</span>
-
       <span id="submitSpinner"
         class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"></span>
-
     </button>
 
     <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
@@ -184,14 +178,14 @@
 
 </section>
 
-<!-- EXACT FOOTER -->
+<!-- ✅ EXACT FOOTER -->
 <footer class="glass-effect border-t border-white/10 py-12">
     <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
 
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center space-x-2 mb-4 md:mb-6">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
                         <div class="w-10 h-10 bg-gradient-to-br from-[var(--audi-red)] to-[var(--audi-blue)] rounded-lg flex items-center justify-center">
                             <i data-lucide="activity" class="w-6 h-6"></i>
                         </div>
@@ -203,7 +197,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-bold mb-3 md:mb-4">Quick Links</h4>
+                    <h4 class="font-bold mb-3">Quick Links</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" class="text-gray-400 hover:text-white">Code Database</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white">Audi Models</a></li>
@@ -213,7 +207,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-bold mb-3 md:mb-4">Community</h4>
+                    <h4 class="font-bold mb-3">Community</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" class="text-gray-400 hover:text-white">Forum</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white">Expert Help</a></li>
@@ -231,6 +225,7 @@
     </div>
 </footer>
 
+<!-- 🔥 REQUIRED ORDER -->
 <script src="firebase.js"></script>
 <script src="script.js"></script>
 
