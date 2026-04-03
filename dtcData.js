@@ -4,6 +4,13 @@ const rawDTCData = [
     "code": "DTC",
     "description": "DTC Text"
   },
+
+  {
+  code: "P0492",
+  title: "Secondary Air Injection System Insufficient Flow (Bank 2)",
+  url: "p0492.html"
+},
+
   {
     "code": "P000100",
     "description": "Fuel Volume Regulator Control Circuit/Open"
