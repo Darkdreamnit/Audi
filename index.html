@@ -431,10 +431,17 @@
     
     
 
+
 <!-- IMPORTANT: THIS MUST BE AFTER -->
 <script src="script.js"></script>
     <script>
         lucide.createIcons();
     </script>
+
+<!-- USED FOR ADDING COMPONENTS TO EACH PAGE -->
+    <script type="module">
+  import { loadComponents } from "./components.js";
+  loadComponents();
+</script>
 </body>
 </html>
