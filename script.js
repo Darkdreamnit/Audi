@@ -199,6 +199,16 @@ result.addEventListener("click", () => {
     
     const detailsBtn = result.querySelector('.details-btn');
 
+    /**** Turn all mentions of codes into clickable links ****/
+    document.addEventListener("DOMContentLoaded", () => {
+  const codeRegex = /\bP\d{4}\b/g;
+
+  document.querySelectorAll("p, li").forEach(el => {
+    el.innerHTML = el.innerHTML.replace(codeRegex, (match) => {
+      return `<a href="${match.toLowerCase()}.html" class="text-blue-400 hover:underline">${match}</a>`;
+    });
+  });
+});
     /**** Button to mactch recent searches ****/
 const code = dtc.code.toLowerCase();
 
