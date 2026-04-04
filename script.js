@@ -759,7 +759,18 @@ if (!code) {
 
       if (data.code !== code) return;
 
-      renderFix(data, doc.id);
+      const div = document.createElement("div");
+      div.className = "bg-gray-800 p-4 rounded-xl";
+
+      div.innerHTML = `
+  <p class="text-sm text-gray-400">${data.name || "Anonymous"}</p>
+  <p class="mt-1">${data.description}</p>
+  <p class="text-xs text-gray-500 mt-2">⏱ ${data.time || "N/A"}</p>
+
+  ${data.imageUrl ? `<img src="${data.imageUrl}" class="mt-3 rounded-lg max-h-48 w-full object-cover">` : ""}
+`;
+
+      fixList.appendChild(div);
     });
   }
 
