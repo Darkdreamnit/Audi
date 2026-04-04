@@ -743,6 +743,43 @@ if (!code) {
   const submitBtn = document.getElementById("submitFixBtn");
   const message = document.getElementById("submitMessage");
 
+
+   // 💾 ADD EDIT + DELETE BUTTONS (UI)
+
+    function renderFix(fix, docId) {
+  const div = document.createElement("div");
+
+  div.className = "relative";
+
+  div.innerHTML = `
+    <div class="absolute -inset-0.5 bg-gradient-to-r from-[var(--audi-red)] to-[var(--audi-blue)] opacity-20 blur rounded-xl"></div>
+
+    <div class="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4">
+
+      <div class="flex justify-between items-center mb-2 text-xs">
+        <span class="text-blue-300 font-medium">${fix.name || "Anonymous"}</span>
+        <span class="text-purple-300">${fix.time || ""}</span>
+      </div>
+
+      <p class="text-sm text-gray-300 mb-3">${fix.text}</p>
+
+      ${fix.image ? `<img src="${fix.image}" class="w-full max-h-48 object-cover rounded-lg border border-white/10 mb-2" />` : ""}
+
+      <div class="flex justify-between items-center mt-3 text-xs text-gray-500">
+        <span>${new Date(fix.createdAt).toLocaleDateString()}</span>
+
+        <div class="flex gap-2">
+          <button class="edit-btn text-blue-400 hover:underline" data-id="${docId}">Edit</button>
+          <button class="delete-btn text-red-400 hover:underline" data-id="${docId}">Delete</button>
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  fixesList.prepend(div);
+}
+
   // 🔄 Load fixes
   async function loadFixes() {
     fixList.innerHTML = "";
@@ -759,18 +796,7 @@ if (!code) {
 
       if (data.code !== code) return;
 
-      const div = document.createElement("div");
-      div.className = "bg-gray-800 p-4 rounded-xl";
-
-      div.innerHTML = `
-  <p class="text-sm text-gray-400">${data.name || "Anonymous"}</p>
-  <p class="mt-1">${data.description}</p>
-  <p class="text-xs text-gray-500 mt-2">⏱ ${data.time || "N/A"}</p>
-
-  ${data.imageUrl ? `<img src="${data.imageUrl}" class="mt-3 rounded-lg max-h-48 w-full object-cover">` : ""}
-`;
-
-      fixList.appendChild(div);
+      renderFix(data, doc.id);
     });
   }
 
@@ -878,92 +904,9 @@ if (fileInput) {
   
     // 💾 Add passcode validation + save
 
-    const passcodeInput = document.getElementById("fixPasscode");
-
-submitBtn?.addEventListener("click", async () => {
-  const name = document.getElementById("fixName").value.trim();
-  const text = document.getElementById("fixDescription").value.trim();
-  const time = document.getElementById("fixTime").value;
-  const passcode = passcodeInput.value.trim();
-
-  if (!text || !passcode) {
-    alert("Description and passcode are required.");
-    return;
-  }
-
-  if (!/^\d{4}$/.test(passcode)) {
-    alert("Passcode must be exactly 4 digits.");
-    return;
-  }
-
-  setLoading(true);
-
-  try {
-    let imageUrl = "";
-
-    if (selectedFile) {
-      const storageRef = ref(storage, `fix-images/${dtcCode}/${Date.now()}-${selectedFile.name}`);
-      await uploadBytes(storageRef, selectedFile);
-      imageUrl = await getDownloadURL(storageRef);
-    }
-
-    await addDoc(collection(window.db, "fixes"), {
-      code: dtcCode,
-      name,
-      text,
-      time,
-      passcode, // 🔥 stored
-      image: imageUrl,
-      createdAt: Date.now()
-    });
-
-    // reset
-    passcodeInput.value = "";
-    loadFixes();
-
-  } catch (err) {
-    console.error(err);
-  }
-
-  setLoading(false);
-});
 
     
-    // 💾 ADD EDIT + DELETE BUTTONS (UI)
-
-    function renderFix(fix, docId) {
-  const div = document.createElement("div");
-
-  div.className = "relative";
-
-  div.innerHTML = `
-    <div class="absolute -inset-0.5 bg-gradient-to-r from-[var(--audi-red)] to-[var(--audi-blue)] opacity-20 blur rounded-xl"></div>
-
-    <div class="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4">
-
-      <div class="flex justify-between items-center mb-2 text-xs">
-        <span class="text-blue-300 font-medium">${fix.name || "Anonymous"}</span>
-        <span class="text-purple-300">${fix.time || ""}</span>
-      </div>
-
-      <p class="text-sm text-gray-300 mb-3">${fix.text}</p>
-
-      ${fix.image ? `<img src="${fix.image}" class="w-full max-h-48 object-cover rounded-lg border border-white/10 mb-2" />` : ""}
-
-      <div class="flex justify-between items-center mt-3 text-xs text-gray-500">
-        <span>${new Date(fix.createdAt).toLocaleDateString()}</span>
-
-        <div class="flex gap-2">
-          <button class="edit-btn text-blue-400 hover:underline" data-id="${docId}">Edit</button>
-          <button class="delete-btn text-red-400 hover:underline" data-id="${docId}">Delete</button>
-        </div>
-      </div>
-
-    </div>
-  `;
-
-  fixesList.prepend(div);
-}
+   
     // 💾 Edit Logic
 
     document.addEventListener("click", async (e) => {
@@ -1019,14 +962,15 @@ submitBtn?.addEventListener("click", async () => {
   loadFixes();
 });
     // 💾 Save to Firestore
-    await addDoc(collection(window.db, "fixes"), {
-      code: code,
-      name: name || "Anonymous",
-      description,
-      time,
-      imageUrl,
-      timestamp: Date.now()
-    });
+   await addDoc(collection(window.db, "fixes"), {
+  code: code,
+  name: name || "Anonymous",
+  text: description,        // ✅ FIXED
+  time,
+  image: imageUrl,          // ✅ FIXED
+  passcode,                 // ✅ IMPORTANT
+  createdAt: Date.now()     // ✅ FIXED
+});
 
     message.textContent = "✅ Fix submitted!";
 
