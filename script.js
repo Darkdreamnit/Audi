@@ -743,43 +743,6 @@ if (!code) {
   const submitBtn = document.getElementById("submitFixBtn");
   const message = document.getElementById("submitMessage");
 
-
-   // 💾 ADD EDIT + DELETE BUTTONS (UI)
-
-    function renderFix(fix, docId) {
-  const div = document.createElement("div");
-
-  div.className = "relative";
-
-  div.innerHTML = `
-    <div class="absolute -inset-0.5 bg-gradient-to-r from-[var(--audi-red)] to-[var(--audi-blue)] opacity-20 blur rounded-xl"></div>
-
-    <div class="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4">
-
-      <div class="flex justify-between items-center mb-2 text-xs">
-        <span class="text-blue-300 font-medium">${fix.name || "Anonymous"}</span>
-        <span class="text-purple-300">${fix.time || ""}</span>
-      </div>
-
-      <p class="text-sm text-gray-300 mb-3">${fix.text}</p>
-
-      ${fix.image ? `<img src="${fix.image}" class="w-full max-h-48 object-cover rounded-lg border border-white/10 mb-2" />` : ""}
-
-      <div class="flex justify-between items-center mt-3 text-xs text-gray-500">
-        <span>${new Date(fix.createdAt).toLocaleDateString()}</span>
-
-        <div class="flex gap-2">
-          <button class="edit-btn text-blue-400 hover:underline" data-id="${docId}">Edit</button>
-          <button class="delete-btn text-red-400 hover:underline" data-id="${docId}">Delete</button>
-        </div>
-      </div>
-
-    </div>
-  `;
-
-  fixesList.prepend(div);
-}
-
   // 🔄 Load fixes
   async function loadFixes() {
     fixList.innerHTML = "";
@@ -906,7 +869,41 @@ if (fileInput) {
 
 
     
-   
+    // 💾 ADD EDIT + DELETE BUTTONS (UI)
+
+    function renderFix(fix, docId) {
+  const div = document.createElement("div");
+
+  div.className = "relative";
+
+  div.innerHTML = `
+    <div class="absolute -inset-0.5 bg-gradient-to-r from-[var(--audi-red)] to-[var(--audi-blue)] opacity-20 blur rounded-xl"></div>
+
+    <div class="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4">
+
+      <div class="flex justify-between items-center mb-2 text-xs">
+        <span class="text-blue-300 font-medium">${fix.name || "Anonymous"}</span>
+        <span class="text-purple-300">${fix.time || ""}</span>
+      </div>
+
+      <p class="text-sm text-gray-300 mb-3">${fix.text}</p>
+
+      ${fix.image ? `<img src="${fix.image}" class="w-full max-h-48 object-cover rounded-lg border border-white/10 mb-2" />` : ""}
+
+      <div class="flex justify-between items-center mt-3 text-xs text-gray-500">
+        <span>${new Date(fix.createdAt).toLocaleDateString()}</span>
+
+        <div class="flex gap-2">
+          <button class="edit-btn text-blue-400 hover:underline" data-id="${docId}">Edit</button>
+          <button class="delete-btn text-red-400 hover:underline" data-id="${docId}">Delete</button>
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  fixesList.prepend(div);
+}
     // 💾 Edit Logic
 
     document.addEventListener("click", async (e) => {
