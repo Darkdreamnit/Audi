@@ -279,48 +279,99 @@ body { font-family: 'Inter', sans-serif; }
 </div>
 
 <!-- USER FIXES -->
-<div class="mt-12">
+<div class="mt-16 max-w-3xl mx-auto px-4">
 
-  <h2 class="text-2xl font-bold mb-4 text-center">🛠 User Submitted Fixes</h2>
+  <h2 class="text-2xl font-bold mb-6 text-center tracking-tight">
+    🛠 User Submitted Fixes
+  </h2>
 
-  <div class="bg-gray-900 p-6 rounded-xl mb-8 max-w-xl mx-auto">
+  <!-- FORM CARD -->
+  <div class="relative mb-10">
 
-    <input id="fixName" placeholder="Your name"
-      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white" />
+    <!-- glow background -->
+    <div class="absolute -inset-1 bg-gradient-to-r from-[var(--audi-red)] to-[var(--audi-blue)] opacity-20 blur rounded-2xl"></div>
 
-    <textarea id="fixDescription" placeholder="What fixed the issue?"
-      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white"></textarea>
+    <div class="relative glass backdrop-blur-md border border-white/10 rounded-2xl p-6">
 
-    <select id="fixTime"
-      class="w-full mb-3 px-4 py-2 rounded bg-black border border-gray-700 text-white">
-      <option value="">Select repair time</option>
-      <option>15–30 minutes</option>
-      <option>30–60 minutes</option>
-      <option>1–2 hours</option>
-      <option>2–4 hours</option>
-      <option>Half day</option>
-      <option>Full day</option>
-    </select>
+      <!-- NAME -->
+      <input id="fixName" placeholder="Your name"
+        class="w-full mb-3 px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[var(--audi-red)] transition" />
 
-    <input type="file" id="fixImage"
-      class="w-full mb-4 text-sm text-gray-400" />
-    <p id="fileInfo" class="text-xs text-gray-500 mt-1"></p>
+      <!-- DESCRIPTION -->
+      <textarea id="fixDescription" placeholder="What fixed the issue?"
+        class="w-full mb-3 px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[var(--audi-red)] transition resize-none"
+        rows="4"></textarea>
 
-    <button id="submitFixBtn"
-      class="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold transition flex items-center justify-center gap-2">
+      <!-- TIME -->
+      <select id="fixTime"
+        class="w-full mb-3 px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[var(--audi-red)] transition">
+        <option value="">Select repair time</option>
+        <option>15–30 minutes</option>
+        <option>30–60 minutes</option>
+        <option>1–2 hours</option>
+        <option>2–4 hours</option>
+        <option>Half day</option>
+        <option>Full day</option>
+      </select>
 
-      <span id="submitText">Submit Fix</span>
+      <!-- FILE INPUT -->
+      <div class="flex items-center justify-between gap-3 mb-2">
 
-      <span id="submitSpinner"
-        class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"></span>
+        <label class="text-sm text-gray-400 hover:text-white transition cursor-pointer">
+          📷 Add Image
+          <input type="file" id="fixImage" class="hidden" />
+        </label>
 
-    </button>
+        <span id="fileInfo" class="text-xs text-gray-500 truncate"></span>
 
-    <p id="submitMessage" class="text-sm mt-3 text-gray-400"></p>
+      </div>
 
+      <!-- IMAGE PREVIEW -->
+      <img id="imagePreview"
+        class="hidden w-20 h-20 object-cover rounded-lg border border-white/10 mb-3" />
+
+      <!-- BUTTON -->
+      <button id="submitFixBtn"
+        class="w-full bg-[var(--audi-blue)] hover:bg-blue-600 py-2.5 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 active:scale-95">
+
+        <span id="submitText">Submit Fix</span>
+
+        <span id="submitSpinner"
+          class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"></span>
+
+      </button>
+
+      <!-- MESSAGE -->
+      <p id="submitMessage" class="text-sm mt-3 text-center text-gray-400"></p>
+
+    </div>
   </div>
 
-  <div id="fixList" class="space-y-4 max-w-xl mx-auto"></div>
+  <!-- FIX LIST -->
+  <div id="fixList" class="space-y-4">
+
+    <!-- Example card structure (JS renders these) -->
+    <!--
+    <div class="glass border border-white/10 rounded-xl p-4 backdrop-blur-md">
+      <div class="flex justify-between items-center mb-2 text-xs text-gray-500">
+        <span>John D.</span>
+        <span>1–2 hours</span>
+      </div>
+
+      <p class="text-sm text-gray-300 mb-3">
+        Replaced vacuum hose near intake — idle instantly smoothed out and code cleared.
+      </p>
+
+      <img src="IMAGE_URL"
+        class="w-full max-h-48 object-cover rounded-lg border border-white/10 mb-2" />
+
+      <div class="text-xs text-gray-500">
+        2 days ago
+      </div>
+    </div>
+    -->
+
+  </div>
 
 </div>
 
