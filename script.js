@@ -959,15 +959,14 @@ if (fileInput) {
   loadFixes();
 });
     // 💾 Save to Firestore
-   await addDoc(collection(window.db, "fixes"), {
-  code: code,
-  name: name || "Anonymous",
-  text: description,        // ✅ FIXED
-  time,
-  image: imageUrl,          // ✅ FIXED
-  passcode,                 // ✅ IMPORTANT
-  createdAt: Date.now()     // ✅ FIXED
-});
+    await addDoc(collection(window.db, "fixes"), {
+      code: code,
+      name: name || "Anonymous",
+      description,
+      time,
+      imageUrl,
+      timestamp: Date.now()
+    });
 
     message.textContent = "✅ Fix submitted!";
 
