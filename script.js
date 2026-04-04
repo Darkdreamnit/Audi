@@ -868,44 +868,7 @@ if (fileInput) {
 
 
 
-    // 💾 Image preview
-
-
-    const imageInput = document.getElementById("imageInput");
-const preview = document.getElementById("imagePreview");
-
-imageInput.addEventListener("change", () => {
-  const file = imageInput.files[0];
-  if (!file) return;
-
-  preview.src = URL.createObjectURL(file);
-  preview.classList.remove("hidden");
-});
-
-function setLoading(isLoading) {
-  document.getElementById("submitSpinner").classList.toggle("hidden", !isLoading);
-  document.getElementById("submitText").textContent = isLoading ? "Uploading..." : "Submit Fix";
-}
-
-
-function renderFix(fix) {
-  const container = document.getElementById("fixesList");
-  document.getElementById("emptyState")?.remove();
-
-  const div = document.createElement("div");
-  div.className = "glass border border-white/10 rounded-xl p-4 backdrop-blur-md";
-
-  div.innerHTML = `
-    <p class="text-sm text-gray-300 mb-3">${fix.text}</p>
-    ${fix.image ? `<img src="${fix.image}" class="w-full max-h-48 object-cover rounded-lg border border-white/10 mb-3" />` : ""}
-    <div class="flex justify-between text-xs text-gray-500">
-      <span>User submission</span>
-      <span>${new Date(fix.createdAt).toLocaleDateString()}</span>
-    </div>
-  `;
-
-  container.prepend(div);
-}
+  
     // 💾 Save to Firestore
     await addDoc(collection(window.db, "fixes"), {
       code: code,
