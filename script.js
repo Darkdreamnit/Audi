@@ -867,6 +867,55 @@ if (fileInput) {
   
     // 💾 Add passcode validation + save
 
+    const passcodeInput = document.getElementById("fixPasscode");
+
+submitBtn?.addEventListener("click", async () => {
+  const name = document.getElementById("fixName").value.trim();
+  const text = document.getElementById("fixDescription").value.trim();
+  const time = document.getElementById("fixTime").value;
+  const passcode = passcodeInput.value.trim();
+
+  if (!text || !passcode) {
+    alert("Description and passcode are required.");
+    return;
+  }
+
+  if (!/^\d{4}$/.test(passcode)) {
+    alert("Passcode must be exactly 4 digits.");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    let imageUrl = "";
+
+    if (selectedFile) {
+      const storageRef = ref(storage, `fix-images/${dtcCode}/${Date.now()}-${selectedFile.name}`);
+      await uploadBytes(storageRef, selectedFile);
+      imageUrl = await getDownloadURL(storageRef);
+    }
+
+    await addDoc(collection(window.db, "fixes"), {
+      code: dtcCode,
+      name,
+      text,
+      time,
+      passcode, // 🔥 stored
+      image: imageUrl,
+      createdAt: Date.now()
+    });
+
+    // reset
+    passcodeInput.value = "";
+    loadFixes();
+
+  } catch (err) {
+    console.error(err);
+  }
+
+  setLoading(false);
+});
 
     
     // 💾 ADD EDIT + DELETE BUTTONS (UI)
