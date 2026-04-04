@@ -375,6 +375,13 @@ async function updateRecentSearches() {
       return;
     }
 
+    snapshot.forEach(docSnap => {
+  const data = docSnap.data();
+  if (data.code !== dtcCode) return;
+
+  renderFix(data, docSnap.id); // pass ID
+});
+
 
     /**** This is where we check firebase data ****/
     const seen = new Set();
@@ -869,6 +876,148 @@ if (fileInput) {
 
 
   
+    // 💾 Add passcode validation + save
+
+    const passcodeInput = document.getElementById("fixPasscode");
+
+submitBtn?.addEventListener("click", async () => {
+  const name = document.getElementById("fixName").value.trim();
+  const text = document.getElementById("fixDescription").value.trim();
+  const time = document.getElementById("fixTime").value;
+  const passcode = passcodeInput.value.trim();
+
+  if (!text || !passcode) {
+    alert("Description and passcode are required.");
+    return;
+  }
+
+  if (!/^\d{4}$/.test(passcode)) {
+    alert("Passcode must be exactly 4 digits.");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    let imageUrl = "";
+
+    if (selectedFile) {
+      const storageRef = ref(storage, `fix-images/${dtcCode}/${Date.now()}-${selectedFile.name}`);
+      await uploadBytes(storageRef, selectedFile);
+      imageUrl = await getDownloadURL(storageRef);
+    }
+
+    await addDoc(collection(window.db, "fixes"), {
+      code: dtcCode,
+      name,
+      text,
+      time,
+      passcode, // 🔥 stored
+      image: imageUrl,
+      createdAt: Date.now()
+    });
+
+    // reset
+    passcodeInput.value = "";
+    loadFixes();
+
+  } catch (err) {
+    console.error(err);
+  }
+
+  setLoading(false);
+});
+
+    
+    // 💾 ADD EDIT + DELETE BUTTONS (UI)
+
+    function renderFix(fix, docId) {
+  const div = document.createElement("div");
+
+  div.className = "relative";
+
+  div.innerHTML = `
+    <div class="absolute -inset-0.5 bg-gradient-to-r from-[var(--audi-red)] to-[var(--audi-blue)] opacity-20 blur rounded-xl"></div>
+
+    <div class="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4">
+
+      <div class="flex justify-between items-center mb-2 text-xs">
+        <span class="text-blue-300 font-medium">${fix.name || "Anonymous"}</span>
+        <span class="text-purple-300">${fix.time || ""}</span>
+      </div>
+
+      <p class="text-sm text-gray-300 mb-3">${fix.text}</p>
+
+      ${fix.image ? `<img src="${fix.image}" class="w-full max-h-48 object-cover rounded-lg border border-white/10 mb-2" />` : ""}
+
+      <div class="flex justify-between items-center mt-3 text-xs text-gray-500">
+        <span>${new Date(fix.createdAt).toLocaleDateString()}</span>
+
+        <div class="flex gap-2">
+          <button class="edit-btn text-blue-400 hover:underline" data-id="${docId}">Edit</button>
+          <button class="delete-btn text-red-400 hover:underline" data-id="${docId}">Delete</button>
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  fixesList.prepend(div);
+}
+    // 💾 Edit Logic
+
+    document.addEventListener("click", async (e) => {
+  if (!e.target.classList.contains("edit-btn")) return;
+
+  const id = e.target.dataset.id;
+  const entered = prompt("Enter your 4-digit passcode to edit:");
+
+  if (!entered) return;
+
+  const docRef = doc(window.db, "fixes", id);
+  const snap = await getDoc(docRef);
+
+  if (!snap.exists()) return;
+
+  const data = snap.data();
+
+  if (data.passcode !== entered) {
+    alert("Incorrect passcode.");
+    return;
+  }
+
+  const newText = prompt("Edit your fix:", data.text);
+  if (!newText) return;
+
+  await updateDoc(docRef, { text: newText });
+  loadFixes();
+});
+    // 💾 Delete Logic
+
+
+    document.addEventListener("click", async (e) => {
+  if (!e.target.classList.contains("delete-btn")) return;
+
+  const id = e.target.dataset.id;
+  const entered = prompt("Enter your 4-digit passcode to delete:");
+
+  if (!entered) return;
+
+  const docRef = doc(window.db, "fixes", id);
+  const snap = await getDoc(docRef);
+
+  if (!snap.exists()) return;
+
+  const data = snap.data();
+
+  if (data.passcode !== entered) {
+    alert("Incorrect passcode.");
+    return;
+  }
+
+  await deleteDoc(docRef);
+  loadFixes();
+});
     // 💾 Save to Firestore
     await addDoc(collection(window.db, "fixes"), {
       code: code,
@@ -900,3 +1049,5 @@ if (fileInput) {
   }
 });
 }
+
+
