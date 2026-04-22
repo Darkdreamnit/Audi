@@ -411,6 +411,7 @@ async function updateRecentSearches() {
       };
 
       recentSearches.appendChild(card);
+      if (!recentSearches) return;
     });
 
   } catch (error) {
