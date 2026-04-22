@@ -377,7 +377,6 @@ async function updateRecentSearches() {
 
     snapshot.forEach(docSnap => {
   const data = docSnap.data();
-  if (data.code !== dtcCode) return;
 
   renderFix(data, docSnap.id); // pass ID
 });
