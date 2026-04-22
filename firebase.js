@@ -23,9 +23,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyAU2q1pvW13B5x3TH-OP8NfGX9MnM78LVo",
-    authDomain: "audi-dtc.firebaseapp.com",
-    projectId: "audi-dtc",
+    apiKey: "AIzaSyADk-UxT3z_9zPUMJ-5tB47C7b2ut2265M",
+  authDomain: "audi-662d3.firebaseapp.com",
+  projectId: "audi-662d3",
+  storageBucket: "audi-662d3.firebasestorage.app",
+  messagingSenderId: "795768172857",
+  appId: "1:795768172857:web:129b079595c66460ac38e8",
+  measurementId: "G-GX3KNV6PSX",
     storageBucket: "audi-dtc.firebasestorage.app" // 🔥 ADD THIS
   };
 
