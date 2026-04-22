@@ -388,6 +388,7 @@ async function updateRecentSearches() {
 
   recentSearches.appendChild(card);
 });
+}
 
 // Clear recent searches
 function clearRecentSearches() {
