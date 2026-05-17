@@ -355,13 +355,16 @@ async function addToRecentSearches(code) {
 }
 
 // Update recent searches display
+// Update recent searches display
 async function updateRecentSearches() {
-    console.log("🔥 Loading recent searches...");
-  const { collection, getDocs, query, orderBy, limit } = window.firebaseFns;
-
-  recentSearches.innerHTML = "";
 
   try {
+
+    const { collection, getDocs, query, orderBy, limit } = window.firebaseFns;
+
+    recentSearches.innerHTML = "";
+
+    // 🔥 Get recent searches from Firestore
     const q = query(
       collection(window.db, "recentSearches"),
       orderBy("timestamp", "desc"),
@@ -370,66 +373,61 @@ async function updateRecentSearches() {
 
     const snapshot = await getDocs(q);
 
-    if (snapshot.empty) {
-      recentSearches.innerHTML = `<p class="text-gray-500">No recent searches</p>`;
-      return;
-    }
-
     snapshot.forEach(docSnap => {
-  const data = docSnap.data();
-  if (data.code !== dtcCode) return;
 
-  renderFix(data, docSnap.id); // pass ID
-});
+      const data = docSnap.data();
 
+      // Skip if code doesn't exist
+      if (!dtcDatabase[data.code]) return;
 
-    /**** This is where we check firebase data ****/
-    const seen = new Set();
+      const dtc = dtcDatabase[data.code];
 
-    snapshot.forEach(doc => {
-      const data = doc.data();
+      const card = document.createElement("div");
 
-      if (dtcDatabase[data.code]) {
-        const dtc = dtcDatabase[data.code];
-        if (seen.has(data.code)) return; // 🚫 skip duplicates
-  seen.add(data.code);
+      card.className =
+        "glass-effect rounded-xl p-5 hover:bg-white/5 cursor-pointer transition";
 
-        const card = document.createElement('div');
-        card.className = 'glass-effect rounded-xl p-5 hover:bg-white/5 cursor-pointer';
+      card.innerHTML = `
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xl font-bold">${dtc.code}</span>
+        </div>
 
-        card.innerHTML = `
-          <div class="flex justify-between items-start mb-3">
-            <span class="text-xl font-bold">${dtc.code}</span>
-          </div>
-          <h4 class="font-bold mb-1">${dtc.description}</h4>
-        `;
+        <h4 class="font-bold mb-1">${dtc.description}</h4>
 
+        <p class="text-sm text-gray-400">${dtc.system}</p>
+      `;
 
-        /**** This section checks if recent search has static pages ****/
+      // Open page on click
+      card.onclick = () => {
 
-        card.onclick = () => {
-  const code = dtc.code.toLowerCase();
+        const code = dtc.code.toLowerCase();
 
-  fetch(`${code}.html`, { method: "HEAD" })
-    .then(res => {
-      if (res.ok) {
-        window.location.href = `${code}.html`;
-      } else {
-        window.location.href = `dtc.html?code=${dtc.code}`;
-      }
-    })
-    .catch(() => {
-      window.location.href = `dtc.html?code=${dtc.code}`;
-    });
-};
+        fetch(`${code}.html`, { method: "HEAD" })
+          .then(res => {
 
-        recentSearches.appendChild(card);
-      }
+            if (res.ok) {
+              window.location.href = `${code}.html`;
+            } else {
+              window.location.href = `dtc.html?code=${dtc.code}`;
+            }
+
+          })
+          .catch(() => {
+            window.location.href = `dtc.html?code=${dtc.code}`;
+          });
+
+      };
+
+      recentSearches.appendChild(card);
+
     });
 
-  } catch (error) {
-    console.error("Error loading searches:", error);
+  } catch (err) {
+
+    console.error("Recent searches error:", err);
+
   }
+
 }
 
 // Clear recent searches
