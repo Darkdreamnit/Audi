@@ -151,7 +151,7 @@ function setupEventListeners() {
 }
 
 // Perform DTC Search
-function performSearch() {
+async function performSearch() {
     searchResults.innerHTML = "";
     searchResults.style.opacity = "0";
     searchResults.style.opacity = "1";
@@ -168,7 +168,8 @@ function performSearch() {
     }
     
     displayDTCResult(dtcDatabase[searchTerm]);
-    addToRecentSearches(searchTerm);
+    await addToRecentSearches(searchTerm);
+await updateRecentSearches();
     hideAutocomplete();
 }
 
